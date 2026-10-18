@@ -1,0 +1,104 @@
+---
+import Icon from './Icon.astro';
+import { contact, languages, site } from '../lib/profile';
+---
+<section class="section contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <p class="label kicker">Contact</p>
+    <h2 id="contact-title">If any of this is useful to you, write to me.</h2>
+    <p class="lede">
+      I'm open to research roles, analyst positions, scholarship programmes and freelance research. Email is the
+      quickest way to reach me.
+    </p>
+
+    <div class="email-row">
+      <a class="email" href={`mailto:${contact.email}`}>{contact.email}</a>
+      <button class="button copy" type="button" data-copy={contact.email}>
+        <Icon name="copy" /> <span>Copy</span>
+      </button>
+    </div>
+
+    <ul class="links">
+      <li><a href={contact.linkedin} rel="me noopener" target="_blank"><Icon name="linkedin" /> LinkedIn</a></li>
+      <li><a href={contact.github} rel="me noopener" target="_blank"><Icon name="github" /> GitHub</a></li>
+      <li><a href={site.cvFile} download><Icon name="download" /> My CV (PDF)</a></li>
+    </ul>
+
+    <p class="langs">
+      I speak {languages.map((l, i) => <>{i > 0 && (i === languages.length - 1 ? ' and ' : ', ')}{l.name} ({l.level.toLowerCase()})</>)}.
+    </p>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('button[data-copy]').forEach((button) => {
+    const text = button.querySelector('span')!;
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy!);
+        text.textContent = 'Copied';
+      } catch {
+        text.textContent = 'Press Ctrl+C';
+        const sel = getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(document.querySelector('.email')!);
+        sel?.removeAllRanges();
+        sel?.addRange(range);
+      }
+      setTimeout(() => (text.textContent = 'Copy'), 2400);
+    });
+  });
+</script>
+
+<style>
+  .contact { border-top: 2px solid var(--ink); }
+  h2 {
+    font-size: clamp(2.1rem, 5vw, 3.6rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    max-width: 20ch;
+    margin-top: 12px;
+  }
+  .lede {
+    max-width: 52ch;
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    line-height: 1.55;
+    margin-top: 20px;
+  }
+  .email-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+    margin-top: 32px;
+  }
+  .email {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    font-weight: 600;
+    color: var(--accent);
+    overflow-wrap: anywhere;
+  }
+  .links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    margin-top: 28px;
+  }
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .links a:hover { color: var(--accent); }
+  .langs {
+    margin-top: 40px;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+</style>

@@ -1,0 +1,472 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  THE ONE FILE TO EDIT
+#  Everything on the website AND in the CV PDF comes from this file
+#  (plus the long project stories in src/content/projects/).
+#
+#  - Website text is first person ("I…"), told as a story in time order.
+#  - CV text (every `cv:` block) is CV style: action verbs, no "I".
+#  - Only write what you can prove. See AGENTS.md.
+#  - Photos/certificates are paths inside src/assets/ (e.g. photos/portrait.jpg).
+#  - Files in public/ are linked as /files/name.pdf.
+#  - After saving, push to GitHub: the site and the CV rebuild by themselves.
+# ─────────────────────────────────────────────────────────────────────────────
+
+person:
+  name: Abdul Haseeb Khan
+  location: Lahore, Pakistan
+  tagline: Economics · Data Analysis · Financial Security
+  portrait: photos/portrait.jpg       # square-ish headshot, used for link previews
+  # The big photograph next to the opening lines.
+  hero:
+    src: photos/ify-2026-znanie-presentation.jpg
+    alt: Abdul Haseeb Khan in a dark suit with a festival lanyard, standing in front of a screen that reads International Festival of Youth 2026 x Znanie.
+    caption: Ekaterinburg, 16 September 2026, the day I presented my research.
+  # The opening lines of the homepage.
+  intro:
+    - I'm Abdul Haseeb Khan, an economist in training from Lahore.
+    - I use data to study money in Pakistan's economy, including how inflation squeezes company profits, how financial fraud drains GDP, and who gets left out of the banking system. This page tells how I got here, in the order it happened.
+
+# Four facts shown under the opening, big number first.
+highlights:
+  - figure: "3.29"
+    text: CGPA in BS Business Economics, University of the Punjab
+  - figure: II degree
+    text: Diploma in Economics at the V International Olympiad on Financial Security
+  - figure: "191"
+    text: countries at the Festival of Youth 2026, where I presented my research
+  - figure: 3 months
+    text: as a banking trainee at Meezan Bank
+
+contact:
+  email: abdulhaseeb2130@gmail.com
+  phone: "+92 301 9734442"        # printed only in the CV PDF, never on the website
+  linkedin: https://www.linkedin.com/in/abdul-haseeb-khan944
+  github: https://github.com/abdulhaseeb707
+
+cv:
+  showPhone: true
+  summary: >-
+    Business Economics graduate from the University of the Punjab (CGPA 3.29/4.00), now studying for an
+    MPhil in Economics. Banking experience as a trainee at Meezan Bank and international recognition in
+    financial security, including a Diploma (II degree) in Economics at the V International Olympiad on
+    Financial Security in Russia. Uses Stata, Excel, SPSS and Power BI for econometric and business analysis.
+    Interested in inflation and firm performance, financial fraud and AML/CFT, and financial inclusion in Pakistan.
+
+# ─── The story ───────────────────────────────────────────────────────────────
+# One chapter per moment, oldest first.
+#   date      sort key (YYYY-MM-DD)       when   the label people see
+#   category  study | work | research | international
+#   map       lahore | krasnoyarsk | ekaterinburg | online  (pins the chapter on the journey map)
+#   evidence  image: (opens in a viewer) | file: /files/x.pdf | url: https://…
+#   cv        entries this chapter adds to the CV (section: education | experience | honours |
+#             projects | events | memberships | certifications)
+timeline:
+  - id: university
+    date: 2021-12-15
+    when: December 2021
+    place: Lahore
+    map: lahore
+    category: study
+    title: Choosing economics
+    summary: >-
+      In December 2021 I started a BS in Business Economics at the University of the Punjab. Before that
+      I had studied ICS (computer science, statistics and mathematics) at the Government College of
+      Science, so I came in with numbers already part of my toolkit.
+    story: |-
+      Over the next four and a half years I worked through micro and macroeconomics, statistics,
+      Econometrics I and II, Calculus I and II, accounting and finance, marketing, quantitative decision
+      science, data visualization, industrial economics, Islamic banking and finance, and a course on
+      Pakistan's own economic problems.
+
+      Econometrics and quantitative decision science gave me the tools for the projects further down this
+      page.
+    cv:
+      - section: education
+        order: 2
+        title: BS Business Economics
+        org: University of the Punjab
+        place: Lahore, Pakistan
+        dates: Dec 2021 – May 2026
+        bullets:
+          - "CGPA 3.29/4.00"
+          - "Coursework: Econometrics I & II, Statistics, Calculus I & II, Quantitative Decision Science, Data Visualization, Islamic Banking & Finance, Industrial Economics"
+      - section: education
+        order: 3
+        title: Intermediate in Computer Science (ICS)
+        org: Government College of Science
+        place: Pakistan
+        bullets:
+          - "Computer Science, Statistics, Mathematics"
+
+  - id: coursera
+    date: 2023-06-26
+    when: June 2023
+    place: Online
+    map: online
+    category: study
+    title: A course from Illinois
+    summary: >-
+      I completed Firm Level Economics: Consumer and Producer Behavior, an online course from the
+      University of Illinois Urbana-Champaign.
+    story: |-
+      It covered how taxes and price controls move a market's equilibrium, how elasticity of demand shapes
+      what consumers do, and how a firm picks its output to maximise profit at given prices.
+    evidence:
+      - label: Course certificate (Coursera)
+        url: https://coursera.org/share/89ecbd921c83dc536a28343f6ab28b8e
+    cv:
+      - section: certifications
+        title: "Firm Level Economics: Consumer and Producer Behavior"
+        org: University of Illinois Urbana-Champaign (Coursera)
+        dates: Jun 2023
+
+  - id: solver
+    date: 2025-02-04
+    when: February – May 2025
+    place: Lahore
+    map: lahore
+    category: research
+    title: Solving a cost problem with Excel Solver
+    summary: >-
+      I built a linear programming model in Excel Solver to find the cheapest production plan that still
+      met the required output and stayed inside the available resources.
+    story: |-
+      I set up the decision variables, wrote the cost to be minimised and the constraints it had to respect,
+      then let Solver find the optimum and read the result back as an operating decision.
+    project: cost-optimization-solver
+    cv:
+      - section: projects
+        title: Operational Cost Optimization Model
+        dates: Feb – May 2025
+        bullets:
+          - "Built a linear programming model in Excel Solver to minimise production costs under output and resource constraints"
+          - "Applied operational research techniques to a real-world economic decision problem"
+
+  - id: inflation
+    date: 2025-05-05
+    when: May – August 2025
+    place: Lahore
+    map: lahore
+    category: research
+    title: Does inflation eat into company profits?
+    summary: >-
+      I ran a regression study in Stata on how inflation relates to the profitability of firms, using
+      company financial data.
+    story: |-
+      The question was simple: when prices rise, what happens to company profits? I worked with company
+      financial data, wrote my hypotheses and estimated multiple regression models in Stata, then read the
+      results for what they meant for businesses and for price stability.
+    project: inflation-profitability
+    cv:
+      - section: projects
+        title: "Inflation and Corporate Profitability: An Econometric Analysis"
+        dates: May – Aug 2025
+        bullets:
+          - "Investigated the relationship between inflation and firm-level profitability using company financial data"
+          - "Estimated multiple regression models in Stata to test hypotheses and interpret the economic relationships"
+          - "Drew evidence-based conclusions for the business environment and price-stability policy"
+
+  - id: iofs
+    date: 2025-09-28
+    when: 28 September – 3 October 2025
+    place: Krasnoyarsk, Russia
+    map: krasnoyarsk
+    category: international
+    title: Siberia, with Pakistan's flag
+    summary: >-
+      I travelled to Krasnoyarsk to represent Pakistan at the V International Olympiad on Financial Security,
+      hosted by Siberian Federal University. I came home with a Diploma (II degree) in Economics.
+    story: |-
+      The olympiad brings students from many countries together to solve cases on anti-money laundering,
+      countering the financing of terrorism, economic risk and financial compliance. I competed in the
+      Economics field.
+
+      On 1 October I spoke at the podium in the session on studying financial security and AML/CFT in
+      Russia. At the closing ceremony I walked on stage with Pakistan's flag to receive my diploma. The
+      result also brought a 50% scholarship toward master's studies.
+    photos:
+      - src: photos/iofs-2025-award-stage.png
+        alt: Abdul Haseeb Khan on stage holding Pakistan's flag and his diploma, next to an official, under a screen reading Economic Security.
+        caption: Receiving my diploma on stage, with Pakistan's flag.
+      - src: photos/iofs-2025-arrival-krasnoyarsk.jpg
+        alt: Abdul Haseeb Khan at Krasnoyarsk airport with Pakistan's flag over his shoulders, in front of the olympiad's welcome banner.
+        caption: "28 September: just landed in Krasnoyarsk."
+      - src: photos/iofs-2025-podium.jpg
+        alt: Abdul Haseeb Khan speaking at a podium on a blue-lit stage, with the olympiad's session title on the screen behind him.
+        caption: "1 October: at the podium."
+      - src: photos/iofs-2025-press-wall.jpg
+        alt: Abdul Haseeb Khan in a white fur hat and the olympiad vest in front of the olympiad's press wall.
+        caption: The Siberian welcome came with a hat.
+      - src: photos/iofs-2025-medal-and-kit.jpg
+        alt: A desk with the olympiad medal, a student badge reading Khan Abdul Haseeb, a certificate, lanyards, notebooks and a fur hat.
+        caption: What I brought home.
+    evidence:
+      - label: Diploma, II degree in Economics
+        image: certificates/iofs-2025-diploma.png
+    cv:
+      - section: honours
+        order: 1
+        title: Diploma (II degree) in Economics
+        org: V International Olympiad on Financial Security, Siberian Federal University
+        place: Krasnoyarsk, Russia
+        dates: Oct 2025
+        bullets:
+          - "Represented Pakistan; solved AML/CFT, economic-risk and financial-compliance case studies"
+          - "Awarded a 50% scholarship toward master's studies"
+
+  - id: brics
+    date: 2025-11-27
+    when: November 2025
+    place: Online, hosted from Khabarovsk
+    map: online
+    category: international
+    title: An award from the BRICS Arts Festival
+    summary: >-
+      I was selected from Pakistan for the financial security programme of the BRICS Arts Festival, held
+      online from Khabarovsk, and received an award for financial data interpretation.
+    story: |-
+      The programme focused on AML/CFT standards, FATF compliance and economic risk, with participants from
+      many countries.
+    evidence:
+      - label: Award files (Yandex Disk)
+        url: https://disk.yandex.com/d/Gtywsi9-HLHz1w
+    cv:
+      - section: honours
+        order: 2
+        title: Award for Excellence in Financial Data Interpretation
+        org: BRICS Arts Festival, financial security programme (online, Khabarovsk)
+        dates: Nov 2025
+        bullets:
+          - "Selected as a participant from Pakistan; programme on AML/CFT standards, FATF compliance and economic risk"
+
+  - id: sbp
+    date: 2026-01-27
+    when: January 2026
+    place: Lahore
+    map: lahore
+    category: study
+    title: Two days at the State Bank
+    summary: >-
+      I attended a two-day awareness session on SMEs and Access to Finance run by the State Bank of
+      Pakistan's Banking Services Corporation in Lahore.
+    story: |-
+      The session looked at why small and medium businesses in Pakistan struggle to get credit, how the
+      central bank's frameworks try to close that gap, and why financial inclusion matters for growth
+      outside the big cities.
+    photos:
+      - src: certificates/sbp-smes-access-to-finance-2026.png
+        alt: Certificate of participation from the State Bank of Pakistan (BSC) for a two-day awareness session on SMEs and Access to Finance, 27–28 January 2026.
+        caption: My certificate from the session.
+    evidence:
+      - label: Certificate of participation
+        image: certificates/sbp-smes-access-to-finance-2026.png
+    cv:
+      - section: events
+        title: Awareness Session on SMEs and Access to Finance
+        org: State Bank of Pakistan (BSC)
+        place: Lahore
+        dates: Jan 2026
+        bullets:
+          - "Credit access for SMEs, central bank frameworks and the role of financial inclusion in regional growth"
+
+  - id: graduation
+    date: 2026-05-04
+    when: May 2026
+    place: Lahore
+    map: lahore
+    category: study
+    title: Finishing the degree
+    summary: >-
+      I finished my BS in Business Economics with a CGPA of 3.29 out of 4.00.
+    story: |-
+      Four and a half years after I started, I had the econometrics, the projects and a trip to Siberia
+      behind me. The next step was to see how all of it works inside a real bank.
+
+  - id: meezan
+    date: 2026-06-04
+    when: June – September 2026
+    place: Lahore
+    map: lahore
+    category: work
+    title: Three months at Meezan Bank
+    summary: >-
+      I joined Meezan Bank in Lahore as a banking trainee from 4 June to 4 September 2026.
+    story: |-
+      I saw the daily work of banking operations: routine operational and documentation tasks, serving
+      customers, and the compliance checks and internal processes that sit behind every transaction.
+
+      After studying Islamic banking and AML/CFT on paper, it was useful to see how those rules shape what
+      a bank actually does each day.
+    cv:
+      - section: experience
+        title: Banking Trainee
+        org: Meezan Bank Limited
+        place: Lahore, Pakistan
+        dates: 4 Jun – 4 Sep 2026
+        bullets:
+          - "Gained practical exposure to banking operations and workplace procedures"
+          - "Assisted with routine operational and documentation tasks"
+          - "Developed an understanding of customer service, compliance and internal processes"
+
+  - id: world-bank
+    date: 2026-06-11
+    when: June 2026
+    place: Online
+    map: online
+    category: international
+    title: A seat at the World Bank Youth Summit
+    summary: >-
+      I was selected as one of more than 3,000 virtual delegates for the World Bank Group Youth Summit 2026,
+      FutureWorks: Designing Jobs for the Digital Age.
+    story: |-
+      Over two days the sessions covered development finance, youth economic empowerment and the jobs that
+      digital technology is creating.
+    photos:
+      - src: certificates/world-bank-youth-summit-2026.png
+        alt: World Bank Group Youth Summit 2026 certificate stating that Abdul Haseeb Khan participated as a virtual delegate in FutureWorks, Designing Jobs for the Digital Age.
+        caption: My delegate certificate.
+    evidence:
+      - label: Certificate of participation
+        image: certificates/world-bank-youth-summit-2026.png
+    cv:
+      - section: events
+        title: "World Bank Group Youth Summit 2026: FutureWorks"
+        org: World Bank Group (online)
+        dates: Jun 2026
+        bullets:
+          - "Virtual delegate, one of 3,000+ selected worldwide; development finance, youth economic empowerment and digital jobs"
+
+  - id: mphil
+    date: 2026-09-05
+    when: 2026
+    place: Lahore
+    map: lahore
+    category: study
+    title: Going further with an MPhil
+    summary: >-
+      I started an MPhil in Economics at the University of the Punjab.
+    story: |-
+      The MPhil is where I want to turn the questions from my projects, on inflation, fraud and access to
+      finance, into research that holds up.
+    cv:
+      - section: education
+        order: 1
+        title: MPhil Economics
+        org: University of the Punjab
+        place: Lahore, Pakistan
+        dates: 2026 – present
+
+  - id: festival
+    date: 2026-09-11
+    when: 11 – 17 September 2026
+    place: Ekaterinburg, Russia
+    map: ekaterinburg
+    category: international
+    title: 10,000 people, 191 countries
+    summary: >-
+      I was one of 10,000 young people from 191 countries at the International Festival of Youth 2026 in
+      Ekaterinburg. I joined the Entrepreneurship Track, spoke for Pakistan in the Interactive International
+      Discussion on financial fraud, and presented my work on what fraud costs Pakistan's economy.
+    story: |-
+      On 16 September I presented "Financial Fraud in Pakistan and Losses to GDP" at the festival's Znanie
+      stage. In the Interactive International Discussion I set out Pakistan's problems with financial fraud
+      and the solutions young people are working on.
+
+      At the festival I also became a member of the International Movement on Financial Security. Between
+      sessions I walked the flag plaza of the World Youth City, met participants from many continents, and saw Russian technology up close: a humanoid robot from the Alabuga special economic
+      zone, Kaspersky's model of a cyber-protected industrial city, and neurotechnology demonstrations.
+    photos:
+      - src: photos/ify-2026-znanie-presentation.jpg
+        alt: Abdul Haseeb Khan in a suit holding a presentation clicker in front of a screen reading International Festival of Youth 2026 x Znanie.
+        caption: "16 September: the day of my presentation."
+      - src: photos/ify-2026-flag-avenue.jpg
+        alt: Abdul Haseeb Khan standing on a wide plaza lined with the flags of many countries.
+        caption: The flag plaza in the World Youth City.
+      - src: photos/ify-2026-alabuga-robot.jpg
+        alt: Abdul Haseeb Khan with his arm around a humanoid robot branded Alabuga special economic zone.
+        caption: Meeting a robot from the Alabuga special economic zone.
+      - src: photos/ify-2026-znanie-pavilion.jpg
+        alt: Abdul Haseeb Khan in front of the Znanie pavilion with a large raccoon mascot behind him.
+        caption: The "Knowledge is power" pavilion.
+      - src: photos/ify-2026-kaspersky-model.jpg
+        alt: A glass dome over a detailed model of an industrial city with power plants and factories, on a Kaspersky stand.
+        caption: Kaspersky's model of a protected industrial city.
+    evidence:
+      - label: Participant certificate (PDF)
+        file: /files/festival-of-youth-2026-participant-certificate.pdf
+    cv:
+      - section: events
+        title: International Festival of Youth 2026
+        org: Entrepreneurship Track, with the International Movement on Financial Security
+        place: Ekaterinburg, Russia
+        dates: Sep 2026
+        bullets:
+          - "Presented \"Financial Fraud in Pakistan and Losses to GDP\""
+          - "Represented Pakistan in the Interactive International Discussion on financial fraud"
+          - "One of 10,000 participants from 191 countries"
+      - section: memberships
+        title: Member, International Movement on Financial Security
+        dates: 2026
+
+  - id: now
+    date: 2026-10-01
+    when: Now
+    place: Lahore
+    map: lahore
+    category: research
+    title: What I'm working on
+    summary: >-
+      I'm in the first year of my MPhil, and I'm building public projects so my work can be checked, not
+      just described.
+    story: |-
+      Next on my list is a dashboard of Pakistan's main economic indicators, a study of banking and
+      financial inclusion, and a look at how education spending connects to outcomes. Each one will have its
+      data, code and write-up on GitHub.
+
+# ─── What I'm working on next (planned, not finished) ──────────────────────
+next:
+  - title: Pakistan Economic Dashboard
+    text: Inflation, GDP growth, interest and exchange rates, trade and jobs in one place, updated from public data.
+    tools: Power BI, Excel
+  - title: Banking and financial inclusion in Pakistan
+    text: Who uses banks and digital payments, who doesn't, and what role Islamic banking plays.
+    tools: Stata, public survey data
+  - title: Education finance and policy
+    text: How education spending relates to access and outcomes, with a regression model and a short policy brief.
+    tools: Stata, public data
+
+interests:
+  - Inflation and how it affects firms
+  - Financial fraud, AML/CFT and the cost of financial crime
+  - Financial inclusion and digital payments in Pakistan
+  - Islamic banking and finance
+  - Special economic zones and industrial policy
+  - Education finance and development
+
+services:
+  - title: Business and market research
+    text: I research a market, its size, its players and its trends, and write it up in plain language.
+  - title: Competitor analysis
+    text: I compare competitors on products, pricing and positioning, and show where the gaps are.
+  - title: Economic and data analysis
+    text: I clean data and run statistical and regression analysis in Stata or Excel, with results you can follow.
+  - title: Dashboards and charts
+    text: I turn spreadsheets into clear Power BI dashboards and charts for reports and presentations.
+
+skills:
+  - group: Analysis and statistics
+    items: [Stata, SPSS, Microsoft Excel (incl. Solver), Regression and econometrics, Hypothesis testing, Linear programming]
+  - group: Reporting and visuals
+    items: [Power BI, Data visualization, Microsoft Office, Reports and business presentations]
+  - group: Research
+    items: [Literature review, Market and competitor research, Policy analysis]
+  - group: Domain knowledge
+    items: [Islamic banking and finance, AML/CFT, Financial inclusion]
+  - group: Learning
+    items: [Python (basic)]
+
+languages:
+  - name: Urdu
+    level: Native
+  - name: English
+    level: Reading C2 · Listening, speaking and writing B2

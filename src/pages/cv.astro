@@ -1,0 +1,238 @@
+---
+// The CV, built from the same data as the website. scripts/build-cv-pdf.mjs prints this page to
+// dist/Abdul-Haseeb-Khan-CV.pdf. Never edit the PDF by hand: change src/data/profile.yaml instead.
+import '@fontsource-variable/source-serif-4/opsz.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/400-italic.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '../styles/tokens.css';
+import { person, contact, cvSettings, skills, languages, site, cv } from '../lib/profile';
+
+const sections = cv();
+const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{person.name}, CV</title>
+    <meta name="robots" content="noindex" />
+    <meta name="description" content={`CV of ${person.name}`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="toolbar">
+      <a href="/">Back to the website</a>
+      <a class="download" href={site.cvFile} download>Download this CV as PDF</a>
+    </div>
+
+    <main class="sheet">
+      <header class="cv-head">
+        <h1>{person.name}</h1>
+        <p class="tagline">{person.tagline}</p>
+        <ul class="contact">
+          <li>{person.location}</li>
+          <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+          {/* filled in only when the PDF is generated, so the number never sits on a web page */}
+          {cvSettings.showPhone && <li data-phone hidden></li>}
+          <li><a href={contact.linkedin}>{bare(contact.linkedin)}</a></li>
+          <li><a href={contact.github}>{bare(contact.github)}</a></li>
+          <li><a href={site.url}>{bare(site.url)}</a></li>
+        </ul>
+      </header>
+
+      <section class="summary">
+        <p>{cvSettings.summary}</p>
+      </section>
+
+      {
+        sections.map((s) => (
+          <section class="cv-section">
+            <h2>{s.title}</h2>
+            {s.entries.map((e) => (
+              <article class="entry">
+                <div class="entry-head">
+                  <h3>{e.title}</h3>
+                  {e.dates && <p class="dates">{e.dates}</p>}
+                </div>
+                {(e.org || e.place) && <p class="org">{[e.org, e.place].filter(Boolean).join(', ')}</p>}
+                {e.bullets.length > 0 && (
+                  <ul>
+                    {e.bullets.map((b) => <li>{b}</li>)}
+                  </ul>
+                )}
+              </article>
+            ))}
+          </section>
+        ))
+      }
+
+      <section class="cv-section">
+        <h2>Skills</h2>
+        <dl class="skills">
+          {skills.map((g) => (
+            <div>
+              <dt>{g.group}</dt>
+              <dd>{g.items.join(', ')}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="cv-section">
+        <h2>Languages</h2>
+        <p class="langs">{languages.map((l) => `${l.name}: ${l.level}`).join('   ·   ')}</p>
+      </section>
+
+      <p class="generated">Generated from {bare(site.url)} on {site.built}.</p>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  @page {
+    size: A4;
+    margin: 13mm 15mm 13mm;
+  }
+  html { background: var(--paper-sunk); }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    color: #2b2f3a;
+    font-size: 9.6pt;
+    line-height: 1.42;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 16px;
+    font-size: 15px;
+  }
+  .toolbar a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .toolbar .download { font-weight: 600; }
+
+  .sheet {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 210mm;
+    margin: 0 auto 48px;
+    padding: 13mm 15mm;
+    background: #ffffff;
+    border: 1px solid var(--rule);
+  }
+  @media screen and (max-width: 640px) {
+    body { font-size: 11pt; }
+    .sheet { padding: 20px 16px; }
+  }
+
+  .cv-head h1 {
+    font-family: var(--serif);
+    font-size: 23pt;
+    font-weight: 600;
+    color: #14213d;
+    line-height: 1.1;
+    margin: 0;
+  }
+  .tagline {
+    margin: 3pt 0 0;
+    color: #1f5f3f;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .contact {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 12pt;
+    margin: 6pt 0 0;
+    padding: 0 0 8pt;
+    border-bottom: 1.5pt solid #14213d;
+    color: #4a4f5c;
+  }
+  .contact li[hidden] { display: none; }
+
+  .summary { margin: 9pt 0 2pt; }
+  .summary p { margin: 0; }
+
+  .cv-section { margin-top: 11pt; }
+  .cv-section h2 {
+    font-family: var(--sans);
+    font-size: 8.4pt;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #14213d;
+    margin: 0 0 5pt;
+    padding-bottom: 2pt;
+    border-bottom: 0.75pt solid #c9c2b3;
+    break-after: avoid;
+  }
+  .entry {
+    margin-bottom: 6pt;
+    break-inside: avoid;
+  }
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12pt;
+  }
+  .entry h3 {
+    font-family: var(--sans);
+    font-size: 9.8pt;
+    font-weight: 600;
+    color: #14213d;
+    margin: 0;
+  }
+  .dates {
+    margin: 0;
+    flex: none;
+    color: #4a4f5c;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .org {
+    margin: 0;
+    font-style: italic;
+    color: #4a4f5c;
+  }
+  .entry ul {
+    margin: 2pt 0 0;
+    padding-left: 11pt;
+  }
+  .entry li { margin: 0.5pt 0; }
+  .entry li::marker { color: #1f5f3f; }
+
+  .skills { margin: 0; }
+  .skills div {
+    display: grid;
+    grid-template-columns: 40mm 1fr;
+    gap: 8pt;
+    margin-bottom: 2pt;
+    break-inside: avoid;
+  }
+  .skills dt { font-weight: 600; color: #14213d; }
+  .skills dd { margin: 0; }
+  .langs { margin: 0; white-space: pre-wrap; }
+
+  .generated {
+    margin: 14pt 0 0;
+    font-size: 7.5pt;
+    color: #8a8f99;
+  }
+
+  @media print {
+    html, body { background: #ffffff; }
+    .toolbar { display: none; }
+    .sheet { max-width: none; margin: 0; padding: 0; border: 0; }
+  }
+</style>

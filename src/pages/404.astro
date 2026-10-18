@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Page not found | Abdul Haseeb Khan" noindex>
+  <section class="wrap missing">
+    <p class="label">404</p>
+    <h1>This page isn't part of my story.</h1>
+    <p>The link may be old, or the address may have a typo. Everything I've done is on the home page, in order.</p>
+    <p><a class="button primary" href="/">Go to the home page</a></p>
+  </section>
+</Base>
+
+<style>
+  .missing {
+    padding-block: 96px 120px;
+    max-width: calc(var(--measure) + 2 * var(--gutter));
+  }
+  h1 {
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    font-weight: 500;
+    margin: 12px 0 20px;
+  }
+  p { font-size: 1.125rem; }
+  .button { margin-top: 12px; }
+</style>

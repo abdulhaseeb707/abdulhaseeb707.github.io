@@ -1,0 +1,24 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# full-size originals, the old site and private files (kept locally, never published)
+_archive/
+
+# raw files the client drops in before they are sorted into public/ or src/assets/
+incoming/
+
+# local preview config for the Claude app (machine-specific Node path)
+.claude/launch.json
+
+# local env
+.env
+.env.*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/

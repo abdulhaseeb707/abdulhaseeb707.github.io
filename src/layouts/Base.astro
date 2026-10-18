@@ -1,0 +1,225 @@
+---
+import '@fontsource-variable/source-serif-4/opsz.css';
+import '@fontsource-variable/source-serif-4/opsz-italic.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import { person, contact, site, asset } from '../lib/profile';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = `${person.name}: ${person.tagline}`,
+  description = person.intro.join(' '),
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = await getImage({ src: asset(person.portrait), width: 400, format: 'jpg' });
+const ogImageUrl = new URL(ogImage.src, site.url).href;
+const home = Astro.url.pathname === '/';
+const link = (hash: string) => (home ? hash : `/${hash}`);
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: person.name,
+  url: site.url,
+  image: ogImageUrl,
+  description: person.tagline,
+  homeLocation: { '@type': 'Place', name: person.location },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'University of the Punjab' },
+  knowsAbout: ['Economics', 'Econometrics', 'Data analysis', 'Financial security', 'AML/CFT', 'Islamic finance'],
+  sameAs: [contact.linkedin, contact.github],
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="author" content={person.name} />
+    <meta name="color-scheme" content="light only" />
+    <meta name="theme-color" content="#faf8f3" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header no-print">
+      <div class="wrap header-inner">
+        <a class="brand" href="/">
+          <span class="brand-name">{person.name}</span>
+          <span class="brand-place">{person.location}</span>
+        </a>
+        <nav aria-label="Main">
+          <ul>
+            <li><a href={link('#story')}>Story</a></li>
+            <li><a href={link('#journey')}>Places</a></li>
+            <li><a href={link('#work')}>Work</a></li>
+            <li><a href={link('#contact')}>Contact</a></li>
+            <li><a class="cv-link" href={site.cvFile} download>Download CV</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer no-print">
+      <div class="wrap footer-inner">
+        <div>
+          <p class="footer-name">{person.name}</p>
+          <p>
+            This website and <a href={site.cvFile} download>my CV</a> are built from the same file, so they always say the
+            same thing. Last updated {site.built}.
+          </p>
+        </div>
+        <ul class="footer-links">
+          <li><a href={`mailto:${contact.email}`}>Email</a></li>
+          <li><a href={contact.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>
+          <li><a href={contact.github} rel="me noopener" target="_blank">GitHub</a></li>
+        </ul>
+        <p class="colophon">Set in Source Serif and IBM Plex Sans. Photographs are my own. Built with Astro, hosted on GitHub Pages.</p>
+      </div>
+    </footer>
+
+    <script>
+      // gentle reveal for elements marked .reveal (CSS skips it under reduced motion)
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.isIntersecting && (e.target.classList.add('is-visible'), io.unobserve(e.target))),
+        { rootMargin: '0px 0px -8% 0px' },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 60px;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-right: auto;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .brand-name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+  .brand-place {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  nav ul {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    list-style: none;
+  }
+  nav a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+  nav a:hover { color: var(--accent); }
+  .cv-link {
+    margin-left: 8px;
+    background: var(--ink);
+    color: var(--paper) !important;
+    border-radius: var(--radius);
+  }
+  .cv-link:hover { background: var(--accent); }
+
+  @media (max-width: 860px) {
+    .brand-place { display: none; }
+    nav li:nth-child(2) { display: none; }
+  }
+  @media (max-width: 560px) {
+    .brand-name { font-size: 1.02rem; }
+    nav a { padding: 8px 7px; font-size: 0.88rem; }
+    nav li:nth-child(3) { display: none; }
+    .cv-link { margin-left: 4px; }
+  }
+  @media (max-width: 400px) {
+    nav li:nth-child(4) { display: none; }
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    padding-block: 48px 56px;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .footer-inner {
+    display: grid;
+    gap: 24px;
+  }
+  @media (min-width: 760px) {
+    .footer-inner { grid-template-columns: minmax(0, 1fr) auto; }
+  }
+  .footer-inner p { max-width: 60ch; }
+  .footer-name {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .footer-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+  .colophon {
+    grid-column: 1 / -1;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.8rem;
+    font-style: italic;
+    font-family: var(--serif);
+  }
+</style>

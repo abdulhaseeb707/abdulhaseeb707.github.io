@@ -1,0 +1,30 @@
+/* Design tokens. Light theme only. Solid colors only: no gradients, no shadows (see AGENTS.md). */
+:root {
+  --paper: #faf8f3;
+  --paper-sunk: #f2eee5;
+  --ink: #14213d;
+  --text: #3a3f4c;
+  --muted: #646976;
+  --rule: #e3ded3;
+  --rule-strong: #c9c2b3;
+  --accent: #1f5f3f;
+  --accent-strong: #164a31;
+  --accent-soft: #e4eee7;
+  --on-accent: #ffffff;
+  --land: #ebe6db;
+  --land-focus: #d8d0bf;
+
+  --serif: 'Source Serif 4 Variable', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+  --sans: 'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --measure: 66ch;
+  --page: 1180px;
+  --gutter: 16px;
+  --radius: 2px;
+
+  color-scheme: light;
+}
+
+@media (min-width: 720px) {
+  :root { --gutter: 32px; }
+}

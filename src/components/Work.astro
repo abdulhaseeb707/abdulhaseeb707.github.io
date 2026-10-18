@@ -1,0 +1,151 @@
+---
+import { getCollection } from 'astro:content';
+import Icon from './Icon.astro';
+import { next } from '../lib/profile';
+
+const projects = (await getCollection('projects', (p) => !p.data.draft)).sort((a, b) => a.data.order - b.data.order);
+const featured = projects.find((p) => p.data.featured) ?? projects[0];
+const others = projects.filter((p) => p !== featured);
+---
+<section class="section work" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="label kicker">My work</p>
+      <h2 id="work-title">The questions I've tried to answer</h2>
+      <p>Each project starts with a question about Pakistan's economy, and each page shows what I did, with what data, and what came out of it.</p>
+    </header>
+
+    {
+      featured && (
+        <article class="featured">
+          <div>
+            <p class="label">{featured.data.status === 'completed' ? 'Completed' : 'In progress'} · {featured.data.period}</p>
+            <h3><a href={`/projects/${featured.id}/`}>{featured.data.title}</a></h3>
+            <p class="summary">{featured.data.summary}</p>
+            <a class="button" href={`/projects/${featured.id}/`}>
+              Read the project <Icon name="arrow-right" />
+            </a>
+          </div>
+          <blockquote>
+            <p>{featured.data.question}</p>
+            {featured.data.tools.length > 0 && <footer>{featured.data.tools.join(' · ')}</footer>}
+          </blockquote>
+        </article>
+      )
+    }
+
+    {
+      others.length > 0 && (
+        <ol class="project-list">
+          {others.map((p) => (
+            <li>
+              <p class="label">{p.data.period}</p>
+              <div>
+                <h3><a href={`/projects/${p.id}/`}>{p.data.title}</a></h3>
+                <p>{p.data.summary}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+
+    {
+      next.length > 0 && (
+        <div class="next">
+          <h3>What I'm working on next</h3>
+          <p class="next-note">Planned, not finished. Each will get its own page with data and code when it's done.</p>
+          <ol>
+            {next.map((n) => (
+              <li>
+                <h4>{n.title}</h4>
+                <p>{n.text}</p>
+                {n.tools && <p class="tools">{n.tools}</p>}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .featured {
+    display: grid;
+    gap: 32px;
+    padding-block: 32px 40px;
+    border-top: 2px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+  @media (min-width: 900px) {
+    .featured { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 64px; }
+  }
+  .featured h3 {
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin: 10px 0 14px;
+  }
+  .featured h3 a,
+  .project-list h3 a { color: var(--ink); text-decoration: none; }
+  .featured h3 a:hover,
+  .project-list h3 a:hover { color: var(--accent); text-decoration: underline; }
+  .summary { max-width: 48ch; margin-bottom: 28px; font-family: var(--serif); font-size: 1.2rem; line-height: 1.55; }
+  blockquote {
+    margin: 0;
+    padding-left: 24px;
+    border-left: 3px solid var(--accent);
+    align-self: center;
+  }
+  blockquote p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  blockquote footer {
+    margin-top: 14px;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .project-list { list-style: none; }
+  .project-list li {
+    display: grid;
+    gap: 6px 32px;
+    padding-block: 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+  @media (min-width: 760px) {
+    .project-list li { grid-template-columns: 200px minmax(0, 1fr); }
+  }
+  .project-list h3 { font-size: 1.45rem; font-weight: 500; margin-bottom: 6px; }
+
+  .next {
+    margin-top: 56px;
+    padding: 28px;
+    background: var(--paper-sunk);
+    border: 1px solid var(--rule);
+  }
+  .next > h3 { font-size: 1.5rem; }
+  .next-note { color: var(--muted); font-size: 0.95rem; margin-top: 6px; }
+  .next ol {
+    list-style: none;
+    display: grid;
+    gap: 24px;
+    margin-top: 24px;
+  }
+  @media (min-width: 900px) {
+    .next ol { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  }
+  .next h4 {
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .next li p { font-size: 0.95rem; }
+  .tools { color: var(--muted); font-size: 0.875rem !important; margin-top: 6px; }
+</style>

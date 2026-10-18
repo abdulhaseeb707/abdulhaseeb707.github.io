@@ -1,0 +1,218 @@
+---
+import { getCollection } from 'astro:content';
+import Chapter from './Chapter.astro';
+import { timeline, years, yearOf, categories } from '../lib/profile';
+
+const published = new Set((await getCollection('projects', (p) => !p.data.draft)).map((p) => p.id));
+const groups = years.map((year) => ({ year, chapters: timeline.filter((c) => yearOf(c) === year) }));
+const slug = (year: string) => `y-${year.toLowerCase()}`;
+---
+<section class="section story" id="story" aria-labelledby="story-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="label kicker">My story</p>
+      <h2 id="story-title">How I got here</h2>
+      <p>
+        {timeline.length} chapters, oldest first. Jump to a year, show only one kind of chapter, or open any of them for
+        the full story and the proof behind it.
+      </p>
+    </header>
+
+    <div class="story-layout">
+      <div class="controls">
+        <nav class="year-rail" aria-label="Jump to a year">
+          <ol>
+            {groups.map((g) => <li><a href={`#${slug(g.year)}`} data-year={g.year}>{g.year}</a></li>)}
+          </ol>
+        </nav>
+
+        <div class="filters" role="group" aria-label="Show chapters about">
+          <button type="button" data-filter="all" aria-pressed="true">Everything</button>
+          {Object.entries(categories).map(([key, name]) => (
+            <button type="button" data-filter={key} aria-pressed="false">{name}</button>
+          ))}
+          <p class="filter-status" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="chapters">
+        {
+          groups.map((g) => (
+            <section class="year-group" id={slug(g.year)} data-year={g.year} aria-label={g.year}>
+              <h3 class="year-mark" aria-hidden="true">{g.year}</h3>
+              {g.chapters.map((c) => (
+                <Chapter chapter={c} number={timeline.indexOf(c) + 1} projectUrl={c.project && published.has(c.project) ? `/projects/${c.project}/` : undefined} />
+              ))}
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const chapters = [...document.querySelectorAll<HTMLElement>('.chapter')];
+  const groups = [...document.querySelectorAll<HTMLElement>('.year-group')];
+  const railLinks = [...document.querySelectorAll<HTMLAnchorElement>('.year-rail a')];
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('.filters button')];
+  const status = document.querySelector('.filter-status')!;
+
+  function applyFilter(filter: string) {
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+    let shown = 0;
+    chapters.forEach((c) => {
+      const match = filter === 'all' || c.dataset.category === filter;
+      c.hidden = !match;
+      if (match) shown++;
+    });
+    groups.forEach((g) => {
+      const empty = !g.querySelector('.chapter:not([hidden])');
+      g.hidden = empty;
+      railLinks.find((a) => a.dataset.year === g.dataset.year)?.classList.toggle('is-empty', empty);
+    });
+    status.textContent = filter === 'all' ? '' : `Showing ${shown} of ${chapters.length} chapters`;
+  }
+  buttons.forEach((b) => b.addEventListener('click', () => applyFilter(b.dataset.filter!)));
+
+  // highlight the year being read
+  const visible = new Map<string, boolean>();
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => visible.set((e.target as HTMLElement).dataset.year!, e.isIntersecting));
+      const current = groups.find((g) => visible.get(g.dataset.year!))?.dataset.year;
+      if (!current) return;
+      railLinks.forEach((a) => {
+        const on = a.dataset.year === current;
+        a.toggleAttribute('aria-current', on);
+        if (on) a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      });
+    },
+    { rootMargin: '-35% 0px -60% 0px' },
+  );
+  groups.forEach((g) => io.observe(g));
+
+  // arriving on a chapter link (e.g. from the map) opens its full story
+  function openFromHash() {
+    const target = location.hash && document.querySelector(location.hash);
+    if (target?.classList.contains('chapter')) target.querySelector('details')?.setAttribute('open', '');
+  }
+  addEventListener('hashchange', openFromHash);
+  openFromHash();
+</script>
+
+<style>
+  .story-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .controls { display: contents; }
+
+  /* phones and tablets: years stick under the header, filters sit above the chapters */
+  .year-rail {
+    position: sticky;
+    top: 56px;
+    z-index: 10;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .year-rail ol {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+  }
+  .year-rail a {
+    display: block;
+    padding: 12px 12px 10px;
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .year-rail a:hover { color: var(--ink); }
+  .year-rail a[aria-current] { color: var(--ink); border-bottom-color: var(--accent); }
+  .year-rail a.is-empty { opacity: 0.35; pointer-events: none; }
+
+  .filters {
+    display: none;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding-block: 20px 8px;
+  }
+  :global(.js) .filters { display: flex; }
+  .filters button {
+    min-height: 40px;
+    padding: 6px 14px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    font: 500 0.9rem/1 var(--sans);
+    cursor: pointer;
+  }
+  .filters button:hover { border-color: var(--ink); }
+  .filters button[aria-pressed='true'] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+  .filter-status {
+    margin: 0 0 0 4px;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .year-mark {
+    font-size: clamp(2.6rem, 7vw, 4.5rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    padding-top: 40px;
+    letter-spacing: -0.02em;
+    font-variant-numeric: lining-nums;
+  }
+  .year-group:first-child .year-mark { padding-top: 24px; }
+
+  /* wide screens: a sticky column on the left with years and filters */
+  @media (min-width: 1100px) {
+    .story-layout {
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 48px;
+    }
+    .controls {
+      display: block;
+      position: sticky;
+      top: 88px;
+      align-self: start;
+    }
+    .year-rail {
+      position: static;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      overflow: visible;
+    }
+    .year-rail ol { flex-direction: column; gap: 0; }
+    .year-rail a {
+      padding: 6px 0 6px 14px;
+      border-bottom: 0;
+      border-left: 2px solid var(--rule);
+    }
+    .year-rail a[aria-current] { border-left-color: var(--accent); }
+    .filters {
+      flex-direction: column;
+      align-items: stretch;
+      padding-top: 28px;
+    }
+    .filters button { text-align: left; border-radius: var(--radius); }
+    .filter-status { margin: 4px 0 0; }
+  }
+</style>

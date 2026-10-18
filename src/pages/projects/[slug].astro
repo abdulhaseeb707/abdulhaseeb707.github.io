@@ -1,0 +1,163 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { timeline } from '../../lib/profile';
+
+export async function getStaticPaths() {
+  const projects = (await getCollection('projects', (p) => !p.data.draft)).sort((a, b) => a.data.order - b.data.order);
+  return projects.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, nextProject: projects[(i + 1) % projects.length] },
+  }));
+}
+
+const { project, nextProject } = Astro.props;
+const { Content } = await render(project);
+const p = project.data;
+const chapter = p.chapter ? timeline.find((c) => c.id === p.chapter) : undefined;
+---
+<Base title={`${p.title} | Abdul Haseeb Khan`} description={p.summary}>
+  <article class="wrap project">
+    <a class="back" href="/#work"><Icon name="arrow-left" /> All my work</a>
+
+    <header>
+      <p class="label">{p.status === 'completed' ? 'Completed' : 'In progress'} · {p.period}</p>
+      <h1>{p.title}</h1>
+      <p class="summary">{p.summary}</p>
+    </header>
+
+    <dl class="facts">
+      <div class="question">
+        <dt>The question</dt>
+        <dd>{p.question}</dd>
+      </div>
+      {p.data && <div><dt>Data</dt><dd>{p.data}</dd></div>}
+      {p.methods.length > 0 && <div><dt>Methods</dt><dd>{p.methods.join(', ')}</dd></div>}
+      {p.tools.length > 0 && <div><dt>Tools</dt><dd>{p.tools.join(', ')}</dd></div>}
+    </dl>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      p.links.length > 0 && (
+        <ul class="downloads">
+          {p.links.map((l) => (
+            <li>
+              <a class="button" href={l.url} target={l.url.startsWith('http') ? '_blank' : undefined} rel="noopener">
+                {l.label} <Icon name={l.url.startsWith('http') ? 'external' : 'download'} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <footer class="project-foot">
+      {chapter && (
+        <p>
+          This project is part of my story: <a href={`/#ch-${chapter.id}`}>{chapter.when}, {chapter.title}</a>.
+        </p>
+      )}
+      {nextProject && nextProject.id !== project.id && (
+        <p>
+          Next project: <a href={`/projects/${nextProject.id}/`}>{nextProject.data.title}</a>
+        </p>
+      )}
+    </footer>
+  </article>
+</Base>
+
+<style>
+  .project {
+    max-width: calc(var(--measure) + 2 * var(--gutter) + 160px);
+    padding-block: 40px 96px;
+  }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  header { margin-top: 24px; }
+  h1 {
+    font-size: clamp(2.1rem, 5vw, 3.4rem);
+    font-weight: 500;
+    margin-top: 14px;
+    letter-spacing: -0.02em;
+  }
+  .summary {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    line-height: 1.5;
+    margin-top: 18px;
+    max-width: var(--measure);
+  }
+  .facts {
+    margin: 40px 0;
+    border-top: 2px solid var(--ink);
+  }
+  .facts div {
+    display: grid;
+    gap: 4px 32px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  @media (min-width: 700px) {
+    .facts div { grid-template-columns: 160px minmax(0, 1fr); }
+  }
+  .facts dt { font-weight: 600; color: var(--ink); }
+  .facts dd { margin: 0; }
+  .question dd {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--ink);
+  }
+  .prose {
+    max-width: var(--measure);
+    font-family: var(--serif);
+    font-size: 1.14rem;
+    line-height: 1.65;
+  }
+  .prose :global(h2) {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: 40px 0 14px;
+  }
+  .prose :global(ul),
+  .prose :global(ol) { padding-left: 1.3em; margin-bottom: 1em; }
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+    margin: 1em 0;
+    display: block;
+    overflow-x: auto;
+  }
+  .prose :global(th),
+  .prose :global(td) {
+    text-align: left;
+    padding: 8px 12px 8px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .prose :global(img) { border: 1px solid var(--rule); margin: 1em 0; }
+  .downloads {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .project-foot {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+  }
+</style>

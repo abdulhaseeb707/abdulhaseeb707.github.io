@@ -1,0 +1,248 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Icon from './Icon.astro';
+import { asset, categories, paragraphs, type Chapter } from '../lib/profile';
+
+interface Props {
+  chapter: Chapter;
+  number: number;
+  projectUrl?: string;
+}
+const { chapter: c, number, projectUrl } = Astro.props;
+
+// a big version for the lightbox; the link also works without JS (it opens the image)
+const full = async (src: string) => (await getImage({ src: asset(src), width: 1600, format: 'webp' })).src;
+
+const [lead, ...more] = c.photos;
+const leadImage = lead && asset(lead.src);
+const leadFull = lead && (await full(lead.src));
+const leadShape = leadImage && leadImage.height > leadImage.width ? 'tall' : 'wide';
+const morePhotos = await Promise.all(more.map(async (p) => ({ ...p, image: asset(p.src), full: await full(p.src) })));
+const evidence = await Promise.all(
+  c.evidence.map(async (e) => ({ ...e, href: e.image ? await full(e.image) : (e.file ?? e.url!) })),
+);
+const story = paragraphs(c.story);
+---
+<article class="chapter reveal" id={`ch-${c.id}`} data-category={c.category}>
+  <div class="meta">
+    <p class="num" aria-hidden="true">{String(number).padStart(2, '0')}</p>
+    <p class="when">{c.when}</p>
+    <p class="place">{c.place}</p>
+    <p class="cat label">{categories[c.category]}</p>
+  </div>
+
+  <div class="body">
+    <h4>{c.title}</h4>
+    <p class="summary read">{c.summary}</p>
+
+    {
+      lead && (
+        <figure class:list={['lead', leadShape]}>
+          <a class="js-lightbox" href={leadFull} data-caption={lead.caption ?? lead.alt}>
+            <Image
+              src={leadImage}
+              alt={lead.alt}
+              widths={leadShape === 'tall' ? [360, 540, 720] : [480, 760, 1100]}
+              sizes={leadShape === 'tall' ? '(min-width: 700px) 340px, 80vw' : '(min-width: 1000px) 640px, 92vw'}
+            />
+          </a>
+          {lead.caption && <figcaption>{lead.caption}</figcaption>}
+        </figure>
+      )
+    }
+
+    {
+      (story.length > 0 || morePhotos.length > 0) && (
+        <details class="more">
+          <summary>
+            <span class="open-text">Read the full story</span>
+            <span class="close-text">Close the story</span>
+          </summary>
+          <div class="more-inner">
+            {story.map((p) => <p class="read">{p}</p>)}
+            {morePhotos.length > 0 && (
+              <ul class="strip" aria-label="More photos">
+                {morePhotos.map((p) => (
+                  <li>
+                    <figure>
+                      <a class="js-lightbox" href={p.full} data-caption={p.caption ?? p.alt}>
+                        <Image src={p.image} alt={p.alt} widths={[240, 400]} sizes="(min-width: 700px) 200px, 45vw" />
+                      </a>
+                      {p.caption && <figcaption>{p.caption}</figcaption>}
+                    </figure>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </details>
+      )
+    }
+
+    {
+      (evidence.length > 0 || projectUrl) && (
+        <p class="proof">
+          {evidence.map((e) =>
+            e.image ? (
+              <a class="js-lightbox" href={e.href} data-caption={e.label}>
+                See the proof: {e.label}
+              </a>
+            ) : (
+              <a href={e.href} target="_blank" rel="noopener">
+                See the proof: {e.label} <Icon name="external" />
+              </a>
+            ),
+          )}
+          {projectUrl && (
+            <a href={projectUrl}>
+              Read the project <Icon name="arrow-right" />
+            </a>
+          )}
+        </p>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .chapter {
+    position: relative;
+    display: grid;
+    gap: 6px 32px;
+    padding: 28px 0 36px 28px;
+  }
+  /* the timeline: a hairline with a solid dot per chapter */
+  .chapter::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--rule-strong);
+  }
+  .chapter::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 34px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+  }
+  .chapter:target::after,
+  .chapter:hover::after { background: var(--accent); }
+
+  @media (min-width: 760px) {
+    .chapter {
+      grid-template-columns: 170px minmax(0, 1fr);
+      padding-left: 0;
+    }
+    .chapter::before { left: 186px; }
+    .chapter::after { left: 181px; }
+    .body { padding-left: 34px; }
+  }
+
+  .meta p { margin: 0; }
+  .num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 4px !important;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .when {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.4;
+  }
+  .place { font-size: 0.95rem; color: var(--muted); }
+  .cat { margin-top: 6px !important; color: var(--accent); }
+
+  h4 {
+    font-size: clamp(1.5rem, 2.7vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    margin-bottom: 14px;
+    max-width: 28ch;
+  }
+  .summary {
+    max-width: var(--measure);
+    font-size: 1.2rem;
+  }
+
+  figure { margin: 0; }
+  figcaption {
+    margin-top: 8px;
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .lead { margin-top: 22px; }
+  .lead.tall { max-width: 340px; }
+  .lead.wide { max-width: 640px; }
+  .lead img,
+  .strip img {
+    width: 100%;
+    border: 1px solid var(--rule);
+    background: var(--paper-sunk);
+  }
+  .lead a,
+  .strip a { display: block; cursor: zoom-in; }
+
+  .more {
+    margin-top: 22px;
+    max-width: var(--measure);
+  }
+  .more summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--ink);
+    list-style: none;
+    border-bottom: 1px solid var(--ink);
+  }
+  .more summary::-webkit-details-marker { display: none; }
+  .more summary::after { content: '+'; font-weight: 400; font-size: 1.2rem; line-height: 1; }
+  .more[open] summary::after { content: '\2212'; }
+  .more summary:hover { color: var(--accent); border-color: var(--accent); }
+  .close-text,
+  .more[open] .open-text { display: none; }
+  .more[open] .close-text { display: inline; }
+  .more-inner { padding-top: 18px; }
+
+  .strip {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 22px;
+  }
+  @media (min-width: 700px) {
+    .strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  .strip img { aspect-ratio: 4 / 5; object-fit: cover; }
+
+  .proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .proof a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .proof :global(svg) { width: 15px; height: 15px; }
+</style>

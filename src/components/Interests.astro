@@ -1,0 +1,93 @@
+---
+import { interests, services, skills, contact } from '../lib/profile';
+---
+<section class="section interests" id="interests" aria-label="Interests, services and tools">
+  <div class="wrap columns">
+    <div>
+      <p class="label kicker">Research interests</p>
+      <h2>What I'm curious about</h2>
+      <ul class="plain">
+        {interests.map((i) => <li>{i}</li>)}
+      </ul>
+    </div>
+
+    <div>
+      <p class="label kicker">Freelance</p>
+      <h2>What I can help with</h2>
+      <dl class="services">
+        {services.map((s) => (
+          <div>
+            <dt>{s.title}</dt>
+            <dd>{s.text}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="ask">
+        Have a project in mind? <a href={`mailto:${contact.email}?subject=Project%20enquiry`}>Email me about it</a>.
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap tools" id="tools">
+    <p class="label kicker">Tools</p>
+    <h2>What I work with</h2>
+    <dl>
+      {skills.map((g) => (
+        <div>
+          <dt>{g.group}</dt>
+          <dd>{g.items.join(', ')}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  h2 {
+    font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin: 10px 0 24px;
+  }
+  .columns {
+    display: grid;
+    gap: 56px;
+  }
+  @media (min-width: 900px) {
+    .columns { grid-template-columns: 1fr 1.2fr; gap: 80px; }
+  }
+  .plain {
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+  .plain li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--ink);
+  }
+  .services { margin: 0; }
+  .services div { padding-bottom: 18px; }
+  .services dt { font-weight: 600; color: var(--ink); }
+  .services dd { margin: 4px 0 0; }
+  .ask { margin-top: 8px; font-weight: 500; }
+
+  .tools { margin-top: 88px; }
+  .tools dl {
+    display: grid;
+    margin: 0;
+    border-top: 2px solid var(--ink);
+  }
+  .tools dl div {
+    display: grid;
+    gap: 4px 32px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  @media (min-width: 760px) {
+    .tools dl div { grid-template-columns: 240px minmax(0, 1fr); }
+  }
+  .tools dt { font-weight: 600; color: var(--ink); }
+  .tools dd { margin: 0; }
+</style>
