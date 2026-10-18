@@ -1,6 +1,7 @@
 // Reads the WebP manifest written by scripts/optimize-images.mjs (npm run assets).
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
+import { BASE } from './base';
 
 export type Img = { src: string; srcSet: string; width: number; height: number };
 
@@ -12,5 +13,6 @@ export function img(key: string): Img {
   if (!found) {
     throw new Error(`"${key}" is not in assets/ (or npm run assets has not run). Check the path in content/profile.yaml.`);
   }
-  return found;
+  // paths in the manifest start at the site root; add the folder prefix for preview builds
+  return BASE ? { ...found, src: BASE + found.src, srcSet: found.srcSet.replace(/(^|, )\//g, `$1${BASE}/`) } : found;
 }

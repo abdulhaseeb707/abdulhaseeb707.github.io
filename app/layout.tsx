@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { Reveal } from '@/components/Reveal';
 import { profile, site } from '@/lib/profile';
 import { img } from '@/lib/images';
+import { withBase } from '@/lib/base';
 import './globals.css';
 
 const serif = Instrument_Serif({ subsets: ['latin'], weight: '400', style: ['normal', 'italic'], variable: '--font-serif' });
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   title: { default: `${person.name} · Economist, ${person.location}`, template: `%s · ${person.name}` },
   description,
   authors: [{ name: person.name, url: site.url }],
-  icons: { icon: '/favicon.svg' },
+  icons: { icon: withBase('/favicon.svg') },
   openGraph: {
     type: 'profile',
     title: `${person.name} · Economist`,

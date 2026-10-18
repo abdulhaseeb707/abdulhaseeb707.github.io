@@ -3,6 +3,7 @@ import { img } from '@/lib/images';
 import { moonPath } from '@/lib/moon';
 import { Photo } from './Photo';
 import { Icon } from './Icon';
+import { withBase } from '@/lib/base';
 import styles from './WorkGrid.module.css';
 
 // The viewer gets the large WebP of every photo; links work without JS too (they open the image).
@@ -51,7 +52,7 @@ export function WorkGrid() {
                       p.image ? (
                         <a key={p.label} className="js-view" href={large(p.image)} data-caption={p.label}>View the {p.label.toLowerCase()}</a>
                       ) : (
-                        <a key={p.label} href={p.file ?? p.url} target="_blank" rel="noopener">
+                        <a key={p.label} href={p.file ? withBase(p.file) : p.url} target="_blank" rel="noopener">
                           View the {p.label.toLowerCase()} <Icon name="arrow-up-right" size={13} />
                         </a>
                       ),

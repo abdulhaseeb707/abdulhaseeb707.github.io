@@ -5,6 +5,7 @@ import path from 'node:path';
 import { parse } from 'yaml';
 import { z } from 'zod';
 import { img } from './images';
+import { withBase } from './base';
 
 // YAML reads 2026 as a number; accept it as text so nobody has to remember quotes
 const text = z.union([z.string(), z.number()]).transform(String);
@@ -112,7 +113,7 @@ export type Highlight = Profile['highlights'][number];
 export const site = {
   url: 'https://abdulhaseeb707.github.io',
   cvPage: '/cv/',
-  cvFile: '/Abdul-Haseeb-Khan-CV.pdf',
+  cvFile: withBase('/Abdul-Haseeb-Khan-CV.pdf'), // a plain <a download>, so it needs the folder prefix
   researchPage: `/research/${profile.research.slug}/`,
   built: new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date()),
 };

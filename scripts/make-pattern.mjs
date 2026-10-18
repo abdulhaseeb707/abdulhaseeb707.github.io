@@ -2,7 +2,7 @@
 // Runs before every build (npm run assets). usage: node scripts/make-pattern.mjs [out.svg] [opacity]
 import { writeFileSync } from 'node:fs';
 
-const [out = 'public/pattern.svg', opacityArg] = process.argv.slice(2);
+const [out = 'app/pattern.svg', opacityArg] = process.argv.slice(2);
 const OPACITY = Number(opacityArg ?? 0.105);
 const TILE = 640;
 const CELLS = 10; // 10 x 10 cells of 64px

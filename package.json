@@ -14,6 +14,7 @@
     "build": "next build",
     "postbuild": "node scripts/check-site.mjs",
     "start": "next start",
+    "serve": "node scripts/serve.mjs",
     "sync:research": "node scripts/sync-research.mjs",
     "photos": "node scripts/optimize-originals.mjs",
     "qa": "node scripts/qa-shots.mjs"
