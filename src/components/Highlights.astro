@@ -1,0 +1,146 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Icon from './Icon.astro';
+import { highlights, asset } from '../lib/profile';
+
+// a large version of every photo for the viewer (the links also work without JS)
+const full = async (src: string) => (await getImage({ src: asset(src), width: 1600, format: 'webp' })).src;
+const cards = await Promise.all(
+  highlights.map(async (h) => ({
+    ...h,
+    gallery: await Promise.all(h.photos.map(async (p) => ({ ...p, image: asset(p.src), full: await full(p.src) }))),
+    proofLinks: await Promise.all(
+      h.proof.map(async (p) => ({ ...p, href: p.image ? await full(p.image) : (p.file ?? p.url!) })),
+    ),
+  })),
+);
+---
+<section class="wrap section" id="highlights" aria-labelledby="hl-title">
+  <header class="section-head">
+    <p class="kicker">Highlights</p>
+    <h2 id="hl-title">Places I've been, things I've done</h2>
+  </header>
+
+  <ul class="grid">
+    {
+      cards.map((c) => (
+        <li class:list={['card', `c-${c.color}`, `s-${c.size}`, { 'no-photo': c.gallery.length === 0 }, 'reveal']} id={`hl-${c.id}`}>
+          {c.gallery.length > 0 && (
+            <div class="photo">
+              <a class="js-lightbox" href={c.gallery[0].full} data-gallery={c.id} data-caption={c.gallery[0].caption ?? c.gallery[0].alt}>
+                <Image
+                  src={c.gallery[0].image}
+                  alt={c.gallery[0].alt}
+                  widths={[400, 640, 900]}
+                  sizes={c.size === 'wide' ? '(min-width: 1000px) 400px, 92vw' : '(min-width: 1000px) 380px, 92vw'}
+                />
+                {c.gallery.length > 1 && <span class="count">{c.gallery.length} photos</span>}
+              </a>
+              {c.gallery.slice(1).map((p) => (
+                <a class="js-lightbox" href={p.full} data-gallery={c.id} data-caption={p.caption ?? p.alt} hidden>
+                  {p.caption ?? p.alt}
+                </a>
+              ))}
+            </div>
+          )}
+          <div class="body">
+            <p class="meta">{c.when} · {c.place}</p>
+            <h3>{c.title}</h3>
+            <p class="org">{c.org}</p>
+            <p class="line">{c.line}</p>
+            {c.proofLinks.length > 0 && (
+              <p class="proof">
+                {c.proofLinks.map((p) =>
+                  p.image ? (
+                    <a class="js-lightbox" href={p.href} data-caption={p.label}>
+                      See the {p.label.toLowerCase()}
+                    </a>
+                  ) : (
+                    <a href={p.href} target="_blank" rel="noopener">
+                      See the {p.label.toLowerCase()} <Icon name="external" />
+                    </a>
+                  ),
+                )}
+              </p>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .grid {
+    list-style: none;
+    display: grid;
+    gap: clamp(14px, 1.6vw, 20px);
+    grid-template-columns: 1fr;
+    grid-auto-flow: dense;
+  }
+  @media (min-width: 640px) {
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (min-width: 1000px) {
+    .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: transform 0.2s ease;
+  }
+  .card:hover { transform: translateY(-3px) rotate(-0.3deg); }
+  .c-yellow { background: var(--yellow); }
+  .c-sky { background: var(--sky); }
+  .c-coral { background: var(--coral); }
+  .c-green { background: var(--green); color: var(--surface); }
+
+  @media (min-width: 1000px) {
+    .s-wide { grid-column: span 2; flex-direction: row; }
+    .s-wide .photo { flex: 0 0 52%; border-bottom: 0; border-right: 2px solid var(--ink); }
+    .s-wide .photo img { height: 100%; aspect-ratio: auto; min-height: 300px; }
+    .s-wide .body { align-self: center; }
+  }
+
+  .photo { position: relative; border-bottom: 2px solid var(--ink); background: var(--paper); }
+  .photo a { display: block; cursor: zoom-in; }
+  .photo img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+  .count {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    padding: 4px 10px;
+    border: 2px solid var(--ink);
+    border-radius: var(--pill);
+    background: var(--surface);
+    color: var(--ink);
+    font: 500 0.78rem/1.2 var(--mono);
+  }
+
+  .body {
+    display: grid;
+    align-content: start;
+    gap: 6px;
+    padding: clamp(18px, 2vw, 24px);
+    flex: 1;
+  }
+  .no-photo .body { align-content: end; min-height: 230px; }
+  .no-photo h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); }
+  .meta { font: 500 0.78rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: 0.03em; margin: 0; }
+  h3 { margin-top: 4px; }
+  .org { font-weight: 600; margin: 0; opacity: 0.85; }
+  .line { margin: 6px 0 0; font-size: 0.95rem; line-height: 1.5; }
+  .proof { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 10px 0 0; font-size: 0.9rem; font-weight: 600; }
+  .proof a { display: inline-flex; align-items: center; gap: 5px; }
+  .proof :global(svg) { width: 14px; height: 14px; }
+</style>

@@ -1,0 +1,117 @@
+---
+import { Image } from 'astro:assets';
+import { about, person, skills, services, languages, cv, asset } from '../lib/profile';
+
+// education and experience come straight from the CV, so the two never disagree
+const pick = (title: string) => cv.sections.find((s) => s.title === title)?.entries ?? [];
+const education = pick('Education');
+const experience = pick('Experience');
+---
+<section class="block-yellow" id="about" aria-labelledby="about-title">
+  <div class="wrap section about">
+    <div class="intro">
+      <figure class="portrait">
+        <Image src={asset(person.portrait)} alt={`Portrait of ${person.name}`} widths={[200, 320]} sizes="160px" />
+      </figure>
+      <div>
+        <p class="kicker">About me</p>
+        <h2 id="about-title">The short version</h2>
+        {about.map((p) => <p class="lead">{p}</p>)}
+      </div>
+    </div>
+
+    <div class="cols">
+      <div class="col">
+        <h3>Education</h3>
+        <ul class="list">
+          {education.map((e) => (
+            <li>
+              <strong>{e.title}</strong>
+              <span>{[e.org, e.dates].filter(Boolean).join(' · ')}</span>
+            </li>
+          ))}
+        </ul>
+        <h3>Experience</h3>
+        <ul class="list">
+          {experience.map((e) => (
+            <li>
+              <strong>{e.title}</strong>
+              <span>{[e.org, e.dates].filter(Boolean).join(' · ')}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="col">
+        <h3>What I work with</h3>
+        {skills.map((g) => (
+          <div class="group">
+            <p class="group-name">{g.group}</p>
+            <ul class="chips">{g.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+        <p class="langs">{languages.map((l) => `${l.name}: ${l.level}`).join('  ·  ')}</p>
+      </div>
+
+      {
+        services.length > 0 && (
+          <div class="col freelance">
+            <h3>Freelance</h3>
+            <p>I also take on small research projects:</p>
+            <ul class="tags">{services.map((s) => <li class="tag">{s}</li>)}</ul>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { display: grid; gap: clamp(32px, 4vw, 56px); }
+  .intro {
+    display: grid;
+    gap: 24px;
+    align-items: center;
+    max-width: 980px;
+  }
+  @media (min-width: 700px) {
+    .intro { grid-template-columns: 150px minmax(0, 1fr); gap: 36px; }
+  }
+  .portrait {
+    width: 150px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--surface);
+    transform: rotate(-3deg);
+  }
+  .portrait img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 20%; }
+  h2 { margin-bottom: 14px; }
+  .lead + .lead { margin-top: 10px; }
+
+  .cols {
+    display: grid;
+    gap: 20px;
+  }
+  @media (min-width: 900px) {
+    .cols { grid-template-columns: 1fr 1.3fr 0.9fr; }
+  }
+  .col {
+    padding: clamp(18px, 2vw, 26px);
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .col h3 { font-size: 1.15rem; margin-bottom: 12px; }
+  .col h3:not(:first-child) { margin-top: 22px; }
+  .list { list-style: none; display: grid; gap: 12px; }
+  .list li { display: grid; gap: 2px; }
+  .list span { font-size: 0.9rem; color: var(--ink-soft); }
+  .group + .group { margin-top: 12px; }
+  .group-name { margin: 0 0 6px; font: 500 0.75rem/1 var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  .langs { margin-top: 18px; font-size: 0.88rem; color: var(--ink-soft); }
+  .freelance { background: var(--mint); }
+  .freelance p { font-size: 0.95rem; }
+  .freelance .tags { margin-top: 12px; }
+  .freelance .tag { white-space: normal; }
+</style>

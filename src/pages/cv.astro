@@ -1,0 +1,195 @@
+---
+// The CV as a normal web page, built from the same data as the rest of the site.
+// scripts/build-cv-pdf.mjs prints this page to /Abdul-Haseeb-Khan-CV.pdf on every build.
+import '@fontsource-variable/bricolage-grotesque/opsz.css';
+import '@fontsource-variable/instrument-sans/wght.css';
+import '@fontsource/dm-mono/400.css';
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import { person, contact, cv, skills, languages, site } from '../lib/profile';
+
+const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{person.name} CV</title>
+    <meta name="description" content={`CV of ${person.name}, ${person.role}, ${person.location}.`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={new URL(site.cvPage, site.url).href} />
+  </head>
+  <body>
+    <nav class="toolbar no-print" aria-label="CV">
+      <a class="btn btn-clear" href="/"><Icon name="arrow-left" /> Back to the site</a>
+      <span class="spacer"></span>
+      <button class="btn btn-clear print" type="button" hidden>Print</button>
+      <a class="btn btn-yellow" href={site.cvFile} download><Icon name="download" /> Download PDF</a>
+    </nav>
+
+    <main class="sheet">
+      <header class="head">
+        <div>
+          <h1>{person.name}</h1>
+          <p class="role">{person.role} · {person.location}</p>
+        </div>
+        <ul class="contact">
+          <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+          {/* filled in only when the PDF is generated, so the number never sits on a web page */}
+          {cv.showPhone && <li data-phone hidden></li>}
+          <li><a href={contact.linkedin}>{bare(contact.linkedin)}</a></li>
+          <li><a href={contact.github}>{bare(contact.github)}</a></li>
+          <li><a href={site.url}>{bare(site.url)}</a></li>
+        </ul>
+      </header>
+
+      <p class="summary">{cv.summary}</p>
+
+      {
+        cv.sections.map((s) => (
+          <section class="block">
+            <h2>{s.title}</h2>
+            {s.entries.map((e) => (
+              <article class="entry">
+                <div class="entry-head">
+                  <h3>{e.title}</h3>
+                  {e.dates && <p class="dates">{e.dates}</p>}
+                </div>
+                {e.org && <p class="org">{e.org}</p>}
+                {e.link && <p class="link"><a href={e.link}>{bare(e.link)}</a></p>}
+                {e.bullets.length > 0 && <ul>{e.bullets.map((b) => <li>{b}</li>)}</ul>}
+              </article>
+            ))}
+          </section>
+        ))
+      }
+
+      <section class="block">
+        <h2>Skills</h2>
+        <dl class="skills">
+          {skills.map((g) => (
+            <div>
+              <dt>{g.group}</dt>
+              <dd>{g.items.join(', ')}</dd>
+            </div>
+          ))}
+          <div>
+            <dt>Languages</dt>
+            <dd>{languages.map((l) => `${l.name} (${l.level})`).join('; ')}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <p class="generated">Generated from {bare(site.url)} on {site.built}.</p>
+    </main>
+
+    <script>
+      const print = document.querySelector<HTMLButtonElement>('.print');
+      if (print) {
+        print.hidden = false;
+        print.addEventListener('click', () => window.print());
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @page { size: A4; margin: 12mm 14mm; }
+
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 14px var(--gutter);
+    background: var(--paper);
+  }
+  .toolbar .spacer { flex: 1; }
+
+  .sheet {
+    max-width: 900px;
+    margin: 8px auto 64px;
+    padding: clamp(22px, 5vw, 56px);
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+  .head {
+    display: grid;
+    gap: 14px;
+    padding-bottom: 18px;
+    border-bottom: 3px solid var(--ink);
+  }
+  @media (min-width: 760px) {
+    .head { grid-template-columns: 1fr auto; align-items: end; }
+  }
+  .head h1 { font-size: clamp(2rem, 4.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.035em; }
+  .role { margin: 6px 0 0; font-family: var(--mono); font-size: 0.85rem; color: var(--green); }
+  .contact { list-style: none; display: grid; gap: 2px; font-size: 0.88rem; }
+  @media (min-width: 760px) { .contact { text-align: right; } }
+  .contact a { text-decoration: none; }
+  .contact a:hover { text-decoration: underline; }
+
+  .summary { margin: 18px 0 4px; }
+  .block { margin-top: 22px; }
+  .block h2 {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    background: var(--mint);
+    color: var(--green-deep);
+    font: 700 0.82rem/1.3 var(--mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .entry { margin-bottom: 12px; break-inside: avoid; }
+  .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+  .entry h3 { font: 600 1rem/1.3 var(--sans); letter-spacing: 0; }
+  .dates { margin: 0; flex: none; font: 400 0.85rem/1.3 var(--mono); color: var(--ink-soft); white-space: nowrap; }
+  .org { margin: 1px 0 0; color: var(--ink-soft); font-size: 0.92rem; }
+  .link { margin: 1px 0 0; font: 400 0.8rem/1.3 var(--mono); }
+  .link a { color: var(--green); }
+  .entry ul { margin: 5px 0 0; padding-left: 18px; }
+  .entry li { margin: 2px 0; }
+  .entry li::marker { color: var(--green); }
+  .skills { margin: 0; display: grid; gap: 4px; }
+  .skills div { display: grid; grid-template-columns: 120px 1fr; gap: 12px; break-inside: avoid; }
+  .skills dt { font-weight: 600; }
+  .skills dd { margin: 0; }
+  .generated { margin: 24px 0 0; font: 400 0.75rem/1.3 var(--mono); color: var(--muted); }
+
+  @media (max-width: 560px) {
+    .entry-head { flex-direction: column; gap: 0; }
+    .skills div { grid-template-columns: 1fr; gap: 0; margin-bottom: 6px; }
+  }
+
+  @media print {
+    html, body { background: #fff; }
+    body { font-size: 9.3pt; }
+    .sheet { max-width: none; margin: 0; padding: 0; border: 0; border-radius: 0; font-size: 9.3pt; line-height: 1.38; }
+    .head { grid-template-columns: 1fr auto; align-items: end; padding-bottom: 8pt; border-bottom-width: 2pt; }
+    .head h1 { font-size: 22pt; }
+    .contact { text-align: right; font-size: 8.4pt; }
+    .summary { margin-top: 8pt; }
+    .block { margin-top: 10pt; }
+    .block h2 { font-size: 7.6pt; margin-bottom: 5pt; padding: 2pt 6pt; break-after: avoid; }
+    .entry { margin-bottom: 5pt; }
+    .entry h3 { font-size: 9.6pt; }
+    .dates { font-size: 8pt; }
+    .org, .link { font-size: 8.6pt; }
+    .entry ul { margin-top: 2pt; padding-left: 12pt; }
+    .entry li { margin: 0.5pt 0; }
+    .skills div { grid-template-columns: 26mm 1fr; gap: 6pt; }
+    .generated { margin-top: 10pt; font-size: 7pt; }
+    a { text-decoration: none; }
+  }
+</style>

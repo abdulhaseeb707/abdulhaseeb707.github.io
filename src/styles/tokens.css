@@ -1,0 +1,44 @@
+/* Design tokens. Light theme only. Flat solid colors: no gradients, no shadows, no blur (see AGENTS.md). */
+:root {
+  --paper: #fbf8f1;
+  --surface: #ffffff;
+  --ink: #141414;
+  --ink-soft: #3b3b3b;
+  --muted: #676767;
+  --line: #e6dfd2;
+
+  --green: #0f7a4d;
+  --green-deep: #0a5b39;
+  --mint: #c9f0d9;
+  --yellow: #ffd84d;
+  --coral: #ff8a65;
+  --coral-deep: #e8603d;
+  --sky: #acd5ff;
+
+  --display: 'Bricolage Grotesque Variable', 'Arial Black', system-ui, sans-serif;
+  --sans: 'Instrument Sans Variable', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --mono: 'DM Mono', ui-monospace, 'Cascadia Mono', monospace;
+
+  /* type scale: grows with the screen's width AND height, so a short laptop screen
+     doesn't get a giant headline (1536x695 -> ~62px, phones -> ~38px, 4K/ultrawide capped) */
+  --fs-hero: clamp(2.35rem, min(5.4vw, 9vh), 4.6rem);
+  --fs-h2: clamp(1.85rem, min(3.6vw, 6.4vh), 3.1rem);
+  --fs-h3: clamp(1.12rem, 0.95rem + 0.55vw, 1.45rem);
+  --fs-lead: clamp(1.05rem, 0.96rem + 0.4vw, 1.3rem);
+  --fs-small: 0.875rem;
+
+  --page: 1240px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --radius: 20px;
+  --radius-sm: 12px;
+  --pill: 999px;
+  --header: 64px;
+
+  color-scheme: light;
+}
+
+/* big desktop and ultrawide monitors: a wider page and slightly larger everything, so it doesn't float in space */
+@media (min-width: 2000px) {
+  :root { --page: 1480px; }
+  html { font-size: 18px; }
+}

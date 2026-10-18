@@ -1,0 +1,250 @@
+---
+import '@fontsource-variable/bricolage-grotesque/opsz.css';
+import '@fontsource-variable/instrument-sans/wght.css';
+import '@fontsource/dm-mono/400.css';
+import '@fontsource/dm-mono/500.css';
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import { person, contact, site, asset } from '../lib/profile';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = `${person.name} | ${person.role}, ${person.location}`,
+  description = `${person.name}. ${person.line}`,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = await getImage({ src: asset(person.portrait), width: 400, format: 'jpg' });
+const ogImageUrl = new URL(ogImage.src, site.url).href;
+const home = Astro.url.pathname === '/';
+const link = (hash: string) => (home ? hash : `/${hash}`);
+const nav = [
+  { href: link('#research'), label: 'Research' },
+  { href: link('#highlights'), label: 'Highlights' },
+  { href: link('#about'), label: 'About' },
+  { href: link('#contact'), label: 'Contact' },
+];
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: person.name,
+  url: site.url,
+  image: ogImageUrl,
+  jobTitle: person.role,
+  homeLocation: { '@type': 'Place', name: person.location },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'University of the Punjab' },
+  sameAs: [contact.linkedin, contact.github],
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="author" content={person.name} />
+    <meta name="color-scheme" content="light only" />
+    <meta name="theme-color" content="#fbf8f1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header no-print">
+      <div class="wrap bar">
+        <a class="logo" href="/" aria-label={`${person.name}, home`}>
+          <span class="logo-mark" aria-hidden="true">AH</span>
+          <span class="logo-name">{person.name}</span>
+        </a>
+
+        <nav class="nav-wide" aria-label="Main">
+          <ul>{nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+        </nav>
+
+        <a class="btn btn-yellow cv-btn" href={site.cvPage}>My CV</a>
+
+        <details class="menu">
+          <summary aria-label="Menu"><span></span><span></span></summary>
+          <nav aria-label="Main">
+            <ul>
+              {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+              <li><a href={site.cvFile} download>Download CV (PDF)</a></li>
+            </ul>
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer no-print">
+      <div class="wrap foot">
+        <p><strong>{person.name}</strong> · {person.location}</p>
+        <ul>
+          <li><a href={site.cvPage}>CV</a></li>
+          <li><a href={`mailto:${contact.email}`}>Email</a></li>
+          <li><a href={contact.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>
+          <li><a href={contact.github} rel="me noopener" target="_blank">GitHub</a></li>
+        </ul>
+        <p class="updated">Updated {site.built}</p>
+      </div>
+    </footer>
+
+    <script>
+      // close the phone menu after a link is chosen
+      document.querySelectorAll('.menu a').forEach((a) =>
+        a.addEventListener('click', () => a.closest('details')?.removeAttribute('open')),
+      );
+      // gentle reveal for elements marked .reveal (CSS skips it under reduced motion)
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.isIntersecting && (e.target.classList.add('is-visible'), io.unobserve(e.target))),
+        { rootMargin: '0px 0px -6% 0px' },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--paper);
+    border-bottom: 2px solid var(--ink);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: var(--header);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: auto;
+    text-decoration: none;
+    min-width: 0;
+  }
+  .logo-mark {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    flex: none;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--green);
+    color: var(--surface);
+    font: 700 0.85rem/1 var(--display);
+    letter-spacing: 0;
+  }
+  .logo-name {
+    font: 700 1.1rem/1 var(--display);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .nav-wide ul {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+  }
+  .nav-wide a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: var(--pill);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+  .nav-wide a:hover { background: var(--mint); }
+  .cv-btn { min-height: 40px; padding: 7px 18px; }
+
+  .menu { position: relative; display: none; }
+  .menu summary {
+    display: grid;
+    align-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    padding: 0 11px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    cursor: pointer;
+    list-style: none;
+  }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu summary span { display: block; height: 2px; background: var(--ink); border-radius: 2px; }
+  .menu nav {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    width: min(260px, 80vw);
+    padding: 8px;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+  }
+  .menu ul { list-style: none; }
+  .menu a {
+    display: block;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .menu a:hover { background: var(--mint); }
+
+  @media (max-width: 900px) {
+    .nav-wide { display: none; }
+    .menu { display: block; }
+  }
+  @media (max-width: 420px) {
+    .logo-name { font-size: 1rem; }
+    .bar { gap: 10px; }
+  }
+  @media (max-width: 350px) {
+    .logo-name { display: none; }
+  }
+
+  .site-footer {
+    border-top: 2px solid var(--ink);
+    padding-block: 28px 36px;
+    font-size: 0.92rem;
+  }
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 28px;
+  }
+  .foot p { margin: 0; }
+  .foot ul { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; }
+  .foot a { text-decoration: none; font-weight: 500; }
+  .foot a:hover { text-decoration: underline; }
+  .updated { margin-left: auto !important; color: var(--muted); font-family: var(--mono); font-size: 0.8rem; }
+</style>
