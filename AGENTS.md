@@ -81,13 +81,39 @@ The owner rejected an old-fashioned serif version and a loud, cartoonish one. Th
 | `npm run serve` | Serve the built `out/` at http://localhost:3000 |
 | `npm run qa` | Screenshots of `out/` at the nine screen sizes plus overflow and CV-button checks |
 | `npm run sync:research` | Refresh `content/research/*.json` from the research repo |
-| `npm run photos` | Resize new full-size photos from `_archive/originals/` into `assets/` |
+| `npm run photos` | Resize the owner's full-size originals (see section 7) into `assets/`; the map is in `scripts/optimize-originals.mjs` |
 
 - Node.js LTS. `npm run qa` uses the installed Microsoft Edge on Windows.
 - Python 3.15 is available through `uv` for helper scripts.
-- `_archive/` (originals, old sites, private files), `incoming/`, `out/`, `.next/` and generated assets are gitignored.
+- `out/`, `.next/` and generated assets are gitignored.
 
-## 7. Checklist before asking to push
+## 7. The owner's folder (`Desktop\Portfolio`, next to this repo)
+
+This repo is the `files` folder inside `C:\Users\Abdul Haseeb\Desktop\Portfolio`. The owner's originals live in that
+parent folder, outside git, in numbered folders (a `READ ME.txt` there explains them to the owner):
+
+| Folder | What is in it |
+|---|---|
+| `1 Add new files here` | The owner's drop box for new material. Start here when asked to update the site |
+| `2 Photos` | Full-size originals by event (`IOFS 2025 - Krasnoyarsk`, `Festival of Youth 2026 - Ekaterinburg`, `Portrait`) |
+| `3 Certificates` | Diplomas, certificates, award graphics |
+| `4 CV` | Dated copies of the generated CV PDF, for emailing |
+| `5 Research` | Charts from the paper and links to the paper, summary, slides and code |
+| `6 Website design` | The approved "Cycles" direction board |
+| `7 Old website` | The previous site and the old CV (wrong facts, reference only) |
+| `8 Private - never goes online` | Voucher and other private papers. Never read into the site |
+
+When the owner adds something to `1 Add new files here`:
+
+1. Read it, check it against section 3 (truth and privacy), and ask about anything unclear.
+2. Photos and certificates: move the original into `2 Photos/<event>/` or `3 Certificates/` with a plain name
+   (`YYYY-MM-DD What it shows.jpg`), add it to the map in `scripts/optimize-originals.mjs`, run `npm run photos`,
+   then reference the `assets/` path in `profile.yaml`. PDFs that the site links to are copied to `public/files/`.
+3. Facts and text go into `content/profile.yaml`.
+4. Private papers go to `8 Private - never goes online` and nowhere else.
+5. Leave `1 Add new files here` with only its `How to use this folder.txt`.
+
+## 8. Checklist before asking to push
 
 1. `npm run build` passes (content validation, CV PDF is 2 pages, `check-site.mjs` clean).
 2. `npm run qa` passes at all nine sizes: no sideways scroll, a CV download on the first screen of every page.

@@ -1,33 +1,37 @@
-// One-time: shrink the full-size originals in _archive/originals into assets/ (npm run photos).
-// - longest edge capped at 2400px (Astro makes the smaller responsive sizes at build time)
+// Shrink the owner's full-size originals into assets/ (npm run photos).
+// The originals live outside the code, in the owner's folder next to it (Desktop\Portfolio: "2 Photos",
+// "3 Certificates", ...; see AGENTS.md). Set MATERIALS to use another folder.
+// - longest edge capped at 2400px (npm run assets makes the smaller WebP sizes)
 // - orientation fixed from EXIF, then ALL metadata dropped (phone photos carry GPS location)
 // Re-run after adding a new original to the map below; npm run assets then makes the WebP versions.
 import sharp from 'sharp';
 import { mkdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 
-const SRC = '_archive/originals';
+const SRC = process.env.MATERIALS ?? '..';
 const MAX = 2400;
 
-// original file -> destination inside src/assets
+// original file (inside the owner's folder) -> destination inside assets/
+const iofs = '2 Photos/IOFS 2025 - Krasnoyarsk';
+const ify = '2 Photos/Festival of Youth 2026 - Ekaterinburg';
 const files = {
-  'Profile.jpeg': 'photos/portrait.jpg',
-  '20250928_193054.jpg': 'photos/iofs-2025-arrival-krasnoyarsk.jpg',
-  '20250928_224520.jpg': 'photos/iofs-2025-campus-night.jpg',
-  '20250929_091010.jpg': 'photos/iofs-2025-team-kit.jpg',
-  '20250930_114414.jpg': 'photos/iofs-2025-press-wall.jpg',
-  '20251001_132323.jpg': 'photos/iofs-2025-podium.jpg',
-  '20251001_194755.jpg': 'photos/iofs-2025-evening-walk.jpg',
-  '20251001_223358.jpg': 'photos/iofs-2025-medal-and-kit.jpg',
-  'IOFS.png': 'photos/iofs-2025-award-stage.png',
-  '20260912_192838.jpg': 'photos/ify-2026-znanie-pavilion.jpg',
-  '20260913_132814.jpg': 'photos/ify-2026-flag-avenue.jpg',
-  '20260914_135244.jpg': 'photos/ify-2026-alabuga-robot.jpg',
-  '20260914_190514.jpg': 'photos/ify-2026-kaspersky-model.jpg',
-  '20260916_135348.jpg': 'photos/ify-2026-znanie-presentation.jpg',
-  'IOFS Cert.png': 'certificates/iofs-2025-diploma.png',
-  'WB.png': 'certificates/world-bank-youth-summit-2026.png',
-  'SBP.png': 'certificates/sbp-smes-access-to-finance-2026.png',
+  '2 Photos/Portrait/Portrait.jpeg': 'photos/portrait.jpg',
+  [`${iofs}/2025-09-28 Arrival at Krasnoyarsk airport.jpg`]: 'photos/iofs-2025-arrival-krasnoyarsk.jpg',
+  [`${iofs}/2025-09-28 Campus at night.jpg`]: 'photos/iofs-2025-campus-night.jpg',
+  [`${iofs}/2025-09-29 Team kit.jpg`]: 'photos/iofs-2025-team-kit.jpg',
+  [`${iofs}/2025-09-30 Press wall.jpg`]: 'photos/iofs-2025-press-wall.jpg',
+  [`${iofs}/2025-10-01 At the podium.jpg`]: 'photos/iofs-2025-podium.jpg',
+  [`${iofs}/2025-10-01 Evening walk.jpg`]: 'photos/iofs-2025-evening-walk.jpg',
+  [`${iofs}/2025-10-01 Medal and kit.jpg`]: 'photos/iofs-2025-medal-and-kit.jpg',
+  [`${iofs}/Diploma on stage with the flag.png`]: 'photos/iofs-2025-award-stage.png',
+  [`${ify}/2026-09-12 Znanie pavilion.jpg`]: 'photos/ify-2026-znanie-pavilion.jpg',
+  [`${ify}/2026-09-13 Flag plaza.jpg`]: 'photos/ify-2026-flag-avenue.jpg',
+  [`${ify}/2026-09-14 Alabuga robot.jpg`]: 'photos/ify-2026-alabuga-robot.jpg',
+  [`${ify}/2026-09-14 Kaspersky city model.jpg`]: 'photos/ify-2026-kaspersky-model.jpg',
+  [`${ify}/2026-09-16 My presentation.jpg`]: 'photos/ify-2026-znanie-presentation.jpg',
+  '3 Certificates/IOFS 2025 - Diploma (II degree).png': 'certificates/iofs-2025-diploma.png',
+  '3 Certificates/World Bank Youth Summit 2026 - delegate certificate.png': 'certificates/world-bank-youth-summit-2026.png',
+  '3 Certificates/State Bank of Pakistan 2026 - SMEs and access to finance.png': 'certificates/sbp-smes-access-to-finance-2026.png',
 };
 
 const kb = (bytes) => `${Math.round(bytes / 1024)} KB`;
@@ -44,5 +48,5 @@ for (const [from, to] of Object.entries(files)) {
   const info = await image.toFile(output);
 
   const before = (await stat(input)).size;
-  console.log(`${from.padEnd(22)} ${kb(before).padStart(9)} -> ${to} ${info.width}x${info.height} ${kb(info.size)}`);
+  console.log(`${path.basename(from).padEnd(48)} ${kb(before).padStart(9)} -> ${to} ${info.width}x${info.height} ${kb(info.size)}`);
 }
