@@ -20,9 +20,7 @@
     "qa": "node scripts/qa-shots.mjs"
   },
   "dependencies": {
-    "@fontsource/geist": "5.3.0",
-    "@fontsource/geist-mono": "5.3.0",
-    "@fontsource/instrument-serif": "5.3.0",
+    "@fontsource/source-serif-4": "5.3.0",
     "@react-pdf/renderer": "4.9.0",
     "d3-geo": "3.1.1",
     "d3-scale": "4.0.2",

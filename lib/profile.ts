@@ -30,6 +30,8 @@ const cvEntry = z.strictObject({
   org: z.string().optional(),
   dates: text.optional(),
   link: z.url().optional(),
+  linkLabel: z.string().optional(), // what the PDF prints for the link; the address itself if left out
+  pdf: z.boolean().default(true), // false: on the website only, left out of the PDF
   bullets: z.array(z.string()).default([]),
 });
 

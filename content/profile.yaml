@@ -244,20 +244,24 @@ languages:
     level: Reading C2 · Listening, speaking and writing B2
 
 # ─── The CV (web page at /cv/ and the PDF) ─────────────────────────────────
+#   CV style: no "I", short lines, a full stop at the end of each sentence.
+#   pdf: false keeps an entry on the website but leaves it out of the PDF.
+#   linkLabel: the words the PDF prints for a link (otherwise it prints the address).
 cv:
   showPhone: true
   summary: >-
-    Business Economics graduate from the University of the Punjab (CGPA 3.29/4.00), now studying for an
-    MPhil in Economics. Author of an independent working paper on inflation and the profitability of 441
-    PSX-listed firms over FY2006–FY2025. Banking experience as a trainee at Meezan Bank and a Diploma (II degree)
-    in Economics at the V International Olympiad on Financial Security in Russia. Works in Python, Stata,
-    Excel and Power BI.
+    Business Economics graduate from the University of the Punjab, now studying for an MPhil in Economics.
+    Experience in banking as a trainee at Meezan Bank, and international exposure in financial security, economic
+    development and entrepreneurship. Represented Pakistan at the International Olympiad on Financial Security and
+    the International Festival of Youth 2026 in Russia. Author of an independent working paper on inflation and the
+    profitability of 441 listed firms in Pakistan. Interested in financial inclusion and practical solutions to
+    economic and social challenges.
   sections:
     - title: Education
       entries:
         - title: MPhil Economics
           org: University of the Punjab, Lahore
-          dates: 2026 – present
+          dates: Sep 2026 – present
         - title: BS Business Economics
           org: University of the Punjab, Lahore
           dates: Dec 2021 – May 2026
@@ -266,62 +270,81 @@ cv:
             - "Coursework: Econometrics I & II, Statistics, Calculus I & II, Quantitative Decision Science, Data Visualization, Islamic Banking & Finance"
         - title: Intermediate in Computer Science (ICS)
           org: Government College of Science
+          pdf: false
           bullets:
             - "Computer Science, Statistics, Mathematics"
     - title: Research
       entries:
         - title: Inflation and Corporate Profitability in Pakistan, FY2006–FY2025
-          org: Independent research project (working paper, not peer reviewed)
-          dates: 2025 – 2026
+          org: Independent working paper, not peer reviewed
+          dates: May 2025 – 2026
           link: https://github.com/abdulhaseeb707/inflation-corporate-profitability-pakistan
           bullets:
-            - "Built a reproducible Python pipeline that harmonises three State Bank of Pakistan financial-statement releases into a 6,683 firm-year panel of 441 PSX non-financial companies; computed ROA matches SBP's published ratios for 99.75% of firm-years from FY2015"
-            - "Estimated fixed-effects, threshold and heterogeneity models with Driscoll–Kraay standard errors and a wild cluster bootstrap; found the inflation–profitability link is weak on average but kinked at about 10% inflation and varies by sector"
-            - "Wrote a 21-page working paper, technical report and executive summary separating nominal from real profitability: real aggregate operating profit was flat over 20 years despite 6.4× nominal growth"
+            - "Began in 2025 as a Stata regression study of inflation and firm-level profitability; rebuilt in Python in 2026 as a twenty-year panel of 6,683 firm-years for 441 listed non-financial companies, from State Bank of Pakistan data."
+            - "Estimated fixed-effects, threshold and sector models with Driscoll–Kraay errors and a wild cluster bootstrap: the link is weak on average, bends at about 10% inflation and differs by sector."
+            - "Showed that operating profit grew 6.4 times in rupees but ended about 3% lower after inflation. Wrote a 21-page paper, a two-page summary and slides."
     - title: Experience
       entries:
         - title: Banking Trainee
-          org: Meezan Bank Limited, Lahore
+          org: Meezan Bank, Lahore
           dates: Jun – Sep 2026
           bullets:
-            - "Gained practical exposure to banking operations and workplace procedures"
-            - "Assisted with routine operational and documentation tasks"
-            - "Developed an understanding of customer service, compliance and internal processes"
+            - "Gained practical exposure to banking operations and workplace procedures."
+            - "Assisted with routine operational and documentation tasks."
+            - "Developed an understanding of customer service, compliance and internal processes."
+            - "Strengthened communication, teamwork and analytical skills."
     - title: Honours and awards
       entries:
         - title: Diploma (II degree) in Economics
-          org: V International Olympiad on Financial Security, Siberian Federal University, Krasnoyarsk
+          org: International Olympiad on Financial Security, Siberian Federal University, Krasnoyarsk, Russia
           dates: Oct 2025
           bullets:
-            - "Represented Pakistan; solved AML/CFT, economic-risk and financial-compliance case studies"
-            - "Awarded a 50% scholarship toward master's studies"
+            - "Represented Pakistan in an international competition on financial security."
+            - "Solved case studies on anti-money laundering, counter-terrorist financing, financial compliance and economic risk."
+            - "Gained a broader view of international financial security and cross-border cooperation."
         - title: Award for Excellence in Financial Data Interpretation
-          org: BRICS Arts Festival, financial security programme (online)
+          org: BRICS Arts Festival, Khabarovsk (online)
           dates: Nov 2025
+          link: https://disk.yandex.com/d/Gtywsi9-HLHz1w
+          linkLabel: Award files
+          bullets:
+            - "Selected as a top Pakistani participant in a financial security event on AML/CFT standards, FATF compliance and economic risk analysis."
+            - "Recognised for financial data interpretation and problem-solving among peers from dozens of countries."
     - title: Conferences and programmes
       entries:
-        - title: International Festival of Youth 2026, Ekaterinburg
-          org: Entrepreneurship Track, with the International Movement on Financial Security
+        - title: International Festival of Youth 2026
+          org: Ekaterinburg, Russia · Entrepreneurship Track, International Movement on Financial Security
           dates: Sep 2026
           bullets:
-            - "Presented \"Financial Fraud in Pakistan and Losses to GDP\"; represented Pakistan in the Interactive International Discussion on financial fraud"
-        - title: "World Bank Group Youth Summit 2026: FutureWorks"
-          org: Virtual delegate, one of 3,000+ worldwide
+            - 'Presented "Financial Fraud in Pakistan and Losses to GDP" and represented Pakistan in the Interactive International Discussion on financial fraud.'
+            - "Took part in discussions on financial security, entrepreneurship and youth engagement with participants from several continents."
+            - "Explored Russian technology and entrepreneurship initiatives, including neurotechnology demonstrations."
+        - title: World Bank Group Youth Summit 2026
+          org: Washington, DC (online)
           dates: Jun 2026
+          bullets:
+            - "Took part in discussions on development finance, youth economic empowerment and the future of digital jobs."
         - title: Awareness Session on SMEs and Access to Finance
           org: State Bank of Pakistan (BSC), Lahore
           dates: Jan 2026
+          bullets:
+            - "Studied credit access for small and medium enterprises, the role of financial inclusion, and the financing challenges of Pakistan's SME sector."
     - title: Other projects
       entries:
         - title: Operational Cost Optimization Model
-          org: Excel Solver, linear programming
+          org: Linear programming in Excel Solver
           dates: Feb – May 2025
           bullets:
-            - "Built a linear programming model to minimise production costs under output and resource constraints"
+            - "Built a linear programming model to minimise production costs under output and resource constraints."
     - title: Memberships and certifications
       entries:
         - title: Member, International Movement on Financial Security
           dates: 2026
+          pdf: false
         - title: "Firm Level Economics: Consumer and Producer Behavior"
-          org: University of Illinois Urbana-Champaign (Coursera)
+          org: University of Illinois Urbana-Champaign, on Coursera
           dates: Jun 2023
+          link: https://coursera.org/share/89ecbd921c83dc536a28343f6ab28b8e
+          linkLabel: View certificate
+          bullets:
+            - "Taxes and price controls, elasticity of demand, cost theory and profit optimisation."
