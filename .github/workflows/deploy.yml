@@ -16,8 +16,10 @@ concurrency:
 
 jobs:
   build:
-    # pinned: ubuntu-latest moves to Ubuntu 26 from 19 Oct 2026; bump once Playwright supports it
     runs-on: ubuntu-24.04
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
     steps:
       - uses: actions/checkout@v7
 
@@ -29,21 +31,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Chromium for the CV PDF
-        run: npx playwright install --with-deps chromium
-
-      # astro build -> CV PDF from /cv/ -> rule check (AGENTS.md)
+      # assets (doodles, WebP photos) -> next build (static export to out/, CV PDF included) -> rule check
       - name: Build the website and the CV
         run: npm run build
 
       - name: Make sure the CV was generated
-        run: test -s dist/Abdul-Haseeb-Khan-CV.pdf
+        run: test -s out/Abdul-Haseeb-Khan-CV.pdf
 
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: dist
+          path: out
 
   deploy:
     needs: build

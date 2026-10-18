@@ -1,0 +1,55 @@
+.story { position: relative; }
+.steps { list-style: none; display: grid; gap: clamp(48px, 8vh, 80px); }
+.step { max-width: 620px; }
+.head { display: flex; align-items: center; gap: 12px; color: var(--ink); }
+.step h2 { margin-top: 14px; font-size: clamp(1.7rem, 1.2rem + 1.6vw, 2.4rem); }
+.step p { margin-top: 12px; font-size: var(--fs-lead); line-height: 1.55; color: var(--slate); max-width: 46ch; }
+.inline { margin-top: 24px; }
+.stage { display: none; }
+
+.panel {
+  padding: clamp(16px, 2vw, 24px);
+  background: var(--paper);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+}
+
+/* wide screens with JS: pinned chart on the right, notes on the left */
+@media (min-width: 1080px) {
+  :global(.js) .story {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(32px, 4vw, 64px);
+  }
+  :global(.js) .steps { gap: 0; }
+  :global(.js) .step {
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.35;
+    transition: opacity 0.35s ease;
+  }
+  :global(.js) .step[aria-current='step'] { opacity: 1; }
+  :global(.js) .step:first-child { min-height: 64vh; }
+  :global(.js) .inline { display: none; }
+  :global(.js) .stage { display: block; }
+  .sticky {
+    position: sticky;
+    top: calc(var(--header) + 4vh);
+    display: grid;
+    min-height: calc(100vh - var(--header) - 8vh);
+    align-items: center;
+  }
+  .sticky .panel {
+    grid-area: 1 / 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s;
+  }
+  .sticky .panel[data-on='true'] { opacity: 1; visibility: visible; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step, .sticky .panel { transition: none !important; }
+}

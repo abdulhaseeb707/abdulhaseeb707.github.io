@@ -1,0 +1,33 @@
+.top {
+  display: grid;
+  gap: clamp(20px, 3vw, 44px);
+  align-items: center;
+  max-width: 980px;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+@media (min-width: 720px) { .top { grid-template-columns: 160px minmax(0, 1fr); } }
+.top h2 { margin: 14px 0 16px; }
+.top .lead + :global(.lead) { margin-top: 10px; }
+.portrait {
+  width: 160px;
+  padding: 8px;
+  background: var(--paper);
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+}
+.portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; border-radius: 3px; }
+
+.grid { display: grid; gap: 18px; }
+@media (min-width: 1040px) {
+  .grid { grid-template-columns: 1fr 1.1fr 1.3fr; align-items: start; }
+}
+.box { padding: clamp(20px, 2.4vw, 28px); }
+.list + .list { margin-top: 22px; }
+.list ul { list-style: none; display: grid; gap: 12px; margin-top: 12px; }
+.list li { display: grid; gap: 2px; }
+.list strong { font-weight: 500; }
+.list span { font-size: 0.88rem; color: var(--slate); }
+.skills { display: grid; gap: 12px; margin: 12px 0 0; }
+.skills dt { font-weight: 500; }
+.skills dd { margin: 2px 0 0; font-size: 0.9rem; color: var(--slate); }
+.mapBox :global(.label) { margin-bottom: 8px; }

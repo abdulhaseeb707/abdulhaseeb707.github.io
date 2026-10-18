@@ -1,0 +1,24 @@
+[
+  {
+    "regime": "High inflation (>= 10%)",
+    "firm_years": 3024,
+    "mean_roa": 3.8262947107312817,
+    "median_roa": 2.764733234903573,
+    "mean_oroa": 8.822896537143546,
+    "mean_npm": -0.7645623893883962,
+    "mean_gpm": 13.169950859472525,
+    "loss_share": 0.32341269841269843,
+    "mean_infl": 15.738329017899252
+  },
+  {
+    "regime": "Low/moderate inflation",
+    "firm_years": 3659,
+    "mean_roa": 4.207411451081293,
+    "median_roa": 3.299969957149408,
+    "mean_oroa": 8.339891581741352,
+    "mean_npm": 0.2558744681562625,
+    "mean_gpm": 12.750939605202433,
+    "loss_share": 0.28177097567641435,
+    "mean_infl": 6.315527066681337
+  }
+]

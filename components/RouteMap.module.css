@@ -1,0 +1,9 @@
+.map { margin: 0; }
+.map svg { display: block; width: 100%; height: auto; }
+.land path { fill: none; stroke: var(--ink); stroke-opacity: 0.28; stroke-width: 0.8; }
+.land path.focus { fill: var(--ink); fill-opacity: 0.045; stroke-opacity: 0.45; }
+.route { fill: none; stroke: var(--brass); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 1 7; }
+.pin { fill: var(--ink); stroke: var(--paper); stroke-width: 2.5; }
+.name { font: 400 22px var(--serif); fill: var(--ink); }
+.note { font: 400 13px var(--mono); fill: var(--slate); }
+.map figcaption { margin-top: 8px; font: 400 0.75rem/1.45 var(--mono); color: var(--slate); }

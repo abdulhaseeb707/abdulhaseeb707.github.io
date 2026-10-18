@@ -1,27 +1,35 @@
 # build output
-dist/
-.astro/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
 
 # dependencies
 node_modules/
 
+# generated at build time (npm run assets)
+public/pattern.svg
+public/img/
+content/generated/
+
 # full-size originals, the old site and private files (kept locally, never published)
 _archive/
 
-# raw files the client drops in before they are sorted into public/ or src/assets/
+# raw files the owner drops in before they are sorted
 incoming/
-
-# local preview config for the Claude app (machine-specific Node path)
-.claude/launch.json
 
 # local env
 .env
 .env.*
+
+# local instructions for the coding assistant on this machine (AGENTS.md is the shared version)
+CLAUDE.md
+.claude/launch.json
 
 # OS / editor
 .DS_Store
 Thumbs.db
 .vscode/
 
-# local instructions for the coding assistant on this machine (AGENTS.md is the shared version)
-CLAUDE.md
+# screenshots from npm run qa
+qa-shots/

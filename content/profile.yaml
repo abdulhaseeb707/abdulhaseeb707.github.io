@@ -1,0 +1,291 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  THE ONE FILE TO EDIT
+#  The website AND the CV (web page + PDF) are built from this file.
+#  The research charts use the numbers in content/research/ (npm run sync:research).
+#
+#  - Website text: first person, short, plain. One line where one line will do.
+#  - Wrap a word in *asterisks* to set it in italic green in a headline.
+#  - CV text (the cv: block): normal CV style, action verbs, no "I".
+#  - Only write what you can prove. See AGENTS.md.
+#  - Images are paths inside assets/ (e.g. photos/portrait.jpg).
+#  - Files in public/ are linked as /files/name.pdf.
+# ─────────────────────────────────────────────────────────────────────────────
+
+person:
+  name: Abdul Haseeb Khan
+  location: Lahore, Pakistan
+  label: Abdul Haseeb Khan · Economist · Lahore
+  headline: I study how inflation moves through *Pakistan's* companies.
+  sub: BS Business Economics, MPhil student, and author of a twenty-year study of 441 listed firms.
+  portrait: photos/portrait.jpg
+  moonCaption: 6,683 dots, one for every firm-year in my research.
+  facts:
+    - figure: "441"
+      text: firms studied
+    - figure: "20"
+      text: fiscal years
+    - figure: II degree
+      text: IOFS 2025 diploma
+
+about:
+  headline: Economist in training, from *Lahore*.
+  text:
+    - I finished my BS in Business Economics at the University of the Punjab with a CGPA of 3.29, and I'm now doing an MPhil in Economics there.
+    - My work sits between economics, data and financial security. I've represented Pakistan twice in Russia and worked as a banking trainee at Meezan Bank.
+
+contact:
+  email: abdulhaseeb2130@gmail.com
+  phone: "+92 301 9734442"        # printed only in the CV PDF, never on the website
+  linkedin: https://www.linkedin.com/in/abdul-haseeb-khan944
+  github: https://github.com/abdulhaseeb707
+
+# ─── The research paper ─────────────────────────────────────────────────────
+research:
+  slug: inflation-profitability
+  title: Inflation and Corporate Profitability in Pakistan, FY2006–FY2025
+  paperTitle: "Inflation and the Profitability of Listed Non-Financial Firms in Pakistan: Firm-Level Panel Evidence, FY2006–FY2025"
+  status: Working paper, 2026. Not peer reviewed.
+  tagline: How the profits of Pakistan's listed companies have moved with inflation over twenty years.
+  teaser: Operating profit grew 6.4 times in rupees. In real terms it ended *3% lower*.
+  origin: It started as a Stata project at university in 2025. In 2026 I rebuilt it in Python with twenty years of data.
+  stats:
+    - figure: "441"
+      text: listed firms
+    - figure: "6,683"
+      text: firm-years
+    - figure: "20"
+      text: fiscal years
+    - figure: "14"
+      text: sectors
+  # the six scroll steps on the research page; each one changes the chart
+  story:
+    - title: The question
+      text: Pakistan's inflation went from 2.9% in FY2016 to 29.2% in FY2023. I wanted to know what that did to company profits.
+    - title: The data
+      text: I built a panel from State Bank of Pakistan company accounts. 441 non-financial firms in 14 sectors, 6,683 firm-years, each matched to inflation over its own financial year.
+    - title: Rupees vs real
+      text: Aggregate operating profit grew 6.4 times in rupees. Deflated by the CPI, it ended about 3% below its FY2006 level.
+    - title: The 10% bend
+      text: Up to about 10% inflation, return on assets rises 0.48 points per point of inflation. Above it, the slope is flat. The bend holds for every threshold from 6% to 15%.
+    - title: Sectors
+      text: Sugar, mineral products, electrical machinery, fuel and energy, and chemicals show clearly positive slopes. Cement and autos show none.
+    - title: The trap
+      text: With ordinary firm-clustered errors, the average effect looks highly significant. Errors that allow for shocks hitting every firm at once say it isn't.
+  implications:
+    - Judge performance in inflationary years by real profits, not only by nominal ratios.
+    - Exposure to inflation is mostly a sector question.
+    - Above roughly 10% inflation, measured profitability stopped improving.
+  limitations: These are associations from observational data, over twenty years with two big inflation episodes. Accounting changes and the use of the CPI rather than producer prices are documented limits.
+  links:
+    - label: Read the paper
+      note: PDF, 21 pages
+      url: https://github.com/abdulhaseeb707/inflation-corporate-profitability-pakistan/blob/main/reports/research_paper.pdf
+    - label: Two-page summary
+      note: PDF
+      url: https://github.com/abdulhaseeb707/inflation-corporate-profitability-pakistan/blob/main/reports/executive_summary.pdf
+    - label: Slides
+      note: PDF, 11 slides
+      url: https://github.com/abdulhaseeb707/inflation-corporate-profitability-pakistan/blob/main/presentation/inflation_profitability_pakistan.pdf
+    - label: Code and data notes
+      note: GitHub
+      url: https://github.com/abdulhaseeb707/inflation-corporate-profitability-pakistan
+  did:
+    - Harmonised three State Bank of Pakistan Excel releases with different layouts and year conventions into one firm-year panel
+    - Matched company accounts to monthly IMF CPI data using each firm's own year-end month
+    - "Panel econometrics in Python: fixed effects, Driscoll–Kraay standard errors, wild cluster bootstrap, a threshold model and sector-specific slopes"
+    - Wrote a 21-page working paper, a technical report, an executive summary and an 11-slide deck
+    - Kept the whole pipeline reproducible from raw data with one command (uv, Python 3.15)
+  tags: [Python, pandas, statsmodels, linearmodels, matplotlib, Econometrics, Panel data, Macroeconomics, Corporate finance, Pakistan]
+
+# ─── Work and recognition: one line each ────────────────────────────────────
+#   proof: image: (opens in the viewer) | file: /files/x.pdf | url: https://…
+highlights:
+  - id: iofs
+    title: Diploma in Economics
+    org: International Olympiad on Financial Security
+    when: Oct 2025
+    place: Krasnoyarsk, Russia
+    line: I represented Pakistan and came home with a Diploma (II degree) and a 50% master's scholarship.
+    photos:
+      - src: photos/iofs-2025-award-stage.png
+        alt: Abdul Haseeb Khan on stage holding Pakistan's flag and his diploma, next to an official, under a screen reading Economic Security.
+        caption: Receiving the diploma, with Pakistan's flag.
+      - src: photos/iofs-2025-arrival-krasnoyarsk.jpg
+        alt: Abdul Haseeb Khan at Krasnoyarsk airport with Pakistan's flag over his shoulders, in front of the olympiad's welcome banner.
+        caption: Just landed in Krasnoyarsk.
+      - src: photos/iofs-2025-podium.jpg
+        alt: Abdul Haseeb Khan at a podium on a blue-lit stage with the olympiad's session title on the screen behind him.
+        caption: At the podium, 1 October.
+      - src: photos/iofs-2025-medal-and-kit.jpg
+        alt: A desk with the olympiad medal, a student badge reading Khan Abdul Haseeb, a certificate, lanyards and a fur hat.
+        caption: What I brought home.
+    proof:
+      - label: Diploma
+        image: certificates/iofs-2025-diploma.png
+
+  - id: festival
+    title: Presented my research on financial fraud
+    org: International Festival of Youth 2026
+    when: Sep 2026
+    place: Ekaterinburg, Russia
+    line: One of 10,000 young people from 191 countries. I spoke for Pakistan in the discussion on financial fraud.
+    photos:
+      - src: photos/ify-2026-znanie-presentation.jpg
+        alt: Abdul Haseeb Khan in a suit holding a presentation clicker in front of a screen reading International Festival of Youth 2026 x Znanie.
+        caption: The day of my presentation.
+      - src: photos/ify-2026-flag-avenue.jpg
+        alt: Abdul Haseeb Khan on a wide plaza lined with the flags of many countries.
+        caption: The flag plaza in the World Youth City.
+      - src: photos/ify-2026-alabuga-robot.jpg
+        alt: Abdul Haseeb Khan with his arm around a humanoid robot branded Alabuga special economic zone.
+        caption: Meeting a robot from the Alabuga special economic zone.
+      - src: photos/ify-2026-kaspersky-model.jpg
+        alt: A glass dome over a model of an industrial city on a Kaspersky stand.
+        caption: Kaspersky's model of a protected industrial city.
+    proof:
+      - label: Participant certificate
+        file: /files/festival-of-youth-2026-participant-certificate.pdf
+
+  - id: meezan
+    title: Banking trainee
+    org: Meezan Bank
+    when: Jun – Sep 2026
+    place: Lahore
+    line: Three months inside banking operations, compliance and customer service.
+
+  - id: world-bank
+    title: Youth Summit delegate
+    org: World Bank Group
+    when: Jun 2026
+    place: Online
+    line: "FutureWorks: Designing Jobs for the Digital Age."
+    photos:
+      - src: certificates/world-bank-youth-summit-2026.png
+        alt: World Bank Group Youth Summit 2026 certificate stating that Abdul Haseeb Khan participated as a virtual delegate.
+        caption: My delegate certificate.
+
+  - id: brics
+    title: Award for financial data interpretation
+    org: BRICS Arts Festival
+    when: Nov 2025
+    place: Online
+    line: Financial security programme on AML/CFT, FATF compliance and economic risk.
+    proof:
+      - label: Award files
+        url: https://disk.yandex.com/d/Gtywsi9-HLHz1w
+
+  - id: sbp
+    title: SMEs and access to finance
+    org: State Bank of Pakistan
+    when: Jan 2026
+    place: Lahore
+    line: A two-day session on why small businesses struggle to get credit.
+    photos:
+      - src: certificates/sbp-smes-access-to-finance-2026.png
+        alt: Certificate of participation from the State Bank of Pakistan for a two-day session on SMEs and Access to Finance, January 2026.
+        caption: My certificate.
+
+services:
+  - Market and business research
+  - Competitor analysis
+  - Economic and data analysis
+  - Dashboards and charts
+
+skills:
+  - group: Analysis
+    items: ["Python (pandas, statsmodels, linearmodels)", Stata, SPSS, Excel and Solver, Panel econometrics, Regression]
+  - group: Reporting
+    items: [Power BI, matplotlib, Data visualization, Microsoft Office, Reports and presentations]
+  - group: Research
+    items: [Literature review, Market and competitor research, Policy analysis]
+  - group: Domain
+    items: [Islamic banking and finance, AML/CFT, Financial inclusion]
+
+languages:
+  - name: Urdu
+    level: Native
+  - name: English
+    level: Reading C2 · Listening, speaking and writing B2
+
+# ─── The CV (web page at /cv/ and the PDF) ─────────────────────────────────
+cv:
+  showPhone: true
+  summary: >-
+    Business Economics graduate from the University of the Punjab (CGPA 3.29/4.00), now studying for an
+    MPhil in Economics. Author of an independent working paper on inflation and the profitability of 441
+    PSX-listed firms over FY2006–FY2025. Banking experience as a trainee at Meezan Bank and a Diploma (II degree)
+    in Economics at the V International Olympiad on Financial Security in Russia. Works in Python, Stata,
+    Excel and Power BI.
+  sections:
+    - title: Education
+      entries:
+        - title: MPhil Economics
+          org: University of the Punjab, Lahore
+          dates: 2026 – present
+        - title: BS Business Economics
+          org: University of the Punjab, Lahore
+          dates: Dec 2021 – May 2026
+          bullets:
+            - "CGPA 3.29/4.00"
+            - "Coursework: Econometrics I & II, Statistics, Calculus I & II, Quantitative Decision Science, Data Visualization, Islamic Banking & Finance"
+        - title: Intermediate in Computer Science (ICS)
+          org: Government College of Science
+          bullets:
+            - "Computer Science, Statistics, Mathematics"
+    - title: Research
+      entries:
+        - title: Inflation and Corporate Profitability in Pakistan, FY2006–FY2025
+          org: Independent research project (working paper, not peer reviewed)
+          dates: 2025 – 2026
+          link: https://github.com/abdulhaseeb707/inflation-corporate-profitability-pakistan
+          bullets:
+            - "Built a reproducible Python pipeline that harmonises three State Bank of Pakistan financial-statement releases into a 6,683 firm-year panel of 441 PSX non-financial companies; computed ROA matches SBP's published ratios for 99.75% of firm-years from FY2015"
+            - "Estimated fixed-effects, threshold and heterogeneity models with Driscoll–Kraay standard errors and a wild cluster bootstrap; found the inflation–profitability link is weak on average but kinked at about 10% inflation and varies by sector"
+            - "Wrote a 21-page working paper, technical report and executive summary separating nominal from real profitability: real aggregate operating profit was flat over 20 years despite 6.4× nominal growth"
+    - title: Experience
+      entries:
+        - title: Banking Trainee
+          org: Meezan Bank Limited, Lahore
+          dates: Jun – Sep 2026
+          bullets:
+            - "Gained practical exposure to banking operations and workplace procedures"
+            - "Assisted with routine operational and documentation tasks"
+            - "Developed an understanding of customer service, compliance and internal processes"
+    - title: Honours and awards
+      entries:
+        - title: Diploma (II degree) in Economics
+          org: V International Olympiad on Financial Security, Siberian Federal University, Krasnoyarsk
+          dates: Oct 2025
+          bullets:
+            - "Represented Pakistan; solved AML/CFT, economic-risk and financial-compliance case studies"
+            - "Awarded a 50% scholarship toward master's studies"
+        - title: Award for Excellence in Financial Data Interpretation
+          org: BRICS Arts Festival, financial security programme (online)
+          dates: Nov 2025
+    - title: Conferences and programmes
+      entries:
+        - title: International Festival of Youth 2026, Ekaterinburg
+          org: Entrepreneurship Track, with the International Movement on Financial Security
+          dates: Sep 2026
+          bullets:
+            - "Presented \"Financial Fraud in Pakistan and Losses to GDP\"; represented Pakistan in the Interactive International Discussion on financial fraud"
+        - title: "World Bank Group Youth Summit 2026: FutureWorks"
+          org: Virtual delegate, one of 3,000+ worldwide
+          dates: Jun 2026
+        - title: Awareness Session on SMEs and Access to Finance
+          org: State Bank of Pakistan (BSC), Lahore
+          dates: Jan 2026
+    - title: Other projects
+      entries:
+        - title: Operational Cost Optimization Model
+          org: Excel Solver, linear programming
+          dates: Feb – May 2025
+          bullets:
+            - "Built a linear programming model to minimise production costs under output and resource constraints"
+    - title: Memberships and certifications
+      entries:
+        - title: Member, International Movement on Financial Security
+          dates: 2026
+        - title: "Firm Level Economics: Consumer and Producer Behavior"
+          org: University of Illinois Urbana-Champaign (Coursera)
+          dates: Jun 2023

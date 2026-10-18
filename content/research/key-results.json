@@ -1,0 +1,591 @@
+{
+  "m1_roa": {
+    "coef": 0.14333750906169532,
+    "se": 0.08507927337841852,
+    "p": 0.09208639302717196,
+    "n": 6683,
+    "firms": 441,
+    "ci": [
+      -0.02344717424353024,
+      0.31012219236692085
+    ]
+  },
+  "m1_roa_col1": {
+    "coef": -0.027381036189126382,
+    "p": 0.5693291226900039
+  },
+  "m1_by_dv": {
+    "ROA": {
+      "coef": 0.14333750906169532,
+      "se": 0.08507927337841852,
+      "p": 0.09208639302717196,
+      "p_boot": 0.27382738273827384,
+      "n": 6683
+    },
+    "Operating ROA": {
+      "coef": 0.16398959234887847,
+      "se": 0.04804924606358131,
+      "p": 0.0006467302759240891,
+      "p_boot": 0.0775077507750775,
+      "n": 6683
+    },
+    "ROE": {
+      "coef": 0.3104161715935641,
+      "se": 0.23888597025750297,
+      "p": 0.1938481930407296,
+      "p_boot": 0.40594059405940597,
+      "n": 6125
+    },
+    "Net margin": {
+      "coef": 0.14795934267048116,
+      "se": 0.07789835465761714,
+      "p": 0.05755933845435532,
+      "p_boot": 0.17281728172817282,
+      "n": 6683
+    },
+    "Operating margin": {
+      "coef": 0.1361885406409563,
+      "se": 0.042518748306023285,
+      "p": 0.0013667672122012052,
+      "p_boot": 0.0558055805580558,
+      "n": 6683
+    },
+    "Gross margin": {
+      "coef": 0.09824922386731402,
+      "se": 0.041377236759448675,
+      "p": 0.017604004118739275,
+      "p_boot": 0.15211521152115212,
+      "n": 6683
+    }
+  },
+  "m1_real_sales_growth": {
+    "coef": 0.7148974486994766,
+    "se": 0.4272921382244765,
+    "p": 0.09436064665681344,
+    "p_boot": 0.17291729172917292
+  },
+  "m2": {
+    "Export share": {
+      "infl_x_z_export_share_l1": {
+        "coef": 0.03839780387805573,
+        "se": 0.024517828027673997,
+        "p": 0.11737314613143433
+      }
+    },
+    "Inventories/assets": {
+      "infl_x_z_inv_ta_l1": {
+        "coef": -0.04457605883518359,
+        "se": 0.024091615767876915,
+        "p": 0.06432222577886657
+      }
+    },
+    "Leverage": {
+      "infl_x_z_lev_l1": {
+        "coef": 0.051725295687281105,
+        "se": 0.032547921113868804,
+        "p": 0.1120657153495131
+      }
+    },
+    "Gross margin": {
+      "infl_x_z_gpm_l1": {
+        "coef": -0.03529352013327163,
+        "se": 0.023424254048570955,
+        "p": 0.13193740577887042
+      }
+    },
+    "All": {
+      "infl_x_z_export_share_l1": {
+        "coef": 0.039350015764782316,
+        "se": 0.02624136813808657,
+        "p": 0.13378525550775022
+      },
+      "infl_x_z_inv_ta_l1": {
+        "coef": -0.056249497061889905,
+        "se": 0.027085569683490573,
+        "p": 0.03786816880637585
+      },
+      "infl_x_z_lev_l1": {
+        "coef": 0.01141343414005496,
+        "se": 0.031866146044711816,
+        "p": 0.7202300376233496
+      },
+      "infl_x_z_gpm_l1": {
+        "coef": -0.032490676258590964,
+        "se": 0.01931518874706861,
+        "p": 0.0925948825913164
+      }
+    }
+  },
+  "m2_bootstrap": [
+    {
+      "model_column": "Export share",
+      "interaction": "Inflation x Export share",
+      "coef": 0.03839780387805573,
+      "p_two_way_cluster": 0.11737314613143433,
+      "p_wild_bootstrap_year": 0.2624524904980996
+    },
+    {
+      "model_column": "Inventories/assets",
+      "interaction": "Inflation x Inventories/assets",
+      "coef": -0.04457605883518359,
+      "p_two_way_cluster": 0.06432222577886657,
+      "p_wild_bootstrap_year": 0.22864572914582917
+    },
+    {
+      "model_column": "Leverage",
+      "interaction": "Inflation x Leverage",
+      "coef": 0.051725295687281105,
+      "p_two_way_cluster": 0.1120657153495131,
+      "p_wild_bootstrap_year": 0.05761152230446089
+    },
+    {
+      "model_column": "Gross margin",
+      "interaction": "Inflation x Gross margin",
+      "coef": -0.03529352013327163,
+      "p_two_way_cluster": 0.13193740577887042,
+      "p_wild_bootstrap_year": 0.04480896179235847
+    },
+    {
+      "model_column": "All",
+      "interaction": "Inflation x Export share",
+      "coef": 0.039350015764782316,
+      "p_two_way_cluster": 0.13378525550775022,
+      "p_wild_bootstrap_year": 0.3348669733946789
+    },
+    {
+      "model_column": "All",
+      "interaction": "Inflation x Inventories/assets",
+      "coef": -0.056249497061889905,
+      "p_two_way_cluster": 0.03786816880637585,
+      "p_wild_bootstrap_year": 0.13822764552910582
+    },
+    {
+      "model_column": "All",
+      "interaction": "Inflation x Leverage",
+      "coef": 0.01141343414005496,
+      "p_two_way_cluster": 0.7202300376233496,
+      "p_wild_bootstrap_year": 0.6983396679335867
+    },
+    {
+      "model_column": "All",
+      "interaction": "Inflation x Gross margin",
+      "coef": -0.032490676258590964,
+      "p_two_way_cluster": 0.0925948825913164,
+      "p_wild_bootstrap_year": 0.08761752350470094
+    }
+  ],
+  "m2_oroa_all": {
+    "infl_x_z_export_share_l1": {
+      "coef": 0.04247828165105719,
+      "se": 0.02309186495772561,
+      "p": 0.06588540956820531
+    },
+    "infl_x_z_inv_ta_l1": {
+      "coef": -0.0517567948662188,
+      "se": 0.02876268661614057,
+      "p": 0.07199838069772711
+    },
+    "infl_x_z_lev_l1": {
+      "coef": 0.040993899468889226,
+      "se": 0.028443486943439397,
+      "p": 0.1495683836341009
+    },
+    "infl_x_z_gpm_l1": {
+      "coef": -0.038813912166692235,
+      "se": 0.030136139642522815,
+      "p": 0.19781163598009308
+    }
+  },
+  "m3": {
+    "ROA": {
+      "kink_p_boot": 0.006000600060006,
+      "below10": 0.47856180713558993,
+      "below10_p": 0.00031960272101291495,
+      "kink": -0.5321580016868747,
+      "kink_p": 0.001963653314069795,
+      "above10": -0.053596194551284726,
+      "above10_se": 0.09876287965804664,
+      "above10_p": 0.5873726461220912
+    },
+    "Operating ROA": {
+      "kink_p_boot": 0.010401040104010401,
+      "below10": 0.4060309121684547,
+      "below10_p": 0.000004993493085887546,
+      "kink": -0.3842329622909572,
+      "kink_p": 0.0012597727032309814,
+      "above10": 0.021797949877497502,
+      "above10_se": 0.0650678248093793,
+      "above10_p": 0.7376337059624616
+    }
+  },
+  "threshold_scan": [
+    {
+      "threshold_pct": 6,
+      "slope_below": 1.2537206856226681,
+      "p_below": 0.00006247139200244733,
+      "change_in_slope": -1.212382507285411,
+      "p_change_dk": 0.00033610407676088833,
+      "p_change_wild_bootstrap": 0.0038003800380038005,
+      "slope_above": 0.04133817833725706,
+      "se_above": 0.07934931338682208,
+      "within_r2": 0.044597217573790315,
+      "firm_years_above": 5129
+    },
+    {
+      "threshold_pct": 8,
+      "slope_below": 0.7216692173657657,
+      "p_below": 0.0000041883728884816,
+      "change_in_slope": -0.727869344102586,
+      "p_change_dk": 0.00007998062087483282,
+      "p_change_wild_bootstrap": 0.0006000600060006001,
+      "slope_above": -0.006200126736820244,
+      "se_above": 0.08250747485069941,
+      "within_r2": 0.04581020297435412,
+      "firm_years_above": 3762
+    },
+    {
+      "threshold_pct": 10,
+      "slope_below": 0.47856180713558993,
+      "p_below": 0.00031960272101291495,
+      "change_in_slope": -0.5321580016868747,
+      "p_change_dk": 0.001963653314069795,
+      "p_change_wild_bootstrap": 0.006000600060006,
+      "slope_above": -0.053596194551284726,
+      "se_above": 0.09876287965804664,
+      "within_r2": 0.04328229880287926,
+      "firm_years_above": 3024
+    },
+    {
+      "threshold_pct": 12,
+      "slope_below": 0.33040315021004396,
+      "p_below": 0.002219105972143555,
+      "change_in_slope": -0.402803887464023,
+      "p_change_dk": 0.018802227956881468,
+      "p_change_wild_bootstrap": 0.013701370137013702,
+      "slope_above": -0.07240073725397905,
+      "se_above": 0.12836109134370396,
+      "within_r2": 0.040370599990634415,
+      "firm_years_above": 1727
+    },
+    {
+      "threshold_pct": 15,
+      "slope_below": 0.28315424256731553,
+      "p_below": 0.0017138880649158856,
+      "change_in_slope": -0.4298670240962585,
+      "p_change_dk": 0.02348244697391637,
+      "p_change_wild_bootstrap": 0.015201520152015202,
+      "slope_above": -0.14671278152894296,
+      "se_above": 0.17060112740262853,
+      "within_r2": 0.0395828835121701,
+      "firm_years_above": 1046
+    }
+  ],
+  "sector_equality_wald": {
+    "stat": 37.485710851755954,
+    "df": 13,
+    "p": 0.00034754283181033117,
+    "note": "Joint test that all sector slopes equal Textile's, with reporting-period FE"
+  },
+  "sector_slopes": {
+    "Cement": {
+      "slope": -0.1387186971863395,
+      "se": 0.2330787511024073,
+      "p": 0.5517594629450656
+    },
+    "Motor Vehicles, Trailers & Autoparts": {
+      "slope": -0.11978918590600914,
+      "se": 0.12400056471051676,
+      "p": 0.33406299546307666
+    },
+    "Coke and Refined Petroleum Products": {
+      "slope": 0.019172021606373258,
+      "se": 0.11654183151631207,
+      "p": 0.8693368761342877
+    },
+    "Paper, Paperboard and Products": {
+      "slope": 0.05939234772434916,
+      "se": 0.1430262244274885,
+      "p": 0.6779695923863371
+    },
+    "Food Products": {
+      "slope": 0.13010972462157266,
+      "se": 0.10298963124816186,
+      "p": 0.20651851665628645
+    },
+    "Manufacturing": {
+      "slope": 0.13611263637874213,
+      "se": 0.08827446722065753,
+      "p": 0.12314258746690035
+    },
+    "Other Services Activities": {
+      "slope": 0.13661875372510765,
+      "se": 0.11532520503203687,
+      "p": 0.23620538871524707
+    },
+    "Textile": {
+      "slope": 0.15744730518734362,
+      "se": 0.11308957037059447,
+      "p": 0.16390086891285327
+    },
+    "Information and Communication Services": {
+      "slope": 0.15789608198323946,
+      "se": 0.11629804821969077,
+      "p": 0.17461297867204092
+    },
+    "Chemicals, Chemical Products and Pharmaceuticals": {
+      "slope": 0.20155088408958816,
+      "se": 0.07356146866885377,
+      "p": 0.006163355221787585
+    },
+    "Fuel and Energy": {
+      "slope": 0.2502403411139571,
+      "se": 0.11739202327859671,
+      "p": 0.03307354740612223
+    },
+    "Electrical Machinery and Apparatus": {
+      "slope": 0.2735887363686712,
+      "se": 0.09145213631941033,
+      "p": 0.002786024388981285
+    },
+    "Mineral products": {
+      "slope": 0.2796777339006713,
+      "se": 0.09181389812170712,
+      "p": 0.0023277290349377664
+    },
+    "Sugar": {
+      "slope": 0.39179421443274554,
+      "se": 0.10614197836654421,
+      "p": 0.00022508282990700142
+    }
+  },
+  "wild_bootstrap": {
+    "t_cluster_year": 1.2911710426233476,
+    "p_wcr": 0.27382738273827384,
+    "clusters": 20,
+    "replications": 9999
+  },
+  "robustness": [
+    {
+      "specification": "Baseline (Model 1, col. 3), Driscoll-Kraay SE",
+      "coef": 0.14333750906169532,
+      "se": 0.08507927337841852,
+      "p": 0.09208639302717196
+    },
+    {
+      "specification": "Same, SE clustered by firm",
+      "coef": 0.14333750906169532,
+      "se": 0.03872746349956821,
+      "p": 0.0002164449905075015
+    },
+    {
+      "specification": "Same, SE two-way clustered (firm, fiscal year)",
+      "coef": 0.14333750906169532,
+      "se": 0.11245971007650211,
+      "p": 0.20250980234260627
+    },
+    {
+      "specification": "Same, wild cluster restricted bootstrap by fiscal year (20 clusters, 9,999 draws, Webb weights)",
+      "coef": 0.14333750906169532,
+      "se": null,
+      "p": 0.27382738273827384
+    },
+    {
+      "specification": "ROA not winsorised",
+      "coef": 0.16419597506328373,
+      "se": 0.07439478109839233,
+      "p": 0.02734406744142579
+    },
+    {
+      "specification": "ROA winsorised at 5%/95%",
+      "coef": 0.1021932305709219,
+      "se": 0.07720752320284158,
+      "p": 0.18567862345203257
+    },
+    {
+      "specification": "Pre-tax ROA (PBT / average assets)",
+      "coef": 0.1271635567296287,
+      "se": 0.058680447814469246,
+      "p": 0.030268656528210907
+    },
+    {
+      "specification": "ROA on year-end assets",
+      "coef": 0.11953470731669819,
+      "se": 0.08326102601888483,
+      "p": 0.15114864394418942
+    },
+    {
+      "specification": "End-of-year YoY inflation instead of 12-month average",
+      "coef": 0.13213085732686503,
+      "se": 0.05455581734723074,
+      "p": 0.015466273941244085
+    },
+    {
+      "specification": "Exclude firms with imputed year-end month",
+      "coef": 0.14958966161140982,
+      "se": 0.0903010910751492,
+      "p": 0.09766019981820388
+    },
+    {
+      "specification": "June year-end firms only",
+      "coef": 0.1298127353194385,
+      "se": 0.09892277619842926,
+      "p": 0.189492455213407
+    },
+    {
+      "specification": "Exclude FY2020 (COVID-19)",
+      "coef": 0.16078665780442414,
+      "se": 0.08752036131721536,
+      "p": 0.06624020213688234
+    },
+    {
+      "specification": "Exclude FY2023-FY2024 (crisis years)",
+      "coef": 0.19077798687645703,
+      "se": 0.09150603174772019,
+      "p": 0.03712651659416863
+    },
+    {
+      "specification": "Exclude Textile (largest sector)",
+      "coef": 0.13692072132078373,
+      "se": 0.09155389936093018,
+      "p": 0.1348549083068958
+    },
+    {
+      "specification": "Exclude firms that changed sector",
+      "coef": 0.16054424563070158,
+      "se": 0.08861386409329532,
+      "p": 0.07007792327126809
+    },
+    {
+      "specification": "Exclude firm-years with negative equity",
+      "coef": 0.11293220486198224,
+      "se": 0.09470576598400647,
+      "p": 0.23313264063469052
+    },
+    {
+      "specification": "Firms observed for 15+ years",
+      "coef": 0.12063696472511615,
+      "se": 0.10306373734546458,
+      "p": 0.24185151544595024
+    },
+    {
+      "specification": "Add linear time trend",
+      "coef": 0.08921099534512471,
+      "se": 0.08211829837553251,
+      "p": 0.27735657467302066
+    },
+    {
+      "specification": "Add real sales growth (possible bad control)",
+      "coef": 0.10087558536464744,
+      "se": 0.07886711917765955,
+      "p": 0.20092491841917795
+    },
+    {
+      "specification": "No macro controls",
+      "coef": -0.017307907153096307,
+      "se": 0.04971163771904291,
+      "p": 0.7277271898922548
+    }
+  ],
+  "diagnostics": [
+    {
+      "test": "Variance inflation factors (pooled)",
+      "statistic": "Inflation (12-m avg, %): 5.21; Log real assets (t-1): 1.04; Liabilities/assets (t-1): 1.03; Lending rate (%): 3.40; PKR depreciation (%): 4.23; Real GDP growth (%): 2.64",
+      "p_value": "",
+      "note": "Values below 5 suggest no serious multicollinearity"
+    },
+    {
+      "test": "Pesaran CD test (FE residuals)",
+      "statistic": "CD = 44.13",
+      "p_value": "0.0000",
+      "note": "Mean |pairwise residual correlation| = 0.343"
+    },
+    {
+      "test": "Wooldridge test for AR(1) errors",
+      "statistic": "F = 65.79 (coef on lagged FD residual = -0.298; H0 = -0.5)",
+      "p_value": "0.0000",
+      "note": ""
+    },
+    {
+      "test": "Modified Wald test, groupwise heteroskedasticity",
+      "statistic": "chi2(409) = 4.48e+05",
+      "p_value": "0.0000",
+      "note": "Firms with 5+ observations"
+    },
+    {
+      "test": "Hausman test, FE vs RE",
+      "statistic": "chi2(6) = 252.12",
+      "p_value": "0.0000",
+      "note": "Rejection favours fixed effects"
+    },
+    {
+      "test": "ADF unit-root test: Monthly YoY CPI inflation, Jul 2005-Dec 2025",
+      "statistic": "ADF = -2.57",
+      "p_value": "0.0995",
+      "note": ""
+    },
+    {
+      "test": "ADF unit-root test: Monthly lending rate, Jul 2005-Dec 2025",
+      "statistic": "ADF = -2.75",
+      "p_value": "0.0661",
+      "note": ""
+    },
+    {
+      "test": "ADF unit-root test: Fiscal-year inflation, FY2006-FY2025 (n=20)",
+      "statistic": "ADF = -2.91",
+      "p_value": "0.0439",
+      "note": ""
+    }
+  ],
+  "vif": {
+    "Inflation (12-m avg, %)": 5.212018307735974,
+    "Log real assets (t-1)": 1.0358827287798489,
+    "Liabilities/assets (t-1)": 1.034159400008844,
+    "Lending rate (%)": 3.3967927650423575,
+    "PKR depreciation (%)": 4.230551645387521,
+    "Real GDP growth (%)": 2.6392604317708774
+  },
+  "aggregate_ts": {
+    "Aggregate ROA, inflation only": {
+      "coef_inflation": -0.06166597940107514,
+      "se": 0.06495266179563859,
+      "p": 0.3424178186174933,
+      "n": 20,
+      "r2": 0.01958323739926915
+    },
+    "Aggregate ROA, with macro controls": {
+      "coef_inflation": 0.05776122762987396,
+      "se": 0.19926482328360545,
+      "p": 0.771914413574454,
+      "n": 20,
+      "r2": 0.301334407222426
+    },
+    "Median ROA, inflation only": {
+      "coef_inflation": -0.021765224389608186,
+      "se": 0.02735570528692384,
+      "p": 0.42624277588588955,
+      "n": 20,
+      "r2": 0.01166726947299157
+    },
+    "Median ROA, with macro controls": {
+      "coef_inflation": -0.012737066762971785,
+      "se": 0.10301768260111117,
+      "p": 0.9016006237483584,
+      "n": 20,
+      "r2": 0.24048400516066537
+    },
+    "Aggregate operating ROA, inflation only": {
+      "coef_inflation": 0.031468035557025875,
+      "se": 0.060150535981335164,
+      "p": 0.6008666031457275,
+      "n": 20,
+      "r2": 0.007729326831069194
+    },
+    "Aggregate operating ROA, with macro controls": {
+      "coef_inflation": 0.0320380094261134,
+      "se": 0.14643807352512095,
+      "p": 0.8268198966629541,
+      "n": 20,
+      "r2": 0.38347190916848906
+    }
+  }
+}

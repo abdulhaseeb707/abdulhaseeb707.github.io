@@ -1,55 +1,58 @@
 # AGENTS.md: rules for working on this repo
 
-The personal website of **Abdul Haseeb Khan** (Lahore), published at https://abdulhaseeb707.github.io with
-GitHub Pages. Read this before changing anything.
+The personal website of **Abdul Haseeb Khan** (economist, Lahore), built with **Next.js**. It is published as static
+files on GitHub Pages (https://abdulhaseeb707.github.io) and will later run as a Node server on Oracle Cloud
+(see DEPLOY-ORACLE.md). Read this before changing anything.
 
 ## 1. One file feeds the website and the CV
 
-- All content is in `src/data/profile.yaml`: who he is, the research paper, highlights, about, skills and the
-  full CV (`cv:`).
-- The CV is a normal web page at `/cv/` (`src/pages/cv.astro`). On every build `scripts/build-cv-pdf.mjs` prints
-  that page to `/Abdul-Haseeb-Khan-CV.pdf`. Never hand-edit or upload a CV PDF.
-- Change facts in `profile.yaml`, never in `.astro` markup. The site and the CV then update together.
+- All words and facts live in `content/profile.yaml`: hero, research text, work highlights, about, skills, and the
+  full CV (`cv:`). The research charts read `content/research/*.json`, a committed snapshot of the research repo
+  made by `npm run sync:research`. Never edit those JSON files by hand.
+- The CV exists twice, both from the same data: the web page `/cv/` (`app/cv/page.tsx`) and the PDF
+  `/Abdul-Haseeb-Khan-CV.pdf` (`app/Abdul-Haseeb-Khan-CV.pdf/route.ts` with `lib/cv/CvDocument.tsx`, react-pdf).
+  Never hand-edit or upload a CV PDF.
+- Change facts in `profile.yaml`, not in components. `lib/profile.ts` validates the file and fails the build with a
+  readable message if something is wrong.
 
-## 2. Voice: a personal site, not a column
+## 2. Voice
 
-- Short. One line where one line will do. No timelines, no essays, no long "story" paragraphs.
-- First person, plain sentences ("I represented Pakistan…"). No emoji, no arrows like "you are here", not much
-  bold.
-- Banned phrases: passionate, leverage, spearheaded, cutting-edge, delve, unlock, synergy, results-driven,
-  world-class, game-changer, seamless, "in today's fast-paced world".
-- CV text (the `cv:` block) is normal CV style: action verbs, no "I".
+- Short and personal: one line where one line will do. No timelines, no essays.
+- First person on the website, plain sentences, no emoji, very little bold. CV text is normal CV style (no "I").
+- Banned: passionate, leverage, spearheaded, cutting-edge, delve, unlock, synergy, results-driven, world-class,
+  game-changer, seamless.
 
 ## 3. Truth rules
 
-- Only claim what `profile.yaml` already states or a file proves. Never invent numbers, titles, dates or results.
-- The research is an **independent research project / working paper, not peer reviewed**. Never say
-  "published" or "publication". Results are **associations**: write "is linked to" or "moves with", never
-  "inflation causes" or "raises". Use the exact figures already in `profile.yaml` (`research.exact`); don't
-  round or change them.
-- Facts that are easy to get wrong: CGPA **3.29/4.00**; Meezan Bank was a **trainee** role, Jun to Sep 2026,
-  now ended; MPhil is **in progress**; IOFS 2025 was a **Diploma (II degree) in Economics**.
-- Private data never ships: date of birth, ID numbers, the festival voucher, home address, family or money
-  matters. The phone number appears **only in the CV PDF** (`cv.showPhone`), never on a web page.
+- Claim only what `profile.yaml` states or a file proves. Never invent numbers, titles, dates or results.
+- The research is an **independent research project / working paper, not peer reviewed**. Never "published".
+  Results are **associations**: "is linked to", "moves with"; never "inflation causes/raises/lowers".
+- Easy to get wrong: CGPA **3.29/4.00**; Meezan Bank was a **trainee** role, Jun to Sep 2026, ended; the MPhil is
+  **in progress**; IOFS 2025 was a **Diploma (II degree) in Economics**.
+- Private data never ships: date of birth, ID numbers, the festival voucher, address, family or money matters. The
+  phone number appears **only in the CV PDF** (`cv.showPhone`), never on a web page.
 
-## 4. Design: young, bold, clearly hand-made
+## 4. Design: "Cycles" (mature, minimal, premium, clearly hand-made)
 
-The direction is a "data zine": confident, playful, colorful, like a well-made student magazine or The
-Pudding, never a corporate template and never an AI-generated landing page.
+The owner rejected an old-fashioned serif version and a loud, cartoonish one. This direction was approved:
 
-- **Light theme only.** No dark mode, no theme toggle.
-- Type: Bricolage Grotesque (headlines, numbers), Instrument Sans (text), DM Mono (small labels, tags).
-- Color: paper `#fbf8f1`, ink `#141414`, and flat blocks of green `#0f7a4d`, yellow `#ffd84d`, coral `#ff8a65`,
-  sky `#acd5ff`, mint `#c9f0d9`. Tokens live in `src/styles/tokens.css`; don't add colors outside them.
-- Flat only: **no gradients, no shadows (box or text), no blur, no glass, no glow, no neon.** Depth comes from
-  2px ink outlines, color blocks and a slight tilt on photos and stickers.
-- Real photos and the real research charts are the imagery. No stock or AI images.
-- Text sizes use `clamp()` with **both width and height** (`vw` and `vh`) so short laptop screens don't get a
-  giant headline. On the owner's laptop (1536x695 CSS px) the CV buttons must be visible without scrolling.
-- Test every change at: 360x740, 390x844, 768x1024, 1024x768, 1366x657, 1536x695, 1920x969, 2560x1329 and
-  3440x1329. No sideways scrolling at any size.
-- Motion is small (hover lift, photo shuffle, reveal fade) and off under `prefers-reduced-motion`.
-- The page must work without JavaScript: menu, links and images all still work.
+- **Light only.** Ivory paper (`--ivory #f4f1ea`) with grain and a faint doodle wallpaper (`public/pattern.svg`,
+  generated by `scripts/make-pattern.mjs`, about 10% strength). The research page uses a light line grid instead.
+- **Ink on paper.** Text is ink `#111a2b` and slate `#4b5466`. Colour appears only in charts.
+- **Chart colours**, in this fixed order and nowhere else: forest `#0e7a5a`, brass `#b7802a`, steel `#2c6db3`;
+  de-emphasised data `#c3beb3`. Validated with the dataviz palette validator. Brass also draws thin rules and marks;
+  small brass text uses `--brass-ink #8a5f1d` for contrast.
+- **Type:** Instrument Serif for headlines (italic green for one emphasised phrase), Geist for text and UI, Geist
+  Mono for labels, axes and dates. Big numbers use Geist, never the serif.
+- **Illustration language:** moon phases (the header mark waxes as you scroll; each research step is a phase) and
+  dots (the hero moon is 6,683 dots, one per firm-year). Thin line doodles only.
+- **Flat:** no gradients, shadows, blur, glass or glow. Hairline borders (`--hair`) and space do the separating.
+- **Sizes** use `clamp()` on width and height (`--fs-hero` etc. in `app/globals.css`). On the owner's laptop
+  (1536x695) the hero headline is about 57px and the CV button is on the first screen.
+- **Charts** follow the dataviz skill: one axis (never dual), thin 2px lines, hairline grid, direct labels, a legend
+  for 2+ series, emphasis instead of rainbow, hover and keyboard read-outs, and a "Show the numbers" table under
+  every chart. Charts are drawn at real pixel width so labels stay readable on phones.
+- Motion is small (moon drawing in, slow orbit, fades) and off under `prefers-reduced-motion`.
 
 ## 5. Git and GitHub rules (set by the owner)
 
@@ -60,27 +63,24 @@ Pudding, never a corporate template and never an AI-generated landing page.
 4. **Don't change the research repo** (`abdulhaseeb707/inflation-corporate-profitability-pakistan`) without the
    owner's OK, not even its homepage field.
 
-## 6. Commands and tooling
+## 6. Commands
 
 | Command | What it does |
 |---|---|
-| `npm install` | Install dependencies (first time only) |
-| `npm run dev` | Local preview at http://localhost:4321 |
-| `npm run build` | Build into `dist/`, print the CV PDF, then run the rule check |
-| `npm run preview` | Serve the built `dist/` |
-| `npm run photos` | Resize full-size photos from `_archive/originals/` into `src/assets/` |
+| `npm install` | Install dependencies |
+| `npm run dev` | Local preview at http://localhost:3000 (makes the doodle tile and WebP photos first) |
+| `npm run build` | Static export to `out/` (GitHub Pages), CV PDF included, then `scripts/check-site.mjs` |
+| `NEXT_OUTPUT=standalone npm run build` | Node server build for Oracle Cloud (used by the `Dockerfile`) |
+| `npm run qa` | Screenshots of `out/` at the nine screen sizes plus overflow and CV-button checks |
+| `npm run sync:research` | Refresh `content/research/*.json` from the research repo |
+| `npm run photos` | Resize new full-size photos from `_archive/originals/` into `assets/` |
 
-- Node.js LTS. On Windows the CV PDF is printed with the installed Microsoft Edge; on Linux/CI with Playwright's
-  Chromium (`npx playwright install chromium`).
+- Node.js LTS. `npm run qa` uses the installed Microsoft Edge on Windows.
 - Python 3.15 is available through `uv` for helper scripts.
-- In a shell opened before a tool was installed, refresh PATH first:
-  `$env:Path = "$env:USERPROFILE\.local\bin;" + [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')`
-- Research figures come from the research repo (`outputs/figures/`) and are copied into `src/assets/research/`.
-- `_archive/` (originals, old site, private files) and `incoming/` (new files from the owner) are gitignored.
+- `_archive/` (originals, old sites, private files), `incoming/`, `out/`, `.next/` and generated assets are gitignored.
 
 ## 7. Checklist before asking to push
 
-1. `npm run build` passes, including `scripts/check-site.mjs` (wrong claims, private data, AI attribution,
-   gradients/shadows, dark theme, emoji, banned phrases).
-2. The CV PDF is 2 pages and matches `/cv/`.
-3. Every size in section 4 checked: no sideways scroll, CV buttons visible on the first screen.
+1. `npm run build` passes (content validation, CV PDF is 2 pages, `check-site.mjs` clean).
+2. `npm run qa` passes at all nine sizes: no sideways scroll, a CV download on the first screen of every page.
+3. Look at the screenshots: nothing overlaps, charts read clearly, the doodles stay behind the text.

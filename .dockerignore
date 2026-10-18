@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+qa-shots
+_archive
+incoming
+.git
+.github
+.claude
+CLAUDE.md
+*.md
+!content/**/*.md

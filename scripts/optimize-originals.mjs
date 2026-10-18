@@ -1,7 +1,7 @@
-// One-time: shrink the full-size originals in _archive/originals into src/assets.
+// One-time: shrink the full-size originals in _archive/originals into assets/ (npm run photos).
 // - longest edge capped at 2400px (Astro makes the smaller responsive sizes at build time)
 // - orientation fixed from EXIF, then ALL metadata dropped (phone photos carry GPS location)
-// Re-run with `npm run photos` after adding a new original to the map below.
+// Re-run after adding a new original to the map below; npm run assets then makes the WebP versions.
 import sharp from 'sharp';
 import { mkdir, stat } from 'node:fs/promises';
 import path from 'node:path';
@@ -34,7 +34,7 @@ const kb = (bytes) => `${Math.round(bytes / 1024)} KB`;
 
 for (const [from, to] of Object.entries(files)) {
   const input = path.join(SRC, from);
-  const output = path.join('src/assets', to);
+  const output = path.join('assets', to);
   await mkdir(path.dirname(output), { recursive: true });
 
   let image = sharp(input).rotate().resize({ width: MAX, height: MAX, fit: 'inside', withoutEnlargement: true });
