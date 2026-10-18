@@ -30,7 +30,7 @@ export function InflationLine({ data }: { data: Row[] }) {
   return (
     <Frame
       boxRef={ref}
-      readout={a ? `${a.label}: inflation ${fmt.num(a.inflation)}%` : 'Hover, or focus the chart and use the arrow keys, to read each year.'}
+      readout={a ? `${a.label}: inflation ${fmt.num(a.inflation)}%` : 'Tap or hover on the chart to read each year. Arrow keys work too.'}
       caption="CPI inflation, 12-month average over each fiscal year. Sources: IMF, Pakistan Bureau of Statistics."
     >
       <svg width={width} height={H} viewBox={`0 0 ${width} ${H}`} role="img" tabIndex={0} onKeyDown={onKey} onBlur={() => setActive(null)}
@@ -58,7 +58,7 @@ export function InflationLine({ data }: { data: Row[] }) {
             <Tip x={x(active)} y={m.t} maxX={width} lines={[a.label, `Inflation ${fmt.num(a.inflation)}%`]} />
           </>
         )}
-        <rect className={s.hit} x={m.l} y={m.t} width={width - m.l - m.r} height={H - m.t - m.b} onPointerMove={move} onPointerLeave={() => setActive(null)} />
+        <rect className={s.hit} x={m.l} y={m.t} width={width - m.l - m.r} height={H - m.t - m.b} onPointerMove={move} onPointerDown={move} onPointerLeave={(e) => e.pointerType === 'mouse' && setActive(null)} />
       </svg>
     </Frame>
   );

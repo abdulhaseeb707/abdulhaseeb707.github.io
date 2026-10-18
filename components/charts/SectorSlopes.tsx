@@ -32,7 +32,7 @@ export function SectorSlopes({ data }: { data: Row[] }) {
         { label: 'Clearly above zero (p < 0.05)', color: COLORS.forest, kind: 'dot' },
         { label: 'Not clearly different from zero', color: COLORS.context, kind: 'dot' },
       ]}
-      readout={a ? `${a.sector}: ${fmt.signed(a.slope)} pp of ROA per point of inflation (95% interval ${fmt.signed(a.low)} to ${fmt.signed(a.high)}, ${fmt.p(a.p)})` : 'Hover a row, or focus the chart and use the arrow keys.'}
+      readout={a ? `${a.sector}: ${fmt.signed(a.slope)} pp of ROA per point of inflation (95% interval ${fmt.signed(a.low)} to ${fmt.signed(a.high)}, ${fmt.p(a.p)})` : 'Tap or hover on a row to read it. Arrow keys work too.'}
       caption="Change in ROA (percentage points) per point of inflation, by sector, with 95% intervals. Driscoll–Kraay standard errors."
     >
       <svg width={width} height={H} viewBox={`0 0 ${width} ${H}`} role="img" tabIndex={0} onKeyDown={onKey} onBlur={() => setActive(null)}
@@ -63,7 +63,7 @@ export function SectorSlopes({ data }: { data: Row[] }) {
           <Tip x={x(a.slope)} y={Math.min(m.t + active * row + 14, H - 70)} maxX={width}
             lines={[a.label, `Slope ${fmt.signed(a.slope)} pp`, `95%: ${fmt.signed(a.low)} to ${fmt.signed(a.high)}`]} />
         )}
-        <rect className={s.hit} x={0} y={m.t} width={width} height={H - m.t - m.b} onPointerMove={move} onPointerLeave={() => setActive(null)} />
+        <rect className={s.hit} x={0} y={m.t} width={width} height={H - m.t - m.b} onPointerMove={move} onPointerDown={move} onPointerLeave={(e) => e.pointerType === 'mouse' && setActive(null)} />
       </svg>
     </Frame>
   );

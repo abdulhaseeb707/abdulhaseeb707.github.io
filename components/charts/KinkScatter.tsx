@@ -47,7 +47,7 @@ export function KinkScatter({ data, at, below, above }: { data: Point[]; at: num
         { label: `Years below ${at}% inflation`, color: COLORS.forest, kind: 'dot' },
         { label: `Years at or above ${at}%`, color: COLORS.brass, kind: 'dot' },
       ]}
-      readout={a ? `${a.label}: inflation ${fmt.num(a.inflation)}%, median ROA ${fmt.num(a.medianRoa, 2)}%` : 'Hover a dot, or focus the chart and use the arrow keys.'}
+      readout={a ? `${a.label}: inflation ${fmt.num(a.inflation)}%, median ROA ${fmt.num(a.medianRoa, 2)}%` : 'Tap or hover on a dot to read it. Arrow keys work too.'}
       caption={`Median return on assets of listed non-financial firms by fiscal year. Threshold model (firm fixed effects): ${fmt.signed(below)} pp of ROA per point of inflation below ${at}%, ${fmt.signed(above)} above.`}
     >
       <svg width={width} height={H} viewBox={`0 0 ${width} ${H}`} role="img" tabIndex={0} onKeyDown={onKey} onBlur={() => setActive(null)}
@@ -80,7 +80,7 @@ export function KinkScatter({ data, at, below, above }: { data: Point[]; at: num
         {a && (
           <Tip x={x(a.inflation)} y={Math.max(m.t, y(a.medianRoa) - 64)} maxX={width} lines={[a.label, `Inflation ${fmt.num(a.inflation)}%`, `Median ROA ${fmt.num(a.medianRoa, 2)}%`]} />
         )}
-        <rect className={s.hit} x={m.l} y={m.t} width={width - m.l - m.r} height={H - m.t - m.b} onPointerMove={move} onPointerLeave={() => setActive(null)} />
+        <rect className={s.hit} x={m.l} y={m.t} width={width - m.l - m.r} height={H - m.t - m.b} onPointerMove={move} onPointerDown={move} onPointerLeave={(e) => e.pointerType === 'mouse' && setActive(null)} />
       </svg>
     </Frame>
   );

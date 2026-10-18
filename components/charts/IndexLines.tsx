@@ -34,7 +34,7 @@ export function IndexLines({ data }: { data: Row[] }) {
         { label: 'In rupees (nominal)', color: COLORS.forest },
         { label: 'After inflation (real)', color: COLORS.brass },
       ]}
-      readout={a ? `${a.label}: ${fmt.num(a.nominal, 0)} in rupees, ${fmt.num(a.real, 0)} after inflation (FY06 = 100)` : 'Hover, or focus the chart and use the arrow keys, to read each year.'}
+      readout={a ? `${a.label}: ${fmt.num(a.nominal, 0)} in rupees, ${fmt.num(a.real, 0)} after inflation (FY06 = 100)` : 'Tap or hover on the chart to read each year. Arrow keys work too.'}
       caption="Aggregate operating profit, chain-linked index, FY06 = 100. Source: SBP financial statements of 441 listed non-financial firms; real values deflated by the CPI."
     >
       <svg width={width} height={H} viewBox={`0 0 ${width} ${H}`} role="img" tabIndex={0} onKeyDown={onKey} onBlur={() => setActive(null)}
@@ -64,7 +64,7 @@ export function IndexLines({ data }: { data: Row[] }) {
             <Tip x={x(active)} y={m.t} maxX={width - m.r + 40} lines={[a.label, `Rupees ${fmt.num(a.nominal, 0)}`, `Real ${fmt.num(a.real, 0)}`]} />
           </>
         )}
-        <rect className={s.hit} x={m.l} y={m.t} width={width - m.l - m.r} height={H - m.t - m.b} onPointerMove={move} onPointerLeave={() => setActive(null)} />
+        <rect className={s.hit} x={m.l} y={m.t} width={width - m.l - m.r} height={H - m.t - m.b} onPointerMove={move} onPointerDown={move} onPointerLeave={(e) => e.pointerType === 'mouse' && setActive(null)} />
       </svg>
     </Frame>
   );

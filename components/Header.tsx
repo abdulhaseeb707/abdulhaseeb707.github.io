@@ -4,10 +4,12 @@ import { Icon } from './Icon';
 import { profile, site } from '@/lib/profile';
 import styles from './Header.module.css';
 
+// in the same order as the sections on the home page
 const nav = [
-  { href: site.researchPage, label: 'Research' },
   { href: '/#work', label: 'Work' },
-  { href: '/#about', label: 'About' },
+  { href: '/#education', label: 'Education' },
+  { href: '/#papers', label: 'Papers' },
+  { href: '/#places', label: 'Places' },
   { href: '/#contact', label: 'Contact' },
 ];
 
@@ -39,6 +41,7 @@ export function Header() {
               {nav.map((n) => (
                 <li key={n.href}><Link href={n.href}>{n.label}</Link></li>
               ))}
+              <li><Link href={site.researchPage}>The research in six charts</Link></li>
               <li><Link href={site.cvPage}>CV as a web page</Link></li>
             </ul>
           </nav>

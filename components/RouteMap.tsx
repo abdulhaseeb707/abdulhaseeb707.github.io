@@ -1,37 +1,39 @@
-// A small ink-line map: Lahore to Krasnoyarsk (2025) and Ekaterinburg (2026). Drawn at build time from
-// Natural Earth borders (world-atlas); only plain SVG paths reach the browser.
+// A small ink-line map: routes from home (the first place in profile.yaml) to every other place. Drawn at build
+// time from Natural Earth borders (world-atlas); only plain SVG paths reach the browser.
 import { geoConicConformal, geoPath, geoDistance } from 'd3-geo';
 import { feature } from 'topojson-client';
 import world from 'world-atlas/countries-110m.json';
 import type { Topology, GeometryCollection } from 'topojson-specification';
+import { profile } from '@/lib/profile';
 import styles from './RouteMap.module.css';
 
 const W = 900;
 const H = 470;
-const places = {
-  lahore: { name: 'Lahore', note: 'home', at: [74.3587, 31.5204] as [number, number] },
-  krasnoyarsk: { name: 'Krasnoyarsk', note: '2025', at: [92.8932, 56.0153] as [number, number] },
-  ekaterinburg: { name: 'Ekaterinburg', note: '2026', at: [60.6122, 56.8389] as [number, number] },
-};
-type Key = keyof typeof places;
+const [home, ...trips] = profile.places;
 
+// frame the map around all the places, with some room for the labels
+const lons = profile.places.map((p) => p.at[0]);
+const lats = profile.places.map((p) => p.at[1]);
+const [west, east, south, north] = [Math.min(...lons) - 12, Math.max(...lons) + 12, Math.min(...lats) - 8, Math.max(...lats) + 5];
 const frame: [number, number][] = [];
-for (let lon = 48; lon <= 104; lon += 2) frame.push([lon, 23], [lon, 61]);
-for (let lat = 23; lat <= 61; lat += 2) frame.push([48, lat], [104, lat]);
+for (let lon = west; lon <= east; lon += 2) frame.push([lon, south], [lon, north]);
+for (let lat = south; lat <= north; lat += 2) frame.push([west, lat], [east, lat]);
 const projection = geoConicConformal()
   .parallels([30, 60])
-  .rotate([-76, 0])
+  .rotate([-(west + east) / 2, 0])
   .fitExtent([[8, 8], [W - 8, H - 8]], { type: 'MultiPoint', coordinates: frame })
   .clipExtent([[0, 0], [W, H]]);
 const path = geoPath(projection).digits(0);
 const topo = world as unknown as Topology<{ countries: GeometryCollection }>;
-const countries = (feature(topo, topo.objects.countries) as unknown as { features: { id: string }[] }).features
-  .map((f) => ({ id: String(f.id), d: path(f as never) ?? '' }))
+const countries = (feature(topo, topo.objects.countries) as unknown as { features: { id: string; properties: { name: string } }[] }).features
+  .map((f) => ({ id: String(f.id), name: f.properties.name, d: path(f as never) ?? '' }))
   .filter((c) => c.d);
+const visited = new Set(profile.places.map((p) => p.country));
 
-const xy = (k: Key) => projection(places[k].at)!;
-const km = (a: Key, b: Key) => Math.round((geoDistance(places[a].at, places[b].at) * 6371) / 100) * 100;
-function arc(a: Key, b: Key, bend: number) {
+type Place = (typeof profile.places)[number];
+const xy = (p: Place) => projection(p.at)!;
+const km =(a: Place, b: Place) => Math.round((geoDistance(a.at, b.at) * 6371) / 100) * 100;
+function arc(a: Place, b: Place, bend: number) {
   const [x1, y1] = xy(a);
   const [x2, y2] = xy(b);
   const cx = (x1 + x2) / 2 - (y2 - y1) * bend;
@@ -40,31 +42,30 @@ function arc(a: Key, b: Key, bend: number) {
 }
 
 export function RouteMap() {
-  const trips = [
-    { to: 'krasnoyarsk' as const, d: arc('lahore', 'krasnoyarsk', 0.16) },
-    { to: 'ekaterinburg' as const, d: arc('lahore', 'ekaterinburg', -0.16) },
-  ];
+  const label = trips.map((t) => `${t.name} (${t.when}), about ${km(home, t).toLocaleString('en')} km`).join('; ');
   return (
     <figure className={styles.map}>
-      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Map of my trips from Lahore: Krasnoyarsk in 2025, about ${km('lahore', 'krasnoyarsk').toLocaleString('en')} km, and Ekaterinburg in 2026, about ${km('lahore', 'ekaterinburg').toLocaleString('en')} km.`}>
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Map of my trips from ${home.name}: ${label}.`}>
         <g className={styles.land}>
-          {countries.map((c) => <path key={c.id} d={c.d} className={c.id === '586' || c.id === '643' ? styles.focus : undefined} />)}
+          {countries.map((c) => <path key={c.id} d={c.d} className={visited.has(c.name) ? styles.focus : undefined} />)}
         </g>
-        {trips.map((t) => <path key={t.to} d={t.d} className={styles.route} />)}
-        {(Object.keys(places) as Key[]).map((k) => {
-          const [x, y] = xy(k);
-          const right = k !== 'ekaterinburg';
+        <rect className={styles.frame} x={0.5} y={0.5} width={W - 1} height={H - 1} />
+        {trips.map((t, i) => <path key={t.name} d={arc(home, t, i % 2 ? -0.16 : 0.16)} className={styles.route} />)}
+        {profile.places.map((p) => {
+          const [x, y] = xy(p);
+          const dx = p.labelLeft ? -12 : 12;
+          const anchor = p.labelLeft ? 'end' : 'start';
           return (
-            <g key={k}>
+            <g key={p.name}>
               <circle cx={x} cy={y} r={5} className={styles.pin} />
-              <text x={right ? x + 12 : x - 12} y={y - 8} textAnchor={right ? 'start' : 'end'} className={styles.name}>{places[k].name}</text>
-              <text x={right ? x + 12 : x - 12} y={y + 12} textAnchor={right ? 'start' : 'end'} className={styles.note}>{places[k].note}</text>
+              <text x={x + dx} y={y - 8} textAnchor={anchor} className={styles.name}>{p.name}</text>
+              <text x={x + dx} y={y + 12} textAnchor={anchor} className={styles.note}>{p.when}</text>
             </g>
           );
         })}
       </svg>
       <figcaption>
-        Lahore to Krasnoyarsk, about {km('lahore', 'krasnoyarsk').toLocaleString('en')} km. Lahore to Ekaterinburg, about {km('lahore', 'ekaterinburg').toLocaleString('en')} km.
+        {trips.map((t) => `${home.name} to ${t.name}, about ${km(home, t).toLocaleString('en')} km.`).join(' ')}
       </figcaption>
     </figure>
   );

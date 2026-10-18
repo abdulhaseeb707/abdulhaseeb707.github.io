@@ -1,17 +1,20 @@
 import { Hero } from '@/components/Hero';
-import { ResearchTeaser } from '@/components/ResearchTeaser';
 import { WorkGrid } from '@/components/WorkGrid';
-import { About } from '@/components/About';
+import { Education } from '@/components/Education';
+import { Papers } from '@/components/Papers';
+import { Places } from '@/components/Places';
 import { Contact } from '@/components/Contact';
 import { Viewer } from '@/components/Viewer';
 
+// Profile first, then what I've done, what I studied, my papers and where I've been.
 export default function Home() {
   return (
     <>
       <Hero />
-      <ResearchTeaser />
       <WorkGrid />
-      <About />
+      <Education />
+      <Papers />
+      <Places />
       <Contact />
       <Viewer />
     </>

@@ -38,7 +38,7 @@ export function InferenceCompare({ coef, rows }: { coef: number; rows: Row[] }) 
         {rows.map((r, i) => {
           const cy = m.t + i * row + row / 2 + 14;
           return (
-            <g key={r.method} opacity={active === null || active === i ? 1 : 0.5} onPointerEnter={() => setActive(i)} onPointerLeave={() => setActive(null)}>
+            <g key={r.method} opacity={active === null || active === i ? 1 : 0.5} onPointerEnter={() => setActive(i)} onPointerDown={() => setActive(i)} onPointerLeave={(e) => e.pointerType === 'mouse' && setActive(null)}>
               <rect x={0} y={cy - row / 2} width={width} height={row} fill="transparent" />
               <text className={s.labelStrong} x={m.l + 4} y={cy - 18}>{r.method}{!narrow && <tspan className={s.note} dx={10}>{r.note}</tspan>}</text>
               <line x1={x(0.0001)} x2={x(r.p)} y1={cy} y2={cy} stroke={COLORS.hair} strokeWidth={2} />

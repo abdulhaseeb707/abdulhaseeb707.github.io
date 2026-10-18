@@ -11,27 +11,25 @@
 #  - Files in public/ are linked as /files/name.pdf.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# The top of the home page: who I am, in two short lines, next to my portrait.
 person:
   name: Abdul Haseeb Khan
   location: Lahore, Pakistan
-  label: Abdul Haseeb Khan · Economist · Lahore
-  headline: I study how inflation moves through *Pakistan's* companies.
-  sub: BS Business Economics, MPhil student, and author of a twenty-year study of 441 listed firms.
+  label: Economist · Lahore, Pakistan
+  headline: Abdul Haseeb Khan
+  intro:
+    - I'm doing an MPhil in Economics at the University of the Punjab, where I also finished my BS in Business Economics.
+    - I've represented Pakistan twice in Russia, trained at Meezan Bank, and written a working paper on inflation and company profits.
   portrait: photos/portrait.jpg
-  moonCaption: 6,683 dots, one for every firm-year in my research.
   facts:
-    - figure: "441"
-      text: firms studied
-    - figure: "20"
-      text: fiscal years
+    - figure: "3.29"
+      text: BS CGPA, out of 4.00
     - figure: II degree
       text: IOFS 2025 diploma
-
-about:
-  headline: Economist in training, from *Lahore*.
-  text:
-    - I finished my BS in Business Economics at the University of the Punjab with a CGPA of 3.29, and I'm now doing an MPhil in Economics there.
-    - My work sits between economics, data and financial security. I've represented Pakistan twice in Russia and worked as a banking trainee at Meezan Bank.
+    - figure: "2"
+      text: times representing Pakistan abroad
+    - figure: "441"
+      text: firms in my working paper
 
 contact:
   email: abdulhaseeb2130@gmail.com
@@ -48,6 +46,7 @@ research:
   tagline: How the profits of Pakistan's listed companies have moved with inflation over twenty years.
   teaser: Operating profit grew 6.4 times in rupees. In real terms it ended *3% lower*.
   origin: It started as a Stata project at university in 2025. In 2026 I rebuilt it in Python with twenty years of data.
+  moonCaption: 6,683 dots, one for every firm-year in this study.
   stats:
     - figure: "441"
       text: listed firms
@@ -184,6 +183,43 @@ highlights:
       - src: certificates/sbp-smes-access-to-finance-2026.png
         alt: Certificate of participation from the State Bank of Pakistan for a two-day session on SMEs and Access to Finance, January 2026.
         caption: My certificate.
+
+# ─── Papers: the working paper above is always listed first ────────────────
+#   Add later papers, talks and projects here. kind: Paper | Presentation | Project
+#   Optional: line (one sentence), url (a link to the file or page).
+papers:
+  - kind: Presentation
+    title: Financial Fraud in Pakistan and Losses to GDP
+    where: International Festival of Youth 2026, Ekaterinburg
+    when: Sep 2026
+  - kind: Project
+    title: Operational Cost Optimization Model
+    where: Linear programming in Excel Solver
+    when: Feb – May 2025
+    line: A model that keeps production costs as low as possible within output and resource limits.
+
+# ─── Where I've been: the map and the list beside it ───────────────────────
+#   at: [longitude, latitude]. The first place is home; the map draws a route from it to every other place.
+#   work: the id of a highlight above, to link to its photos.
+places:
+  - name: Lahore
+    country: Pakistan
+    when: Home
+    at: [74.3587, 31.5204]
+    line: I studied at the University of the Punjab and trained at Meezan Bank here.
+  - name: Krasnoyarsk
+    country: Russia
+    when: Oct 2025
+    at: [92.8932, 56.0153]
+    line: The International Olympiad on Financial Security, where I earned a Diploma (II degree) in Economics.
+    work: iofs
+  - name: Ekaterinburg
+    country: Russia
+    when: Sep 2026
+    at: [60.6122, 56.8389]
+    line: The International Festival of Youth, where I presented my research on financial fraud.
+    work: festival
+    labelLeft: true
 
 services:
   - Market and business research

@@ -1,4 +1,23 @@
-.head { padding-block: clamp(28px, 6vh, 72px) clamp(32px, 6vh, 64px); }
+.head {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+  padding-block: clamp(28px, 6vh, 72px) clamp(32px, 6vh, 64px);
+}
+@media (min-width: 1040px) { .head { grid-template-columns: minmax(0, 1fr) minmax(0, 0.5fr); } }
+
+/* the moon of 6,683 dots, one per firm-year (wide screens only; phones go straight to the charts) */
+.art { position: relative; margin: 0; width: min(380px, 100%); justify-self: center; }
+@media (max-width: 1039px) { .art { display: none; } }
+.moon { padding: 7%; border-radius: 50%; background: var(--paper); }
+.orbit { position: absolute; top: 0; left: 0; width: 100%; aspect-ratio: 1; overflow: visible; }
+.orbit circle:first-child { fill: none; stroke: var(--brass); stroke-opacity: 0.45; stroke-width: 0.25; stroke-dasharray: 0.4 1.8; }
+.satellite { fill: var(--brass); }
+.art figcaption { margin-top: 6px; text-align: center; font: 400 0.75rem/1.4 var(--mono); color: var(--slate); }
+@media (prefers-reduced-motion: no-preference) {
+  .orbit { animation: turn 120s linear infinite; }
+  @keyframes turn { to { transform: rotate(360deg); } }
+}
 .back {
   display: inline-flex;
   align-items: center;

@@ -14,7 +14,7 @@ export function WorkGrid() {
     <section id="work" className={`wrap section ${styles.section}`} aria-labelledby="work-title">
       <header className="section-head">
         <p className="label">Work and recognition</p>
-        <h2 id="work-title">A few things I&apos;ve done</h2>
+        <h2 id="work-title">What I&apos;ve done</h2>
       </header>
 
       <ul className={styles.grid}>

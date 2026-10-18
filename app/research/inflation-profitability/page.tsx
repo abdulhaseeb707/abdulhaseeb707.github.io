@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { profile, site } from '@/lib/profile';
 import { years, profitIndex, sectorSizes, sectorSlopes, kink, inference, totals, shortSector } from '@/lib/research';
 import { ResearchStory } from '@/components/ResearchStory';
+import { DotMoon } from '@/components/DotMoon';
 import { Numbers } from '@/components/Numbers';
 import { Icon } from '@/components/Icon';
 import { Emph } from '@/components/Emph';
@@ -60,24 +61,36 @@ export default function ResearchPage() {
   return (
     <article className="chart-paper">
       <header className={`wrap ${styles.head}`}>
-        <Link href="/#research" className={styles.back}><Icon name="arrow-left" /> Home</Link>
-        <p className="label">Research · {r.status}</p>
-        <h1 className={styles.title}>{r.title}</h1>
-        <p className={styles.tagline}>{r.tagline}</p>
-        <dl className={styles.stats}>
-          {r.stats.map((s) => (
-            <div key={s.text}><dt>{s.figure}</dt><dd>{s.text}</dd></div>
-          ))}
-        </dl>
-        <ul className={styles.links}>
-          {r.links.map((l, i) => (
-            <li key={l.url}>
-              <a className={`btn ${i === 0 ? 'btn-ink' : ''}`} href={l.url} target="_blank" rel="noopener">
-                {l.label} <span className={styles.note}>{l.note}</span> <Icon name="arrow-up-right" />
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <Link href="/#papers" className={styles.back}><Icon name="arrow-left" /> Back to my papers</Link>
+          <p className="label">Research · {r.status}</p>
+          <h1 className={styles.title}>{r.title}</h1>
+          <p className={styles.tagline}>{r.tagline}</p>
+          <dl className={styles.stats}>
+            {r.stats.map((s) => (
+              <div key={s.text}><dt>{s.figure}</dt><dd>{s.text}</dd></div>
+            ))}
+          </dl>
+          <ul className={styles.links}>
+            {r.links.map((l, i) => (
+              <li key={l.url}>
+                <a className={`btn ${i === 0 ? 'btn-ink' : ''}`} href={l.url} target="_blank" rel="noopener">
+                  {l.label} <span className={styles.note}>{l.note}</span> <Icon name="arrow-up-right" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <figure className={styles.art}>
+          <svg className={styles.orbit} viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="49" />
+            <circle className={styles.satellite} cx="91.5" cy="24" r="0.9" />
+          </svg>
+          <div className={styles.moon}>
+            <DotMoon dots={totals.firmYears} label={`A moon drawn from ${totals.firmYears.toLocaleString('en')} dots`} />
+          </div>
+          <figcaption>{r.moonCaption}</figcaption>
+        </figure>
       </header>
 
       <section className={`wrap ${styles.storyWrap}`} aria-label="The research in six charts">

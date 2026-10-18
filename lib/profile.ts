@@ -39,12 +39,10 @@ const schema = z.strictObject({
     location: z.string(),
     label: z.string(),
     headline: z.string(),
-    sub: z.string(),
+    intro: z.array(z.string()).min(1).max(2, 'two short lines at most'),
     portrait: z.string(),
-    moonCaption: z.string(),
     facts: z.array(z.strictObject({ figure: text, text: z.string() })).max(4),
   }),
-  about: z.strictObject({ headline: z.string(), text: z.array(z.string()).min(1) }),
   contact: z.strictObject({
     email: z.email(),
     phone: z.string().optional(),
@@ -59,6 +57,7 @@ const schema = z.strictObject({
     tagline: z.string(),
     teaser: z.string(),
     origin: z.string(),
+    moonCaption: z.string(),
     stats: z.array(z.strictObject({ figure: text, text: z.string() })),
     story: z.array(z.strictObject({ title: z.string(), text: z.string() })).length(6, 'the research story has six steps, one per chart'),
     implications: z.array(z.string()),
@@ -79,6 +78,31 @@ const schema = z.strictObject({
       proof: z.array(proof).default([]),
     }),
   ),
+  papers: z
+    .array(
+      z.strictObject({
+        kind: z.string(),
+        title: z.string(),
+        where: z.string().optional(),
+        when: text,
+        line: z.string().optional(),
+        url: z.url().optional(),
+      }),
+    )
+    .default([]),
+  places: z
+    .array(
+      z.strictObject({
+        name: z.string(),
+        country: z.string(),
+        when: text,
+        at: z.tuple([z.number().min(-180).max(180), z.number().min(-90).max(90)]),
+        line: z.string(),
+        work: z.string().optional(),
+        labelLeft: z.boolean().default(false),
+      }),
+    )
+    .min(2, 'home plus at least one other place'),
   services: z.array(z.string()).default([]),
   skills: z.array(z.strictObject({ group: z.string(), items: z.array(z.string()) })),
   languages: z.array(z.strictObject({ name: z.string(), level: z.string() })),
@@ -102,6 +126,11 @@ function load() {
   for (const h of data.highlights) {
     h.photos.forEach((p) => img(p.src));
     h.proof.forEach((p) => p.image && img(p.image));
+  }
+  for (const p of data.places) {
+    if (p.work && !data.highlights.some((h) => h.id === p.work)) {
+      throw new Error(`content/profile.yaml has problems:\n  - places > ${p.name} > work: no highlight has the id "${p.work}"`);
+    }
   }
   return data;
 }

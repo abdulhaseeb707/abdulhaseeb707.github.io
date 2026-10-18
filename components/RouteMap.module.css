@@ -2,6 +2,7 @@
 .map svg { display: block; width: 100%; height: auto; }
 .land path { fill: none; stroke: var(--ink); stroke-opacity: 0.28; stroke-width: 0.8; }
 .land path.focus { fill: var(--ink); fill-opacity: 0.045; stroke-opacity: 0.45; }
+.frame { fill: none; stroke: var(--hair-strong); stroke-width: 1; }
 .route { fill: none; stroke: var(--brass); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 1 7; }
 .pin { fill: var(--ink); stroke: var(--paper); stroke-width: 2.5; }
 .name { font: 400 22px var(--serif); fill: var(--ink); }

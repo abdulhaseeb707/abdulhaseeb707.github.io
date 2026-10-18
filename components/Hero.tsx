@@ -1,11 +1,10 @@
-import Link from 'next/link';
-import { DotMoon } from './DotMoon';
+import { Photo } from './Photo';
 import { Icon } from './Icon';
 import { Emph } from './Emph';
 import { profile, site } from '@/lib/profile';
-import { totals } from '@/lib/research';
 import styles from './Hero.module.css';
 
+// The profile comes first: who I am, what I studied and did, with my portrait as the full moon.
 export function Hero() {
   const { person } = profile;
   return (
@@ -13,10 +12,10 @@ export function Hero() {
       <div className={styles.text}>
         <p className="label">{person.label}</p>
         <h1 id="hero-title" className={styles.title}><Emph text={person.headline} /></h1>
-        <p className={styles.sub}>{person.sub}</p>
+        {person.intro.map((t) => <p key={t} className={styles.sub}>{t}</p>)}
         <div className={styles.actions}>
           <a className="btn btn-ink" href={site.cvFile} download><Icon name="download" /> Download my CV</a>
-          <Link className="btn" href={site.researchPage}>Read the research <Icon name="arrow-right" /></Link>
+          <a className="btn" href="#papers">My papers <Icon name="arrow-down" /></a>
         </div>
         <dl className={styles.facts}>
           {person.facts.map((f) => (
@@ -33,10 +32,9 @@ export function Hero() {
           <circle cx="50" cy="50" r="49" />
           <circle className={styles.satellite} cx="91.5" cy="24" r="0.9" />
         </svg>
-        <div className={styles.moon}>
-          <DotMoon dots={totals.firmYears} label={`A moon drawn from ${totals.firmYears.toLocaleString('en')} dots`} />
+        <div className={styles.disc}>
+          <Photo src={person.portrait} alt={`Portrait of ${person.name}`} sizes="(min-width: 960px) 400px, 180px" priority />
         </div>
-        <figcaption>{person.moonCaption}</figcaption>
       </figure>
     </section>
   );

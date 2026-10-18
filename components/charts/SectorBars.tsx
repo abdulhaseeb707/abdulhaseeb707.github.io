@@ -24,7 +24,7 @@ export function SectorBars({ data, total }: { data: Row[]; total: number }) {
   return (
     <Frame
       boxRef={ref}
-      readout={a ? `${a.sector}: ${a.firmYears.toLocaleString('en')} firm-years (${((a.firmYears / total) * 100).toFixed(0)}% of the panel)` : 'Hover, or focus the chart and use the arrow keys, to read each sector.'}
+      readout={a ? `${a.sector}: ${a.firmYears.toLocaleString('en')} firm-years (${((a.firmYears / total) * 100).toFixed(0)}% of the panel)` : 'Tap or hover on the chart to read each sector. Arrow keys work too.'}
       caption={`${total.toLocaleString('en')} firm-years in total. Source: SBP financial statements of PSX-listed non-financial firms, FY2006–FY2025.`}
     >
       <svg width={width} height={H} viewBox={`0 0 ${width} ${H}`} role="img" tabIndex={0} onKeyDown={onKey} onBlur={() => setActive(null)}
@@ -44,7 +44,7 @@ export function SectorBars({ data, total }: { data: Row[]; total: number }) {
         {a && active !== null && (
           <Tip x={x(a.firmYears)} y={Math.min(m.t + active * row, H - 52)} maxX={width} lines={[a.label, `${a.firmYears.toLocaleString('en')} firm-years`]} />
         )}
-        <rect className={s.hit} x={0} y={m.t} width={width} height={H - m.t - m.b} onPointerMove={move} onPointerLeave={() => setActive(null)} />
+        <rect className={s.hit} x={0} y={m.t} width={width} height={H - m.t - m.b} onPointerMove={move} onPointerDown={move} onPointerLeave={(e) => e.pointerType === 'mouse' && setActive(null)} />
       </svg>
     </Frame>
   );

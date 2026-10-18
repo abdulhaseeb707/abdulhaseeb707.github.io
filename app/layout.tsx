@@ -12,8 +12,8 @@ const serif = Instrument_Serif({ subsets: ['latin'], weight: '400', style: ['nor
 const sans = Geist({ subsets: ['latin'], variable: '--font-sans' });
 const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
-const { person, contact, research } = profile;
-const description = `${person.sub} ${research.tagline}`;
+const { person, contact } = profile;
+const description = person.intro.join(' ');
 const portrait = img(person.portrait);
 
 export const metadata: Metadata = {

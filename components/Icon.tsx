@@ -1,5 +1,5 @@
 // The only icons on the site: contact links and a few controls. Thin strokes to match the doodles.
-type Name = 'download' | 'arrow-right' | 'arrow-left' | 'arrow-up-right' | 'mail' | 'linkedin' | 'github' | 'copy' | 'close' | 'print';
+type Name = 'download' | 'arrow-right' | 'arrow-left' | 'arrow-down' | 'arrow-up-right' | 'mail' | 'linkedin' | 'github' | 'copy' | 'close' | 'print';
 
 export function Icon({ name, size = 16 }: { name: Name; size?: number }) {
   const stroke = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
@@ -19,6 +19,7 @@ export function Icon({ name, size = 16 }: { name: Name; size?: number }) {
       {name === 'download' && <><path d="M12 4v11" /><path d="m7 10 5 5 5-5" /><path d="M5 20h14" /></>}
       {name === 'arrow-right' && <><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>}
       {name === 'arrow-left' && <><path d="M19 12H5" /><path d="m11 6-6 6 6 6" /></>}
+      {name === 'arrow-down' && <><path d="M12 5v14" /><path d="m6 13 6 6 6-6" /></>}
       {name === 'arrow-up-right' && <><path d="M7 17 17 7" /><path d="M8 7h9v9" /></>}
       {name === 'mail' && <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></>}
       {name === 'copy' && <><rect x="8" y="8" width="12" height="12" rx="2" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" /></>}
