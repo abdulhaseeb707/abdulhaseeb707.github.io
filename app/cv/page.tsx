@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { profile, site } from '@/lib/profile';
+import { withBase } from '@/lib/base';
 import { Icon } from '@/components/Icon';
 import { PrintButton } from '@/components/PrintButton';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
   title: 'CV',
-  description: `CV of ${profile.person.name}, economics graduate and MPhil student, ${profile.person.location}.`,
+  description: `CV of ${profile.person.name}, Business Economics graduate and MPhil student, ${profile.person.location}.`,
 };
 
 const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
@@ -49,7 +50,7 @@ export default function CvPage() {
                   {e.dates && <p className={styles.dates}>{e.dates}</p>}
                 </div>
                 {e.org && <p className={styles.org}>{e.org}</p>}
-                {e.link && <p className={styles.repo}><a href={e.link}>{bare(e.link)}</a></p>}
+                {e.link && <p className={styles.repo}><a href={e.link.startsWith('/') ? withBase(e.link) : e.link}>{e.linkLabel ?? bare(e.link)}</a></p>}
                 {e.bullets.length > 0 && <ul>{e.bullets.map((b) => <li key={b}>{b}</li>)}</ul>}
               </div>
             ))}

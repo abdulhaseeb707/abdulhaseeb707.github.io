@@ -15,7 +15,7 @@
 person:
   name: Abdul Haseeb Khan
   location: Lahore, Pakistan
-  label: Economics graduate · MPhil student · Lahore   # also the line under the name on the CV; not "Economist" yet
+  label: Business Economics graduate · MPhil student · Lahore   # also under the name on the CV; not "Economist" yet
   headline: Abdul Haseeb Khan
   intro:
     - I'm doing an MPhil in Economics at the University of the Punjab, where I also finished my BS in Business Economics.
@@ -309,13 +309,14 @@ languages:
 #   CV style: no "I", short lines, a full stop at the end of each sentence.
 #   pdf: false keeps an entry on the website but leaves it out of the PDF.
 #   linkLabel: the words the PDF prints for a link (otherwise it prints the address).
+#   link can be a full address or a file on this site (/files/...), which the PDF turns into the full website address.
 cv:
   showPhone: true
   summary: >-
     Business Economics graduate from the University of the Punjab, now studying for an MPhil in Economics.
     Experience in banking as a trainee at Meezan Bank, and international exposure in financial security, economic
-    development and entrepreneurship. Represented Pakistan at the International Olympiad on Financial Security and
-    the International Festival of Youth 2026 in Russia. Author of an independent working paper on inflation and the
+    development and entrepreneurship. Represented Pakistan twice in Russia: at the International Olympiad on Financial
+    Security in 2025 and at the International Festival of Youth in 2026. Author of an independent working paper on inflation and the
     profitability of 441 listed firms in Pakistan. Interested in financial inclusion and practical solutions to
     economic and social challenges.
   sections:
@@ -360,6 +361,8 @@ cv:
         - title: Diploma (II degree) in Economics
           org: International Olympiad on Financial Security, Siberian Federal University, Krasnoyarsk, Russia
           dates: Oct 2025
+          link: /files/iofs-2025-diploma.png
+          linkLabel: View diploma
           bullets:
             - "Represented Pakistan in an international competition on financial security."
             - "Solved case studies on anti-money laundering, counter-terrorist financing, financial compliance and economic risk."
@@ -369,6 +372,8 @@ cv:
         - title: International Festival of Youth 2026
           org: Ekaterinburg, Russia · Entrepreneurship Track
           dates: Sep 2026
+          link: /files/festival-of-youth-2026-participant-certificate.pdf
+          linkLabel: View participant certificate
           bullets:
             - 'Presented "Financial Fraud in Pakistan and Losses to GDP" and represented Pakistan in the Interactive International Discussion on financial fraud.'
             - "Took part in discussions on financial security, entrepreneurship and youth engagement with participants from several continents."

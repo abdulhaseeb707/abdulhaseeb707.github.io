@@ -29,7 +29,7 @@ const cvEntry = z.strictObject({
   title: z.string(),
   org: z.string().optional(),
   dates: text.optional(),
-  link: z.url().optional(),
+  link: z.union([z.url(), z.string().regex(/^\/\S+$/, 'a full address, or a path on this site such as /files/x.pdf')]).optional(),
   linkLabel: z.string().optional(), // what the PDF prints for the link; the address itself if left out
   pdf: z.boolean().default(true), // false: on the website only, left out of the PDF
   bullets: z.array(z.string()).default([]),

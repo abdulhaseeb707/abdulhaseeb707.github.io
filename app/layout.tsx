@@ -18,13 +18,13 @@ const portrait = img(person.portrait);
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: `${person.name} · Economics graduate, ${person.location}`, template: `%s · ${person.name}` },
+  title: { default: `${person.name} · Business Economics graduate, ${person.location}`, template: `%s · ${person.name}` },
   description,
   authors: [{ name: person.name, url: site.url }],
   icons: { icon: withBase('/favicon.svg') },
   openGraph: {
     type: 'profile',
-    title: `${person.name} · Economics graduate and MPhil student`,
+    title: `${person.name} · Business Economics graduate and MPhil student`,
     description,
     url: site.url,
     images: [{ url: portrait.src, width: portrait.width, height: portrait.height, alt: person.name }],

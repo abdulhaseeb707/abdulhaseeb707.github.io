@@ -65,6 +65,8 @@ const ORDER: [string, string][] = [
 
 type Entry = (typeof profile.cv.sections)[number]['entries'][number];
 const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+// a file on this site (/files/...) becomes its full website address, so the link works from a downloaded PDF
+const absolute = (url: string) => (url.startsWith('/') ? new URL(url, site.url).href : url);
 
 function Heading({ children }: { children: string }) {
   return <Text style={s.heading}>{children.toUpperCase()}</Text>;
@@ -88,7 +90,7 @@ function EntryView({ e, first }: { e: Entry; first?: boolean }) {
           ))}
         </View>
       ) : null}
-      {e.link ? <Link style={s.link} src={e.link}>{e.linkLabel ?? bare(e.link)}</Link> : null}
+      {e.link ? <Link style={s.link} src={absolute(e.link)}>{e.linkLabel ?? bare(e.link)}</Link> : null}
     </View>
   );
 }

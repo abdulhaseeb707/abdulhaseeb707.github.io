@@ -38,7 +38,7 @@ files on GitHub Pages (https://abdulhaseeb707.github.io) and will later run as a
 - Easy to get wrong: CGPA **3.29/4.00**; Meezan Bank was a **trainee** role, Jun to Sep 2026, ended; the MPhil is
   **in progress**; IOFS 2025 was a **Diploma (II degree) in Economics**.
 - Don't call him an **economist** yet (no economist role or finished MPhil). His label, on the site and the CV, is
-  `person.label`: "Economics graduate · MPhil student · Lahore".
+  `person.label`: "Business Economics graduate · MPhil student · Lahore" (his degree is Business Economics).
 - The **BRICS Arts Festival** (Nov 2025, online) was **participation** in its financial security programme, not an
   award. `check-site.mjs` fails on the old "Award for ... financial data interpretation" wording.
 - The **International Movement on Financial Security** membership is about awareness of financial fraud. It has
