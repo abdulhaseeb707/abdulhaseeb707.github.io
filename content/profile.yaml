@@ -377,7 +377,7 @@ cv:
           linkLabel: View participant certificate
           bullets:
             - 'Presented "Financial Fraud in Pakistan and Losses to GDP" and represented Pakistan in the Interactive International Discussion on financial fraud.'
-            - "Took part in discussions on financial security, entrepreneurship and youth engagement with participants from several continents."
+            - "Took part in discussions on financial security, entrepreneurship and youth engagement."
             - "Explored Russian technology and entrepreneurship initiatives, including neurotechnology demonstrations."
         - title: World Bank Group Youth Summit 2026
           org: Washington, DC (online)
@@ -388,7 +388,7 @@ cv:
           org: State Bank of Pakistan (BSC), Lahore
           dates: Jan 2026
           bullets:
-            - "Studied credit access for small and medium enterprises, the role of financial inclusion, and the financing challenges of Pakistan's SME sector."
+            - "Studied credit access for SMEs, financial inclusion and the financing challenges of Pakistan's SME sector."
         # participation only, not an award (the owner's correction)
         - title: BRICS Arts Festival, financial security programme
           org: Khabarovsk (online), participant
@@ -416,10 +416,13 @@ cv:
             - "Built a linear programming model to minimise production costs under output and resource constraints."
     - title: Memberships and certifications
       entries:
+        # from his account on the Movement's platform, sodrujestvo.org (Movement Member status; My Olympiad page)
         - title: Member, International Movement on Financial Security
+          org: International community on financial security, 7,100+ participants from 66 countries
           dates: "2026"
           bullets:
             - "Part of the Movement's work on raising awareness of financial fraud."
+            - "VI International Olympiad on Financial Security 2026: 100/100 in the first eliminatory round."
         - title: "Firm Level Economics: Consumer and Producer Behavior"
           org: University of Illinois Urbana-Champaign, on Coursera (online)
           dates: Jun 2023
