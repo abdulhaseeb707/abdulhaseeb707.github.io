@@ -17,7 +17,7 @@ files on GitHub Pages (https://abdulhaseeb707.github.io) and will later run as a
   `@fontsource/source-serif-4`), black and greys only, centred name, a contact line with phone, email, LinkedIn and
   the website (`site.url`), ruled uppercase headings, title and dates on one line, organisation in italics, two pages.
   He rejected the website-styled CV and a copy of his old Europass CV. Keep heading letter-spacing small (about 0.6pt),
-  or CV-screening software reads "P R O F I L E". No 50% scholarship on the CV.
+  or CV-screening software reads "P R O F I L E". No 50% scholarship anywhere (CV or website; the owner's choice).
 - In `cv:` entries, `pdf: false` keeps an entry on the website but out of the PDF, and `linkLabel` is what the PDF
   prints for a link.
 - Change facts in `profile.yaml`, not in components. `lib/profile.ts` validates the file and fails the build with a
