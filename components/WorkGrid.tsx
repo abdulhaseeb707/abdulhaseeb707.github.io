@@ -27,6 +27,10 @@ export function WorkGrid() {
                   <Photo src={cover.src} alt={cover.alt} sizes="(min-width: 1040px) 380px, (min-width: 640px) 46vw, 92vw" />
                   {h.photos.length > 1 && <span className={styles.count}>{h.photos.length} photos</span>}
                 </a>
+              ) : h.logo ? (
+                <div className={styles.plate}>
+                  <Photo src={h.logo} alt={`${h.org} logo`} sizes="200px" className={styles.logo} />
+                </div>
               ) : (
                 <div className={styles.plate} aria-hidden="true">
                   <svg viewBox="0 0 120 120" width="88" height="88">

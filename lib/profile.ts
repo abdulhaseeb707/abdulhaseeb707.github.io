@@ -77,6 +77,7 @@ const schema = z.strictObject({
       place: z.string(),
       line: z.string().max(140, 'keep it to one short sentence'),
       photos: z.array(photo).default([]),
+      logo: z.string().optional(), // shown on the card when there is no photo (path inside assets/)
       proof: z.array(proof).default([]),
     }),
   ),
@@ -164,6 +165,7 @@ function load() {
   for (const h of data.highlights) {
     h.photos.forEach((p) => img(p.src));
     h.proof.forEach((p) => p.image && img(p.image));
+    if (h.logo) img(h.logo);
   }
   for (const p of data.places) {
     if (p.work && !data.highlights.some((h) => h.id === p.work)) {

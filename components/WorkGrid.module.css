@@ -46,6 +46,7 @@
   color: var(--ink);
 }
 .plate span { font: 400 1.35rem/1.1 var(--serif); text-align: center; padding-inline: 16px; }
+.plate .logo { width: min(200px, 58%); height: auto; }
 
 .body { display: grid; gap: 4px; padding: 18px 20px 22px; align-content: start; }
 .meta { margin: 0; font: 400 0.72rem/1.3 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--slate); }

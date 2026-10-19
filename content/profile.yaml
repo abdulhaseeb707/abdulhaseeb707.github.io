@@ -151,6 +151,7 @@ highlights:
     when: Jun – Sep 2026
     place: Lahore
     line: Three months inside banking operations, compliance and customer service.
+    logo: logos/meezan-bank.png   # the bank's own logo, from meezanbank.com
 
   - id: world-bank
     title: Youth Summit delegate
