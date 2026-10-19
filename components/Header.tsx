@@ -31,7 +31,7 @@ export function Header() {
           </ul>
         </nav>
 
-        <a className={`btn btn-ink ${styles.cv}`} href={site.cvFile} download>
+        <a className={`btn btn-ink ${styles.cv}`} href={site.cvFile} download aria-label="Download CV">
           <Icon name="download" /> <span>Download CV</span>
         </a>
 

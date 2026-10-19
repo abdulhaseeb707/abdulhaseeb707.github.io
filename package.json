@@ -12,7 +12,7 @@
     "dev": "next dev",
     "prebuild": "npm run assets",
     "build": "next build",
-    "postbuild": "node scripts/check-site.mjs",
+    "postbuild": "node scripts/fix-prefetch.mjs && node scripts/check-site.mjs",
     "start": "next start",
     "serve": "node scripts/serve.mjs",
     "sync:research": "node scripts/sync-research.mjs",

@@ -28,19 +28,23 @@ export function DotMoon({ dots, phase = 0.29, label }: Props) {
     // reveal order: random, so the moon "develops" like a photograph
     const order = points.map((_, i) => i).sort(() => rnd() - 0.5);
 
+    // each frame adds only the dots not yet drawn (redrawing all of them every frame cost seconds on phones);
+    // a new canvas size clears it, so then everything is drawn again
+    let drawn = 0;
     const draw = (count: number) => {
       const size = el.clientWidth;
+      if (!size) return; // hidden (phones and tablets); drawn on resize if the window gets wide enough
       const dpr = Math.min(devicePixelRatio || 1, 2);
       if (el.width !== Math.round(size * dpr)) {
         el.width = Math.round(size * dpr);
         el.height = Math.round(size * dpr);
+        drawn = 0;
       }
       g.setTransform(dpr, 0, 0, dpr, 0, 0);
-      g.clearRect(0, 0, size, size);
       const c = size / 2;
       const R = size * 0.46;
       const dot = Math.max(0.9, size / 420);
-      for (let n = 0; n < count; n++) {
+      for (let n = drawn; n < count; n++) {
         const p = points[order[n]];
         g.beginPath();
         g.arc(c + p.x * R, c + p.y * R, p.lit ? dot * 1.05 : dot * 0.85, 0, Math.PI * 2);
@@ -49,6 +53,7 @@ export function DotMoon({ dots, phase = 0.29, label }: Props) {
           : `rgba(183, 128, 42, ${0.16 + 0.14 * (1 - p.depth)})`;
         g.fill();
       }
+      drawn = Math.max(drawn, count);
     };
 
     if (reduce) {

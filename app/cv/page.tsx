@@ -1,15 +1,17 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { profile, site } from '@/lib/profile';
+import { pageMeta } from '@/lib/meta';
 import { withBase } from '@/lib/base';
 import { Icon } from '@/components/Icon';
 import { PrintButton } from '@/components/PrintButton';
 import styles from './page.module.css';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: 'CV',
   description: `CV of ${profile.person.name}, Business Economics graduate and MPhil Economics student, ${profile.person.location}.`,
-};
+  path: site.cvPage,
+});
 
 const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 

@@ -102,7 +102,7 @@ The owner rejected an old-fashioned serif version and a loud, cartoonish one. Th
 |---|---|
 | `npm install` | Install dependencies |
 | `npm run dev` | Local preview at http://localhost:3000 (makes the doodle tile and WebP photos first) |
-| `npm run build` | Static export to `out/` (GitHub Pages), CV PDF included, then `scripts/check-site.mjs` |
+| `npm run build` | Static export to `out/` (GitHub Pages), CV PDF included, then `scripts/fix-prefetch.mjs` (copies Next's prefetch files to the names the browser asks for) and `scripts/check-site.mjs` |
 | `NEXT_OUTPUT=standalone npm run build` | Node server build for Oracle Cloud (used by the `Dockerfile`) |
 | `NEXT_BASE_PATH=/portfolio-preview npm run build` | Same static export for a sub-folder address (a preview repo). Plain `<a>`/`<img>` paths go through `withBase()` in `lib/base.ts` |
 | `npm run serve` | Serve the built `out/` at http://localhost:3000 |

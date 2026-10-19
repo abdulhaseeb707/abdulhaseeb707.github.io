@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { profile, site } from '@/lib/profile';
+import { pageMeta } from '@/lib/meta';
 import { costOptimization as co } from '@/lib/projects';
 import { PlantCosts } from '@/components/charts/PlantCosts';
 import { ScenarioChanges } from '@/components/charts/ScenarioChanges';
@@ -54,7 +55,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const p = pages.find((x) => x.slug === slug);
-  return p ? { title: p.title, description: p.tagline } : {};
+  return p ? pageMeta({ title: p.title, description: p.tagline, path: site.projectPage(slug) }) : {};
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {

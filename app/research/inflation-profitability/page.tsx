@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { profile, site } from '@/lib/profile';
+import { pageMeta } from '@/lib/meta';
 import { years, profitIndex, sectorSizes, sectorSlopes, kink, inference, totals, shortSector } from '@/lib/research';
 import { ResearchStory } from '@/components/ResearchStory';
 import { DotMoon } from '@/components/DotMoon';
@@ -18,10 +19,7 @@ import styles from './page.module.css';
 
 const r = profile.research;
 
-export const metadata: Metadata = {
-  title: r.title,
-  description: r.tagline,
-};
+export const metadata: Metadata = pageMeta({ title: r.title, description: r.tagline, path: site.researchPage });
 
 export default function ResearchPage() {
   const figures = [
