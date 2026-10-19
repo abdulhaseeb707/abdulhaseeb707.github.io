@@ -15,7 +15,7 @@
 person:
   name: Abdul Haseeb Khan
   location: Lahore, Pakistan
-  label: Business Economics graduate · MPhil student · Lahore   # also under the name on the CV; not "Economist" yet
+  label: Business Economics graduate · MPhil Economics student · Lahore   # also under the name on the CV; not "Economist" yet
   headline: Abdul Haseeb Khan
   intro:
     - I'm doing an MPhil in Economics at the University of the Punjab, where I also finished my BS in Business Economics.

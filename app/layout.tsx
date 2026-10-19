@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   icons: { icon: withBase('/favicon.svg') },
   openGraph: {
     type: 'profile',
-    title: `${person.name} · Business Economics graduate and MPhil student`,
+    title: `${person.name} · Business Economics graduate and MPhil Economics student`,
     description,
     url: site.url,
     images: [{ url: portrait.src, width: portrait.width, height: portrait.height, alt: person.name }],

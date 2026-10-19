@@ -8,7 +8,7 @@ import styles from './page.module.css';
 
 export const metadata: Metadata = {
   title: 'CV',
-  description: `CV of ${profile.person.name}, Business Economics graduate and MPhil student, ${profile.person.location}.`,
+  description: `CV of ${profile.person.name}, Business Economics graduate and MPhil Economics student, ${profile.person.location}.`,
 };
 
 const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
