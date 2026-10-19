@@ -32,16 +32,25 @@ const files = {
   '3 Certificates/IOFS 2025 - Diploma (II degree).png': 'certificates/iofs-2025-diploma.png',
   '3 Certificates/World Bank Youth Summit 2026 - delegate certificate.png': 'certificates/world-bank-youth-summit-2026.png',
   '3 Certificates/State Bank of Pakistan 2026 - SMEs and access to finance.png': 'certificates/sbp-smes-access-to-finance-2026.png',
+  // a still from the BRICS video; the crop keeps me centred and leaves out the burned-in subtitle at the bottom
+  '2 Photos/BRICS Arts Festival 2025 - online/2025-11 Still from my video.jpg': {
+    to: 'photos/brics-2025-video-still.jpg',
+    crop: { left: 210, top: 0, width: 800, height: 600 },
+  },
 };
 
 const kb = (bytes) => `${Math.round(bytes / 1024)} KB`;
 
-for (const [from, to] of Object.entries(files)) {
+// a target is a path inside assets/, or { to, crop: { left, top, width, height } } to cut the original first
+for (const [from, target] of Object.entries(files)) {
+  const { to, crop } = typeof target === 'string' ? { to: target, crop: undefined } : target;
   const input = path.join(SRC, from);
   const output = path.join('assets', to);
   await mkdir(path.dirname(output), { recursive: true });
 
-  let image = sharp(input).rotate().resize({ width: MAX, height: MAX, fit: 'inside', withoutEnlargement: true });
+  let image = sharp(input).rotate();
+  if (crop) image = image.extract(crop);
+  image = image.resize({ width: MAX, height: MAX, fit: 'inside', withoutEnlargement: true });
   image = output.endsWith('.png')
     ? image.png({ compressionLevel: 9, palette: false })
     : image.jpeg({ quality: 82, mozjpeg: true });

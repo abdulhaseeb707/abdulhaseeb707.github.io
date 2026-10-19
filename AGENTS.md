@@ -119,7 +119,7 @@ parent folder, outside git, in numbered folders (a `READ ME.txt` there explains 
 | Folder | What is in it |
 |---|---|
 | `1 Add new files here` | The owner's drop box for new material. Start here when asked to update the site |
-| `2 Photos` | Full-size originals by event (`IOFS 2025 - Krasnoyarsk`, `Festival of Youth 2026 - Ekaterinburg`, `Portrait`) |
+| `2 Photos` | Full-size originals by event (`IOFS 2025 - Krasnoyarsk`, `Festival of Youth 2026 - Ekaterinburg`, `BRICS Arts Festival 2025 - online`, `Portrait`) |
 | `3 Certificates` | Diplomas, certificates, award graphics |
 | `4 CV` | Dated copies of the generated CV PDF, for emailing |
 | `5 Research` | Charts from the paper and links to the paper, summary, slides and code |
