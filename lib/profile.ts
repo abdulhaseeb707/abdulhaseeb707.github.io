@@ -92,6 +92,42 @@ const schema = z.strictObject({
       }),
     )
     .default([]),
+  projects: z
+    .array(
+      z
+        .strictObject({
+          slug: z.string().regex(/^[a-z0-9-]+$/, 'lowercase letters, numbers and dashes only').optional(),
+          title: z.string(),
+          kind: z.string(),
+          when: text,
+          where: z.string().optional(),
+          line: z.string().optional(),
+          tagline: z.string().optional(),
+          teaser: z.string().optional(),
+          note: z.string().optional(),
+          stats: z.array(z.strictObject({ figure: text, text: z.string() })).default([]),
+          intro: z.array(z.string()).default([]),
+          sections: z
+            .array(
+              z.strictObject({
+                heading: z.string(),
+                text: z.string().optional(),
+                list: z.array(z.string()).optional(),
+                chart: z.enum(['plants', 'scenarios', 'cap']).optional(),
+              }),
+            )
+            .default([]),
+          did: z.array(z.string()).default([]),
+          caveat: z.string().optional(),
+          links: z.array(z.strictObject({ label: z.string(), note: z.string().optional(), url: z.url() })).default([]),
+          tags: z.array(z.string()).default([]),
+        })
+        .refine(
+          (p) => !p.slug || (p.tagline && p.teaser && p.stats.length && p.links.length && p.sections.length),
+          'a project with its own page needs a tagline, teaser, stats, links and sections',
+        ),
+    )
+    .default([]),
   places: z
     .array(
       z.strictObject({
@@ -146,5 +182,6 @@ export const site = {
   cvPage: '/cv/',
   cvFile: withBase('/Abdul-Haseeb-Khan-CV.pdf'), // a plain <a download>, so it needs the folder prefix
   researchPage: `/research/${profile.research.slug}/`,
+  projectPage: (slug: string) => `/projects/${slug}/`,
   built: new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date()),
 };

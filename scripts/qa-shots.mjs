@@ -11,7 +11,7 @@ const SHOTS = path.resolve(process.argv[2] ?? 'qa-shots');
 const SIZES = [
   [360, 740], [390, 844], [768, 1024], [1024, 768], [1366, 657], [1536, 695], [1920, 969], [2560, 1329], [3440, 1329],
 ];
-const PAGES = ['/', '/research/inflation-profitability/', '/cv/'];
+const PAGES = ['/', '/research/inflation-profitability/', '/projects/cost-optimization/', '/cv/'];
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.woff2': 'font/woff2', '.pdf': 'application/pdf', '.txt': 'text/plain', '.png': 'image/png', '.jpg': 'image/jpeg' };
 
 const server = createServer(async (req, res) => {

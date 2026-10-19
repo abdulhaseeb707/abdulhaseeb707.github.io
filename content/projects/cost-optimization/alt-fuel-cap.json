@@ -1,0 +1,107 @@
+[
+  {
+    "alt_fuel_cap": 0.05,
+    "optimized_cost_pkr": 19526238221,
+    "cost_per_gj": 1401.12
+  },
+  {
+    "alt_fuel_cap": 0.06,
+    "optimized_cost_pkr": 19454643047,
+    "cost_per_gj": 1395.98
+  },
+  {
+    "alt_fuel_cap": 0.07,
+    "optimized_cost_pkr": 19383047872,
+    "cost_per_gj": 1390.84
+  },
+  {
+    "alt_fuel_cap": 0.08,
+    "optimized_cost_pkr": 19311452698,
+    "cost_per_gj": 1385.71
+  },
+  {
+    "alt_fuel_cap": 0.09,
+    "optimized_cost_pkr": 19239857523,
+    "cost_per_gj": 1380.57
+  },
+  {
+    "alt_fuel_cap": 0.1,
+    "optimized_cost_pkr": 19168262349,
+    "cost_per_gj": 1375.43
+  },
+  {
+    "alt_fuel_cap": 0.11,
+    "optimized_cost_pkr": 19096667174,
+    "cost_per_gj": 1370.29
+  },
+  {
+    "alt_fuel_cap": 0.12,
+    "optimized_cost_pkr": 19025072000,
+    "cost_per_gj": 1365.16
+  },
+  {
+    "alt_fuel_cap": 0.13,
+    "optimized_cost_pkr": 18980194184,
+    "cost_per_gj": 1361.94
+  },
+  {
+    "alt_fuel_cap": 0.14,
+    "optimized_cost_pkr": 18973067766,
+    "cost_per_gj": 1361.42
+  },
+  {
+    "alt_fuel_cap": 0.15,
+    "optimized_cost_pkr": 18965941349,
+    "cost_per_gj": 1360.91
+  },
+  {
+    "alt_fuel_cap": 0.16,
+    "optimized_cost_pkr": 18961146618,
+    "cost_per_gj": 1360.57
+  },
+  {
+    "alt_fuel_cap": 0.17,
+    "optimized_cost_pkr": 18960672268,
+    "cost_per_gj": 1360.53
+  },
+  {
+    "alt_fuel_cap": 0.18,
+    "optimized_cost_pkr": 18960197919,
+    "cost_per_gj": 1360.5
+  },
+  {
+    "alt_fuel_cap": 0.19,
+    "optimized_cost_pkr": 18959723569,
+    "cost_per_gj": 1360.47
+  },
+  {
+    "alt_fuel_cap": 0.2,
+    "optimized_cost_pkr": 18959249220,
+    "cost_per_gj": 1360.43
+  },
+  {
+    "alt_fuel_cap": 0.21,
+    "optimized_cost_pkr": 18958774870,
+    "cost_per_gj": 1360.4
+  },
+  {
+    "alt_fuel_cap": 0.22,
+    "optimized_cost_pkr": 18958300521,
+    "cost_per_gj": 1360.36
+  },
+  {
+    "alt_fuel_cap": 0.23,
+    "optimized_cost_pkr": 18957826172,
+    "cost_per_gj": 1360.33
+  },
+  {
+    "alt_fuel_cap": 0.24,
+    "optimized_cost_pkr": 18957351822,
+    "cost_per_gj": 1360.3
+  },
+  {
+    "alt_fuel_cap": 0.25,
+    "optimized_cost_pkr": 18956877473,
+    "cost_per_gj": 1360.26
+  }
+]

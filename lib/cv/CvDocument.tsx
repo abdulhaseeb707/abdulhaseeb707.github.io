@@ -30,12 +30,12 @@ const s = StyleSheet.create({
   sep: { color: C.sep },
   plain: { color: C.soft, textDecoration: 'none' },
 
-  section: { marginTop: 13 },
+  section: { marginTop: 12 },
   // modest letter-spacing: wider gaps make PDF readers (and CV-screening software) read "P R O F I L E"
   heading: { fontSize: 9, fontWeight: 600, letterSpacing: 0.6, paddingBottom: 2, marginBottom: 6, borderBottomWidth: 0.6, borderBottomColor: C.rule },
   summary: { textAlign: 'justify' },
 
-  entry: { marginTop: 7 },
+  entry: { marginTop: 6 },
   first: { marginTop: 0 },
   row: { flexDirection: 'row', justifyContent: 'space-between' },
   title: { flex: 1, fontWeight: 600, paddingRight: 14 },
@@ -149,23 +149,17 @@ export function CvDocument() {
         })}
 
         <View style={s.section} wrap={false}>
-          <Heading>Skills</Heading>
+          <Heading>Skills and languages</Heading>
           {skills.map((g) => (
             <View key={g.group} style={s.pair}>
               <Text style={s.key}>{g.group}</Text>
               <Text style={s.value}>{g.items.join(', ')}</Text>
             </View>
           ))}
-        </View>
-
-        <View style={s.section} wrap={false}>
-          <Heading>Languages</Heading>
-          {languages.map((l) => (
-            <View key={l.name} style={s.pair}>
-              <Text style={s.key}>{l.name}</Text>
-              <Text style={s.value}>{l.level}</Text>
-            </View>
-          ))}
+          <View style={s.pair}>
+            <Text style={s.key}>Languages</Text>
+            <Text style={s.value}>{languages.map((l) => `${l.name} (${l.level})`).join('; ')}</Text>
+          </View>
         </View>
       </Page>
     </Document>

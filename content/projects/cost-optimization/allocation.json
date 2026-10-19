@@ -1,0 +1,218 @@
+[
+  {
+    "source_id": "AFG",
+    "plant_id": "JB",
+    "baseline_t": 48818.4967,
+    "optimized_t": 55874.7215,
+    "baseline_cost_pkr": 1911488236.8398,
+    "optimized_cost_pkr": 2187774719.0419,
+    "optimized_heat_gj": 1403628.878
+  },
+  {
+    "source_id": "AFG",
+    "plant_id": "WAH",
+    "baseline_t": 15120.7864,
+    "optimized_t": 17306.3447,
+    "baseline_cost_pkr": 593475746.1201,
+    "optimized_cost_pkr": 679256721.9182,
+    "optimized_heat_gj": 434752.6844
+  },
+  {
+    "source_id": "AFG",
+    "plant_id": "NZP",
+    "baseline_t": 51410.6306,
+    "optimized_t": 54413.2665,
+    "baseline_cost_pkr": 1984347519.7058,
+    "optimized_cost_pkr": 2100243259.8807,
+    "optimized_heat_gj": 1366915.6674
+  },
+  {
+    "source_id": "AFG",
+    "plant_id": "DGK",
+    "baseline_t": 28081.4252,
+    "optimized_t": 23799.7431,
+    "baseline_cost_pkr": 1175263807.6378,
+    "optimized_cost_pkr": 996066849.2546,
+    "optimized_heat_gj": 597873.347
+  },
+  {
+    "source_id": "BAL",
+    "plant_id": "JB",
+    "baseline_t": 73227.745,
+    "optimized_t": 0,
+    "baseline_cost_pkr": 2561506519.9251,
+    "optimized_cost_pkr": 0,
+    "optimized_heat_gj": 0
+  },
+  {
+    "source_id": "BAL",
+    "plant_id": "WAH",
+    "baseline_t": 22681.1796,
+    "optimized_t": 0,
+    "baseline_cost_pkr": 798921871.1814,
+    "optimized_cost_pkr": 0,
+    "optimized_heat_gj": 0
+  },
+  {
+    "source_id": "BAL",
+    "plant_id": "NZP",
+    "baseline_t": 77115.9459,
+    "optimized_t": 30200.2077,
+    "baseline_cost_pkr": 2683249337.3469,
+    "optimized_cost_pkr": 1050816227.9604,
+    "optimized_heat_gj": 700765.6202
+  },
+  {
+    "source_id": "BAL",
+    "plant_id": "DGK",
+    "baseline_t": 42122.1378,
+    "optimized_t": 88683.1927,
+    "baseline_cost_pkr": 1344328028.0785,
+    "optimized_cost_pkr": 2830324094.4068,
+    "optimized_heat_gj": 2057804.803
+  },
+  {
+    "source_id": "SRC",
+    "plant_id": "JB",
+    "baseline_t": 73227.745,
+    "optimized_t": 140283.524,
+    "baseline_cost_pkr": 1846291134.5589,
+    "optimized_cost_pkr": 3536968490.4593,
+    "optimized_heat_gj": 2628211.822
+  },
+  {
+    "source_id": "SRC",
+    "plant_id": "WAH",
+    "baseline_t": 22681.1796,
+    "optimized_t": 43450.6867,
+    "baseline_cost_pkr": 575081309.4426,
+    "optimized_cost_pkr": 1101692161.6068,
+    "optimized_heat_gj": 814048.6156
+  },
+  {
+    "source_id": "SRC",
+    "plant_id": "NZP",
+    "baseline_t": 77115.9459,
+    "optimized_t": 116265.7893,
+    "baseline_cost_pkr": 1978409591.8849,
+    "optimized_cost_pkr": 2982798824.3147,
+    "optimized_heat_gj": 2178239.5624
+  },
+  {
+    "source_id": "SRC",
+    "plant_id": "DGK",
+    "baseline_t": 42122.1378,
+    "optimized_t": 0,
+    "baseline_cost_pkr": 1165098331.714,
+    "optimized_cost_pkr": 0,
+    "optimized_heat_gj": 0
+  },
+  {
+    "source_id": "IMP",
+    "plant_id": "JB",
+    "baseline_t": 0,
+    "optimized_t": 0,
+    "baseline_cost_pkr": 0,
+    "optimized_cost_pkr": 0,
+    "optimized_heat_gj": 0
+  },
+  {
+    "source_id": "IMP",
+    "plant_id": "WAH",
+    "baseline_t": 0,
+    "optimized_t": 0,
+    "baseline_cost_pkr": 0,
+    "optimized_cost_pkr": 0,
+    "optimized_heat_gj": 0
+  },
+  {
+    "source_id": "IMP",
+    "plant_id": "NZP",
+    "baseline_t": 0,
+    "optimized_t": 0,
+    "baseline_cost_pkr": 0,
+    "optimized_cost_pkr": 0,
+    "optimized_heat_gj": 0
+  },
+  {
+    "source_id": "IMP",
+    "plant_id": "DGK",
+    "baseline_t": 0,
+    "optimized_t": 0,
+    "baseline_cost_pkr": 0,
+    "optimized_cost_pkr": 0,
+    "optimized_heat_gj": 0
+  },
+  {
+    "source_id": "BIO",
+    "plant_id": "JB",
+    "baseline_t": 26903.3577,
+    "optimized_t": 38919.0389,
+    "baseline_cost_pkr": 322840292.508,
+    "optimized_cost_pkr": 467028466.6178,
+    "optimized_heat_gj": 477419.85
+  },
+  {
+    "source_id": "BIO",
+    "plant_id": "WAH",
+    "baseline_t": 8332.9056,
+    "optimized_t": 0,
+    "baseline_cost_pkr": 99994867.596,
+    "optimized_cost_pkr": 0,
+    "optimized_heat_gj": 0
+  },
+  {
+    "source_id": "BIO",
+    "plant_id": "NZP",
+    "baseline_t": 28331.8553,
+    "optimized_t": 61080.9611,
+    "baseline_cost_pkr": 339982263.984,
+    "optimized_cost_pkr": 732971533.3822,
+    "optimized_heat_gj": 749280.15
+  },
+  {
+    "source_id": "BIO",
+    "plant_id": "DGK",
+    "baseline_t": 15475.3767,
+    "optimized_t": 0,
+    "baseline_cost_pkr": 185704520.76,
+    "optimized_cost_pkr": 0,
+    "optimized_heat_gj": 0
+  },
+  {
+    "source_id": "TDF",
+    "plant_id": "JB",
+    "baseline_t": 3295.8936,
+    "optimized_t": 6659.5007,
+    "baseline_cost_pkr": 65917871.4,
+    "optimized_cost_pkr": 133190014.2248,
+    "optimized_heat_gj": 234081.45
+  },
+  {
+    "source_id": "TDF",
+    "plant_id": "WAH",
+    "baseline_t": 1020.8529,
+    "optimized_t": 6269.6074,
+    "baseline_cost_pkr": 20417057.52,
+    "optimized_cost_pkr": 125392147.9374,
+    "optimized_heat_gj": 220376.7
+  },
+  {
+    "source_id": "TDF",
+    "plant_id": "NZP",
+    "baseline_t": 3470.8969,
+    "optimized_t": 0,
+    "baseline_cost_pkr": 69417937.2,
+    "optimized_cost_pkr": 0,
+    "optimized_heat_gj": 0
+  },
+  {
+    "source_id": "TDF",
+    "plant_id": "DGK",
+    "baseline_t": 1895.8672,
+    "optimized_t": 2070.8919,
+    "baseline_cost_pkr": 37917344.9,
+    "optimized_cost_pkr": 41417837.8378,
+    "optimized_heat_gj": 72791.85
+  }
+]

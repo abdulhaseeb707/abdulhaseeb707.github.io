@@ -52,6 +52,8 @@ if (!(await exists(OUT))) {
     ['AI attribution', /\bclaude\b|co-authored-by|generated with|anthropic|chatgpt|openai/i],
     ['"published" research claim', /\bpublished (paper|research|study)\b|journal article|peer[- ]reviewed paper/i],
     ['causal claim', /inflation (causes|raises|lowers|reduces|increases) /i],
+    // the owner keeps the cement company in the cost-optimization project unnamed ("a listed Pakistani cement producer")
+    ['cement company name', /\bfauji\b|\bfccl\b/i],
   ]);
 }
 

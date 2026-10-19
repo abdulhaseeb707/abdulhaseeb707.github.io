@@ -64,7 +64,7 @@
 .menu a { display: block; padding: 11px 14px; border-radius: 8px; text-decoration: none; color: var(--ink); }
 .menu a:hover { background: var(--ivory); }
 
-@media (max-width: 960px) {
+@media (max-width: 1080px) {
   .nav { display: none; }
   .menu { display: block; }
   .bar { gap: 10px; }

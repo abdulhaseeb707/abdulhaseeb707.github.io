@@ -185,17 +185,78 @@ highlights:
         caption: My certificate.
 
 # ─── Papers: the working paper above is always listed first ────────────────
-#   Add later papers, talks and projects here. kind: Paper | Presentation | Project
+#   Add later papers and talks here (projects have their own list below). kind: Paper | Presentation
 #   Optional: line (one sentence), url (a link to the file or page).
 papers:
   - kind: Presentation
     title: Financial Fraud in Pakistan and Losses to GDP
     where: International Festival of Youth 2026, Ekaterinburg
     when: Sep 2026
-  - kind: Project
-    title: Operational Cost Optimization Model
-    where: Linear programming in Excel Solver
+
+# ─── Projects: a card each on the home page; a project with a slug also gets its own page ──────────────
+#   The charts read content/projects/<slug>/ (npm run sync:projects). sections: the project page, top to bottom;
+#   chart: plants | scenarios | cap.
+#   The owner's rule: never name the cement company. Call it "a listed Pakistani cement producer with four plants";
+#   the plant names are fine. Supply limits and alternative-fuel prices are simulated, so the saving is a modeled
+#   result, never a real one.
+projects:
+  - slug: cost-optimization
+    title: Cost Optimization with Linear Programming
+    kind: Independent project
+    when: Aug – Oct 2026
+    tagline: Choosing the cheapest kiln-fuel mix across a cement producer's four plants.
+    teaser: The cheapest fuel mix cuts the modeled fuel bill by *4%*, about Rs 794 million a year.
+    note: Built from public data. Supply limits and alternative-fuel prices are simulated.
+    stats:
+      - figure: Rs 794 mn
+        text: saved a year (4.0%)
+      - figure: Rs 1,361
+        text: per GJ, from Rs 1,418
+      - figure: 4 × 6
+        text: plants and fuel sources
+      - figure: "8"
+        text: scenarios tested
+    intro:
+      - A cement kiln needs a fixed amount of heat for every tonne of clinker, and that heat can come from several coals or from alternative fuels like rice husk and shredded tyres.
+      - Using public data for a listed Pakistani cement producer with four plants, I built a linear program that picks the cheapest delivered mix for each plant. It has to meet every kiln's heat demand, keep the coal blend no higher in sulphur than today, and stay within supply limits. I checked the result with a second solver, rebuilt the model in Excel Solver, and tested it under eight scenarios.
+    sections:
+      - heading: The cheapest mix, plant by plant
+        text: The optimized mix is 4.0% cheaper than using the company-wide FY2025 mix at every plant, Rs 19.76 bn down to Rs 18.97 bn a year. About Rs 472 million of that comes from sending each plant its nearest coal, and Rs 322 million from burning more biomass and tyre fuel.
+        chart: plants
+      - heading: What the model changes
+        list:
+          - No imported coal is worth buying. Salt Range coal goes to the three northern plants, and most Balochistan coal goes to Dera Ghazi Khan.
+          - Wah saves the most (8.7%) and Dera Ghazi Khan the least (1.0%). The coal nearest to Dera Ghazi Khan is high in sulphur, so it still needs Afghan coal hauled a long way.
+          - The sulphur limit binds at all four plants. One more tonne of tyre-derived fuel would save about Rs 30,645, of biomass Rs 5,675, and of Salt Range coal Rs 2,308.
+      - heading: Scenarios
+        text: I re-solved the model with one input changed at a time. Losing Afghan coal adds Rs 1.03 bn a year (5.4%); that really happened when the border closed in October 2025. Local coals are high in sulphur, so the model then has to bring in about 153,000 t of imported coal. The saving holds up when coal prices move, and it grows when freight gets more expensive.
+        chart: scenarios
+      - heading: How much alternative fuel helps
+        text: Raising the cap on alternative fuels barely helps, because biomass and tyre supply runs out first. The cost stops falling from about a 14% cap.
+        chart: cap
+    did:
+      - "Built a multi-plant fuel-blending linear program in R (lpSolve): heat, sulphur, alternative-fuel and supply constraints"
+      - Built the dataset from company reports and published fuel data, tagging every number as verified, calculated, assumed or simulated
+      - Checked the optimum with a second solver (GLPK) and confirmed the shadow prices by re-solving
+      - Rebuilt the model in Excel Solver with formulas and a reconciliation to R
+      - Ran scenario and sensitivity analysis and made the charts in ggplot2
+    caveat: This is an independent project built from public data. It isn't affiliated with the company, and the optimized mix is not its actual procurement plan. Supply limits and alternative-fuel prices are simulated, so the saving is a modeled result.
+    links:
+      - label: Code and data
+        note: GitHub
+        url: https://github.com/abdulhaseeb707/cost-optimization-linear-programming
+      - label: Excel Solver model
+        note: XLSX
+        url: https://github.com/abdulhaseeb707/cost-optimization-linear-programming/blob/main/excel/cost_optimization_model.xlsx
+      - label: Scenario results
+        note: CSV
+        url: https://github.com/abdulhaseeb707/cost-optimization-linear-programming/blob/main/results/scenarios.csv
+    tags: [R, Linear programming, Operations research, lpSolve, GLPK, Excel Solver, ggplot2, Cost optimization, Energy, Manufacturing]
+
+  - title: Operational Cost Optimization Model
+    kind: Project
     when: Feb – May 2025
+    where: Linear programming in Excel Solver
     line: A model that keeps production costs as low as possible within output and resource limits.
 
 # ─── Where I've been: the map and the list beside it ───────────────────────
@@ -331,6 +392,14 @@ cv:
             - "Studied credit access for small and medium enterprises, the role of financial inclusion, and the financing challenges of Pakistan's SME sector."
     - title: Other projects
       entries:
+        - title: Cost Optimization with Linear Programming
+          org: Independent project
+          dates: Aug – Oct 2026
+          link: https://github.com/abdulhaseeb707/cost-optimization-linear-programming
+          bullets:
+            - "Built a multi-plant kiln-fuel linear program in R that meets heat, sulphur and supply limits and cuts the modeled FY2025 fuel bill of a listed cement producer by 4.0% (Rs 794 million a year)."
+            - "Built the dataset from company reports and published fuel data; cross-checked the optimum with GLPK and rebuilt the model in Excel Solver."
+            - "Tested eight scenarios, including the Oct 2025 halt in Afghan coal (+5.4% cost); shadow prices show that more tyre fuel and biomass is worth more than a higher alternative-fuel cap."
         - title: Operational Cost Optimization Model
           org: Linear programming in Excel Solver
           dates: Feb – May 2025

@@ -1,0 +1,110 @@
+[
+  {
+    "constraint": "heat",
+    "member": "JB",
+    "dual": 1491.283505,
+    "slack": 0
+  },
+  {
+    "constraint": "sulphur",
+    "member": "JB",
+    "dual": -454.390651,
+    "slack": 0
+  },
+  {
+    "constraint": "altfuel",
+    "member": "JB",
+    "dual": -59.352548,
+    "slack": 0
+  },
+  {
+    "constraint": "heat",
+    "member": "WAH",
+    "dual": 1496.590414,
+    "slack": 0
+  },
+  {
+    "constraint": "sulphur",
+    "member": "WAH",
+    "dual": -434.950276,
+    "slack": 0
+  },
+  {
+    "constraint": "altfuel",
+    "member": "WAH",
+    "dual": -65.59597,
+    "slack": 0
+  },
+  {
+    "constraint": "heat",
+    "member": "NZP",
+    "dual": 1497.794335,
+    "slack": 0
+  },
+  {
+    "constraint": "sulphur",
+    "member": "NZP",
+    "dual": -222.550941,
+    "slack": 0
+  },
+  {
+    "constraint": "altfuel",
+    "member": "NZP",
+    "dual": -67.012349,
+    "slack": 0
+  },
+  {
+    "constraint": "heat",
+    "member": "DGK",
+    "dual": 1440.833839,
+    "slack": 0
+  },
+  {
+    "constraint": "sulphur",
+    "member": "DGK",
+    "dual": -1749.980861,
+    "slack": 0
+  },
+  {
+    "constraint": "altfuel",
+    "member": "DGK",
+    "dual": 0,
+    "slack": 336478.65
+  },
+  {
+    "constraint": "supply",
+    "member": "AFG",
+    "dual": 0,
+    "slack": 48605.924252
+  },
+  {
+    "constraint": "supply",
+    "member": "BAL",
+    "dual": 0,
+    "slack": 181116.599589
+  },
+  {
+    "constraint": "supply",
+    "member": "SRC",
+    "dual": -2307.963992,
+    "slack": 0
+  },
+  {
+    "constraint": "supply",
+    "member": "IMP",
+    "dual": 0,
+    "slack": 1000000
+  },
+  {
+    "constraint": "supply",
+    "member": "BIO",
+    "dual": -5674.708701,
+    "slack": 0
+  },
+  {
+    "constraint": "supply",
+    "member": "TDF",
+    "dual": -30645.309436,
+    "slack": 0
+  }
+]

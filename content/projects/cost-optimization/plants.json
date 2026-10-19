@@ -1,0 +1,50 @@
+[
+  {
+    "plant_id": "JB",
+    "plant_name": "Jhang Bahtar",
+    "location_reference": "Fateh Jang (Attock)",
+    "lat": 33.565,
+    "lon": 72.642,
+    "cement_capacity_tpd": 11865,
+    "cement_capacity_tpa": 3559500,
+    "capacity_share": 0.340361445783133,
+    "clinker_t": 1565727,
+    "heat_demand_gj": 4743342
+  },
+  {
+    "plant_id": "WAH",
+    "plant_name": "Wah",
+    "location_reference": "Taxila (Rawalpindi)",
+    "lat": 33.746,
+    "lon": 72.84,
+    "cement_capacity_tpd": 3675,
+    "cement_capacity_tpa": 1102500,
+    "capacity_share": 0.105421686746988,
+    "clinker_t": 484960,
+    "heat_demand_gj": 1469178
+  },
+  {
+    "plant_id": "NZP",
+    "plant_name": "Nizampur",
+    "location_reference": "Nizampur (Nowshera)",
+    "lat": 33.79,
+    "lon": 72.03,
+    "cement_capacity_tpd": 12495,
+    "cement_capacity_tpa": 3748500,
+    "capacity_share": 0.358433734939759,
+    "clinker_t": 1648863,
+    "heat_demand_gj": 4995201
+  },
+  {
+    "plant_id": "DGK",
+    "plant_name": "Dera Ghazi Khan",
+    "location_reference": "Dera Ghazi Khan",
+    "lat": 30.046,
+    "lon": 70.64,
+    "cement_capacity_tpd": 6825,
+    "cement_capacity_tpa": 2047500,
+    "capacity_share": 0.19578313253012,
+    "clinker_t": 900639,
+    "heat_demand_gj": 2728470
+  }
+]
