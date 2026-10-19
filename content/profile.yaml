@@ -19,7 +19,7 @@ person:
   headline: Abdul Haseeb Khan
   intro:
     - I'm doing an MPhil in Economics at the University of the Punjab, where I also finished my BS in Business Economics.
-    - I've represented Pakistan twice in Russia, trained at Meezan Bank, and written a working paper on inflation and company profits. I'm also a member of the International Movement on Financial Security.
+    - I've represented Pakistan twice in Russia, trained at Meezan Bank, and written a working paper on inflation and company profits. I'm also a member of the International Movement for Financial Security.
   portrait: photos/portrait.jpg
   facts:
     - figure: "3.29"
@@ -100,11 +100,11 @@ research:
 #   proof: image: (opens in the viewer) | file: /files/x.pdf | url: https://…
 highlights:
   - id: iofs
-    title: Diploma in Economics
+    title: Prize winner
     org: International Olympiad on Financial Security
     when: Oct 2025
     place: Krasnoyarsk, Russia
-    line: I represented Pakistan and came home with a Diploma (II degree) in Economics.
+    line: I represented Pakistan and came home a prize winner, with a Diploma (II degree) in Economics.
     photos:
       - src: photos/iofs-2025-award-stage.png
         alt: Abdul Haseeb Khan on stage holding Pakistan's flag and his diploma, next to an official, under a screen reading Economic Security.
@@ -148,17 +148,26 @@ highlights:
   # "Movement Member" on the Movement's platform (sodrujestvo.org); the numbers are the Movement's own
   - id: movement
     title: Movement member
-    org: International Movement on Financial Security
+    org: International Movement for Financial Security
     when: "2026"
     place: International
     line: I'm part of an international community of 7,100+ people in 66 countries working on awareness of financial fraud.
 
+  # as on LinkedIn (Honors & awards)
+  - id: dictation
+    title: Winner's Diploma
+    org: International Financial Security Dictation
+    when: Sep 2026
+    place: International
+    line: I scored 100 out of 100. The 2026 theme was financial security in the world of artificial intelligence.
+
+  # "MeezanShip Trainee" (internship), as on LinkedIn
   - id: meezan
-    title: Banking trainee
+    title: MeezanShip trainee
     org: Meezan Bank
     when: Jun – Sep 2026
     place: Lahore
-    line: Three months inside banking operations, compliance and customer service.
+    line: Four months in a Lahore branch, working on client onboarding, Islamic financing products and AML/CFT checks.
     logo: logos/meezan-bank.png   # the bank's own logo, from meezanbank.com
 
   - id: world-bank
@@ -263,12 +272,6 @@ projects:
         url: https://github.com/abdulhaseeb707/cost-optimization-linear-programming/blob/main/results/scenarios.csv
     tags: [R, Linear programming, Operations research, lpSolve, GLPK, Excel Solver, ggplot2, Cost optimization, Energy, Manufacturing]
 
-  - title: Operational Cost Optimization Model
-    kind: Project
-    when: Feb – May 2025
-    where: Linear programming in Excel Solver
-    line: A model that keeps production costs as low as possible within output and resource limits.
-
 # ─── Where I've been: the map and the list beside it ───────────────────────
 #   at: [longitude, latitude]. The first place is home; the map draws a route from it to every other place.
 #   work: the id of a highlight above, to link to its photos.
@@ -282,7 +285,7 @@ places:
     country: Russia
     when: Oct 2025
     at: [92.8932, 56.0153]
-    line: The International Olympiad on Financial Security, where I earned a Diploma (II degree) in Economics.
+    line: The International Olympiad on Financial Security, where I was a prize winner with a Diploma (II degree) in Economics.
     work: iofs
   - name: Ekaterinburg
     country: Russia
@@ -300,7 +303,7 @@ services:
 
 skills:
   - group: Analysis
-    items: ["Python (pandas, statsmodels, linearmodels)", Stata, SPSS, Excel and Solver, Panel econometrics, Regression]
+    items: ["Python (pandas, statsmodels, linearmodels)", "R (lpSolve, ggplot2)", Stata, SPSS, "Excel (Solver, Power Pivot)", Panel econometrics, Regression, Linear programming]
   - group: Reporting
     items: [Power BI, matplotlib, Data visualization, Microsoft Office, Reports and presentations]
   - group: Research
@@ -310,6 +313,8 @@ skills:
 
 languages:
   - name: Urdu
+    level: Native
+  - name: Punjabi
     level: Native
   - name: English
     level: Reading C2 · Listening, speaking and writing B2
@@ -323,7 +328,7 @@ cv:
   showPhone: true
   summary: >-
     Business Economics graduate from the University of the Punjab, now studying for an MPhil in Economics.
-    Experience in banking as a trainee at Meezan Bank, and international exposure in financial security, economic
+    Experience in banking as a MeezanShip trainee at Meezan Bank, and international exposure in financial security, economic
     development and entrepreneurship. Represented Pakistan twice in Russia: at the International Olympiad on Financial
     Security in 2025 and at the International Festival of Youth in 2026. Author of an independent working paper on inflation and the
     profitability of 441 listed firms in Pakistan. Interested in financial inclusion and practical solutions to
@@ -357,18 +362,23 @@ cv:
             - "Showed that operating profit grew 6.4 times in rupees but ended about 3% lower after inflation. Wrote a 21-page paper, a two-page summary and slides."
     - title: Experience
       entries:
-        - title: Banking Trainee
-          org: Meezan Bank, Lahore
+        # as on LinkedIn: MeezanShip Trainee, internship, four months at a Lahore branch
+        - title: MeezanShip Trainee (internship)
+          org: Meezan Bank Limited, Lahore
           dates: Jun – Sep 2026
           bullets:
-            - "Gained practical exposure to banking operations and workplace procedures."
-            - "Assisted with routine operational and documentation tasks."
-            - "Developed an understanding of customer service, compliance and internal processes."
-            - "Strengthened communication, teamwork and analytical skills."
+            - "Onboarded clients onto Shariah-compliant savings and current accounts and helped mobilise deposits."
+            - "Supported assessments for Islamic financing products, including Murabaha and Diminishing Musharakah."
+            - "Ran AML/CFT checks during client onboarding, in line with SBP regulations and Shariah governance rules."
+            - "Helped customers move to digital banking and introduced them to other halal financial products."
     - title: Honours and awards
       entries:
-        - title: Diploma (II degree) in Economics
-          org: International Olympiad on Financial Security, Siberian Federal University, Krasnoyarsk, Russia
+        - title: Winner's Diploma, International Financial Security Dictation
+          dates: Sep 2026
+          bullets:
+            - "Scored 100 out of 100; the 2026 theme was “Financial security in the world of artificial intelligence: challenges and opportunities”."
+        - title: Prize Winner, Diploma (II degree) in Economics
+          org: V International Olympiad on Financial Security, Siberian Federal University, Krasnoyarsk, Russia
           dates: Oct 2025
           link: /files/iofs-2025-diploma.png
           linkLabel: View diploma
@@ -415,22 +425,14 @@ cv:
             - "Built a multi-plant kiln-fuel linear program in R that meets heat, sulphur and supply limits and cuts the modeled FY2025 fuel bill of a listed cement producer by 4.0% (Rs 794 million a year)."
             - "Built the dataset from company reports and published fuel data; cross-checked the optimum with GLPK and rebuilt the model in Excel Solver."
             - "Tested eight scenarios, including the Oct 2025 halt in Afghan coal (+5.4% cost); shadow prices show that more tyre fuel and biomass is worth more than a higher alternative-fuel cap."
-        # the same line of work as the project above; the owner wants it listed once on the CV
-        - title: Operational Cost Optimization Model
-          org: Linear programming in Excel Solver
-          dates: Feb – May 2025
-          pdf: false
-          bullets:
-            - "Built a linear programming model to minimise production costs under output and resource constraints."
     - title: Memberships and certifications
       entries:
-        # from his account on the Movement's platform, sodrujestvo.org (Movement Member status; My Olympiad page)
-        - title: Member, International Movement on Financial Security
+        # "Movement Member" on the Movement's platform, sodrujestvo.org. The 2026 Olympiad is never mentioned (owner's rule).
+        - title: Member, International Movement for Financial Security
           org: International community on financial security, 7,100+ participants from 66 countries
           dates: "2026"
           bullets:
-            - "Part of the Movement's work on raising awareness of financial fraud."
-            - "VI International Olympiad on Financial Security 2026: 100/100 in the first eliminatory round."
+            - "Part of the Movement's work on raising awareness of financial fraud, including its \"Together Against Fraud\" discussion at the International Festival of Youth 2026."
         - title: "Firm Level Economics: Consumer and Producer Behavior"
           org: University of Illinois Urbana-Champaign, on Coursera (online)
           dates: Jun 2023

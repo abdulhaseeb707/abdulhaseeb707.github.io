@@ -56,6 +56,8 @@ if (!(await exists(OUT))) {
     ['cement company name', /\bfauji\b|\bfccl\b/i],
     // the owner doesn't want the IOFS master's scholarship mentioned anywhere
     ['scholarship claim', /50\s?% (master's )?scholarship|master's scholarship/i],
+    // the owner doesn't want the 2026 Olympiad mentioned anywhere
+    ['2026 Olympiad mention', /VI International Olympiad|Olympiad on Financial Security 2026|eliminatory round/i],
     // the BRICS Arts Festival (Nov 2025) was participation only, not an award
     ['BRICS award claim', /award for (excellence in )?financial data interpretation/i],
   ]);

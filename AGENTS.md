@@ -35,17 +35,21 @@ files on GitHub Pages (https://abdulhaseeb707.github.io) and will later run as a
 - Claim only what `profile.yaml` states or a file proves. Never invent numbers, titles, dates or results.
 - The research is an **independent research project / working paper, not peer reviewed**. Never "published".
   Results are **associations**: "is linked to", "moves with"; never "inflation causes/raises/lowers".
-- Easy to get wrong: CGPA **3.29/4.00**; Meezan Bank was a **trainee** role, Jun to Sep 2026, ended; the MPhil is
-  **in progress**; IOFS 2025 was a **Diploma (II degree) in Economics**.
+- **LinkedIn (linkedin.com/in/abdulhaseebkhan-econ) is the reference.** The website and the CV must match it in
+  every fact and date; when they differ, ask the owner, then align all three.
+- Easy to get wrong: CGPA **3.29/4.00**; Meezan Bank was a **MeezanShip Trainee** role (internship, four months,
+  Jun to Sep 2026, ended); the MPhil is **in progress** (Sep 2026 – present); IOFS 2025: **Prize Winner, Diploma
+  (II degree) in Economics**; the International Financial Security Dictation **Winner's Diploma** (Sep 2026, 100/100).
+- **Never mention the 2026 Olympiad** (the VI IOFS) anywhere. `check-site.mjs` fails if it appears.
 - Don't call him an **economist** yet (no economist role or finished MPhil). His label, on the site and the CV, is
   `person.label`: "Business Economics graduate · MPhil Economics student · Lahore" (his degree is Business
   Economics; always "MPhil Economics", never just "MPhil").
 - The **BRICS Arts Festival** (Nov 2025, online) was **participation** in its financial security programme, not an
   award. `check-site.mjs` fails on the old "Award for ... financial data interpretation" wording.
-- The **International Movement on Financial Security** membership is about awareness of financial fraud. It has
-  nothing to do with the festival's Entrepreneurship Track; don't link the two.
-- On the CV the 2025 Excel Solver project and the 2026 cost optimization project are **one project**: only the
-  2026 entry is printed (the 2025 one has `pdf: false`).
+- The **International Movement for Financial Security** ("for", as on LinkedIn) membership is about awareness of
+  financial fraud. It has nothing to do with the festival's Entrepreneurship Track; don't link the two.
+- The 2025 Excel Solver project and the 2026 cost optimization project are **one project**: only the 2026 one
+  appears, on the website and the CV.
 - **Cost Optimization with Linear Programming** (`projects`, slug `cost-optimization`): never name the cement
   company anywhere on the site or CV. Call it "a listed Pakistani cement producer with four plants"; plant names are
   fine. `check-site.mjs` fails the build if the name appears. Supply limits and alternative-fuel prices are
