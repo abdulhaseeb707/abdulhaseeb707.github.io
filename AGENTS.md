@@ -44,6 +44,9 @@ files on GitHub Pages (https://abdulhaseeb707.github.io) and will later run as a
 - Don't call him an **economist** yet (no economist role or finished MPhil). His label, on the site and the CV, is
   `person.label`: "Business Economics graduate · MPhil Economics student · Lahore" (his degree is Business
   Economics; always "MPhil Economics", never just "MPhil").
+- At the **International Festival of Youth 2026** he was a **student speaker** for Pakistan in the "Together Against
+  Fraud" discussion. The talk was **not based on his research**; never call it "my research on financial fraud"
+  (`check-site.mjs` fails on that wording).
 - The **BRICS Arts Festival** (Nov 2025, online) was **participation** in its financial security programme, not an
   award. `check-site.mjs` fails on the old "Award for ... financial data interpretation" wording.
 - The **International Movement for Financial Security** ("for", as on LinkedIn) membership is about awareness of

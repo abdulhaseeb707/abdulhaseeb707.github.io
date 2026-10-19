@@ -58,6 +58,8 @@ if (!(await exists(OUT))) {
     ['scholarship claim', /50\s?% (master's )?scholarship|master's scholarship/i],
     // the owner doesn't want the 2026 Olympiad mentioned anywhere
     ['2026 Olympiad mention', /VI International Olympiad|Olympiad on Financial Security 2026|eliminatory round/i],
+    // the festival talk on financial fraud (Sep 2026) was a student speaker's talk, not based on his research
+    ['festival talk called research', /research on financial fraud/i],
     // the BRICS Arts Festival (Nov 2025) was participation only, not an award
     ['BRICS award claim', /award for (excellence in )?financial data interpretation/i],
   ]);
