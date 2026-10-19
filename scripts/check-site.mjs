@@ -60,8 +60,9 @@ if (!(await exists(OUT))) {
     ['2026 Olympiad mention', /VI International Olympiad|Olympiad on Financial Security 2026|eliminatory round/i],
     // the festival talk on financial fraud (Sep 2026) was a student speaker's talk, not based on his research
     ['festival talk called research', /research on financial fraud/i],
-    // the BRICS Arts Festival (Nov 2025) was participation only, not an award
+    // the BRICS Arts Festival (Nov 2025) was participation only: not an award, not a financial security programme
     ['BRICS award claim', /award for (excellence in )?financial data interpretation/i],
+    ['BRICS called a financial security programme', /financial security programme|global financial security event/i],
   ]);
 }
 

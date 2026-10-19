@@ -47,8 +47,11 @@ files on GitHub Pages (https://abdulhaseeb707.github.io) and will later run as a
 - At the **International Festival of Youth 2026** he **presented for Pakistan on financial security** (financial fraud
   and how young people can protect themselves) in the "Together Against Fraud" discussion. The talk was **not based on
   his research**; never call it "my research on financial fraud" (`check-site.mjs` fails on that wording).
-- The **BRICS Arts Festival** (Nov 2025, online) was **participation** in its financial security programme, not an
-  award. `check-site.mjs` fails on the old "Award for ... financial data interpretation" wording.
+- The **BRICS Arts Festival** (27 Nov 2025, Khabarovsk, online) was **participation only**: not an award and **not a
+  financial security programme** (his old CV's AML/CFT and award bullets were wrong). `check-site.mjs` fails on the
+  old "Award for ... financial data interpretation" and "financial security programme" wording.
+- The **International Movement for Financial Security** has **its own card**; keep it separate from other cards (don't
+  fold it into the festival card).
 - The **International Movement for Financial Security** ("for", as on LinkedIn) membership is about awareness of
   financial fraud. It has nothing to do with the festival's Entrepreneurship Track; don't link the two.
 - The 2025 Excel Solver project and the 2026 cost optimization project are **one project**: only the 2026 one

@@ -128,7 +128,7 @@ highlights:
     org: International Festival of Youth 2026
     when: Sep 2026
     place: Ekaterinburg, Russia
-    line: One of 10,000 young people from 191 countries. I presented for Pakistan with the International Movement for Financial Security.
+    line: One of 10,000 young people from 191 countries. I presented for Pakistan on financial fraud and how young people can protect themselves.
     photos:
       - src: photos/ify-2026-znanie-presentation.jpg
         alt: Abdul Haseeb Khan in a suit holding a presentation clicker in front of a screen reading International Festival of Youth 2026 x Znanie.
@@ -186,15 +186,15 @@ highlights:
         alt: World Bank Group Youth Summit 2026 certificate stating that Abdul Haseeb Khan participated as a virtual delegate.
         caption: My delegate certificate.
 
-  # participation only, not an award (the owner's correction)
+  # participation only: not an award and not a financial security programme (the owner's corrections)
   - id: brics
-    title: Financial security programme
+    title: Festival participant
     org: BRICS Arts Festival
     when: Nov 2025
     place: Online
-    line: I took part online in a programme on AML/CFT standards, FATF compliance and economic risk.
+    line: I took part in the festival online.
     proof:
-      - label: Video   # the link is a video of me at the programme (Yandex Disk)
+      - label: Video   # a video of me at the festival (Yandex Disk)
         url: https://disk.yandex.com/d/Gtywsi9-HLHz1w
 
   - id: sbp
@@ -412,14 +412,12 @@ cv:
           dates: Jan 2026
           bullets:
             - "Studied credit access for SMEs, financial inclusion and the financing challenges of Pakistan's SME sector."
-        # participation only, not an award (the owner's correction)
-        - title: BRICS Arts Festival, financial security programme
+        # participation only: not an award and not a financial security programme (the owner's corrections)
+        - title: BRICS Arts Festival
           org: Khabarovsk (online), participant
           dates: Nov 2025
           link: https://disk.yandex.com/d/Gtywsi9-HLHz1w
           linkLabel: Watch the video
-          bullets:
-            - "Took part online in a programme on AML/CFT standards, FATF compliance and economic risk analysis."
     - title: Other projects
       entries:
         - title: Cost Optimization with Linear Programming
