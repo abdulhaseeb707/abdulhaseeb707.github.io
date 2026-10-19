@@ -19,7 +19,7 @@ person:
   headline: Abdul Haseeb Khan
   intro:
     - I'm doing an MPhil in Economics at the University of the Punjab, where I also finished my BS in Business Economics.
-    - I've represented Pakistan twice in Russia, trained at Meezan Bank, and written a working paper on inflation and company profits.
+    - I've represented Pakistan twice in Russia, trained at Meezan Bank, and written a working paper on inflation and company profits. I'm also a member of the International Movement on Financial Security.
   portrait: photos/portrait.jpg
   facts:
     - figure: "3.29"
@@ -144,6 +144,14 @@ highlights:
     proof:
       - label: Participant certificate
         file: /files/festival-of-youth-2026-participant-certificate.pdf
+
+  # "Movement Member" on the Movement's platform (sodrujestvo.org); the numbers are the Movement's own
+  - id: movement
+    title: Movement member
+    org: International Movement on Financial Security
+    when: "2026"
+    place: International
+    line: I'm part of an international community of 7,100+ people in 66 countries working on awareness of financial fraud.
 
   - id: meezan
     title: Banking trainee
