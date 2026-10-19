@@ -179,10 +179,6 @@ highlights:
     when: Nov 2025
     place: Online
     line: I took part online in a programme on AML/CFT standards, FATF compliance and economic risk.
-    photos:
-      - src: photos/brics-2025-video-still.jpg
-        alt: Abdul Haseeb Khan speaking to the camera in a university library, wearing a white International Olympiad on Financial Security jacket.
-        caption: A still from my video for the programme.
     proof:
       - label: Video   # the link is a video of me at the programme (Yandex Disk)
         url: https://disk.yandex.com/d/Gtywsi9-HLHz1w
