@@ -163,14 +163,15 @@ highlights:
         alt: World Bank Group Youth Summit 2026 certificate stating that Abdul Haseeb Khan participated as a virtual delegate.
         caption: My delegate certificate.
 
+  # participation only, not an award (the owner's correction)
   - id: brics
-    title: Award for financial data interpretation
+    title: Financial security programme
     org: BRICS Arts Festival
     when: Nov 2025
     place: Online
-    line: Financial security programme on AML/CFT, FATF compliance and economic risk.
+    line: I took part online in a programme on AML/CFT standards, FATF compliance and economic risk.
     proof:
-      - label: Award files
+      - label: Programme files
         url: https://disk.yandex.com/d/Gtywsi9-HLHz1w
 
   - id: sbp
@@ -363,14 +364,6 @@ cv:
             - "Represented Pakistan in an international competition on financial security."
             - "Solved case studies on anti-money laundering, counter-terrorist financing, financial compliance and economic risk."
             - "Gained a broader view of international financial security and cross-border cooperation."
-        - title: Award for Excellence in Financial Data Interpretation
-          org: BRICS Arts Festival, Khabarovsk (online)
-          dates: Nov 2025
-          link: https://disk.yandex.com/d/Gtywsi9-HLHz1w
-          linkLabel: Award files
-          bullets:
-            - "Selected as a top Pakistani participant in a financial security event on AML/CFT standards, FATF compliance and economic risk analysis."
-            - "Recognised for financial data interpretation and problem-solving among peers from dozens of countries."
     - title: Conferences and programmes
       entries:
         - title: International Festival of Youth 2026
@@ -390,6 +383,14 @@ cv:
           dates: Jan 2026
           bullets:
             - "Studied credit access for small and medium enterprises, the role of financial inclusion, and the financing challenges of Pakistan's SME sector."
+        # participation only, not an award (the owner's correction)
+        - title: BRICS Arts Festival, financial security programme
+          org: Khabarovsk (online), participant
+          dates: Nov 2025
+          link: https://disk.yandex.com/d/Gtywsi9-HLHz1w
+          linkLabel: Programme files
+          bullets:
+            - "Took part online in a programme on AML/CFT standards, FATF compliance and economic risk analysis."
     - title: Other projects
       entries:
         - title: Cost Optimization with Linear Programming
@@ -400,20 +401,25 @@ cv:
             - "Built a multi-plant kiln-fuel linear program in R that meets heat, sulphur and supply limits and cuts the modeled FY2025 fuel bill of a listed cement producer by 4.0% (Rs 794 million a year)."
             - "Built the dataset from company reports and published fuel data; cross-checked the optimum with GLPK and rebuilt the model in Excel Solver."
             - "Tested eight scenarios, including the Oct 2025 halt in Afghan coal (+5.4% cost); shadow prices show that more tyre fuel and biomass is worth more than a higher alternative-fuel cap."
+        # the same line of work as the project above; the owner wants it listed once on the CV
         - title: Operational Cost Optimization Model
           org: Linear programming in Excel Solver
           dates: Feb – May 2025
+          pdf: false
           bullets:
             - "Built a linear programming model to minimise production costs under output and resource constraints."
     - title: Memberships and certifications
       entries:
         - title: Member, International Movement on Financial Security
-          dates: 2026
-          pdf: false
+          dates: "2026"
+          bullets:
+            - "Took part in the Movement's Entrepreneurship Track at the International Festival of Youth 2026 in Ekaterinburg."
         - title: "Firm Level Economics: Consumer and Producer Behavior"
-          org: University of Illinois Urbana-Champaign, on Coursera
+          org: University of Illinois Urbana-Champaign, on Coursera (online)
           dates: Jun 2023
           link: https://coursera.org/share/89ecbd921c83dc536a28343f6ab28b8e
           linkLabel: View certificate
           bullets:
-            - "Taxes and price controls, elasticity of demand, cost theory and profit optimisation."
+            - "Analysed how taxes and price controls affect market equilibrium."
+            - "Applied elasticity of demand to consumer behaviour."
+            - "Studied cost theory and how firms maximise profit at given prices."

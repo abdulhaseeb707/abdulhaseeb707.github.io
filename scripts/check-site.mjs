@@ -54,6 +54,8 @@ if (!(await exists(OUT))) {
     ['causal claim', /inflation (causes|raises|lowers|reduces|increases) /i],
     // the owner keeps the cement company in the cost-optimization project unnamed ("a listed Pakistani cement producer")
     ['cement company name', /\bfauji\b|\bfccl\b/i],
+    // the BRICS Arts Festival (Nov 2025) was participation only, not an award
+    ['BRICS award claim', /award for (excellence in )?financial data interpretation/i],
   ]);
 }
 

@@ -60,7 +60,7 @@ const ORDER: [string, string][] = [
   ['Honours and awards', 'Honours and awards'],
   ['Conferences and programmes', 'Conferences and programmes'],
   ['Other projects', 'Projects'],
-  ['Memberships and certifications', 'Certifications'],
+  ['Memberships and certifications', 'Memberships and certifications'],
 ];
 
 type Entry = (typeof profile.cv.sections)[number]['entries'][number];

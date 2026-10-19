@@ -37,6 +37,10 @@ files on GitHub Pages (https://abdulhaseeb707.github.io) and will later run as a
   Results are **associations**: "is linked to", "moves with"; never "inflation causes/raises/lowers".
 - Easy to get wrong: CGPA **3.29/4.00**; Meezan Bank was a **trainee** role, Jun to Sep 2026, ended; the MPhil is
   **in progress**; IOFS 2025 was a **Diploma (II degree) in Economics**.
+- The **BRICS Arts Festival** (Nov 2025, online) was **participation** in its financial security programme, not an
+  award. `check-site.mjs` fails on the old "Award for ... financial data interpretation" wording.
+- On the CV the 2025 Excel Solver project and the 2026 cost optimization project are **one project**: only the
+  2026 entry is printed (the 2025 one has `pdf: false`).
 - **Cost Optimization with Linear Programming** (`projects`, slug `cost-optimization`): never name the cement
   company anywhere on the site or CV. Call it "a listed Pakistani cement producer with four plants"; plant names are
   fine. `check-site.mjs` fails the build if the name appears. Supply limits and alternative-fuel prices are
