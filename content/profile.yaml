@@ -180,7 +180,7 @@ highlights:
     place: Online
     line: I took part online in a programme on AML/CFT standards, FATF compliance and economic risk.
     proof:
-      - label: Programme files
+      - label: Video   # the link is a video of me at the programme (Yandex Disk)
         url: https://disk.yandex.com/d/Gtywsi9-HLHz1w
 
   - id: sbp
@@ -349,7 +349,7 @@ cv:
       entries:
         - title: Inflation and Corporate Profitability in Pakistan, FY2006–FY2025
           org: Independent working paper, not peer reviewed
-          dates: May 2025 – 2026
+          dates: May 2025 – Oct 2026
           link: https://github.com/abdulhaseeb707/inflation-corporate-profitability-pakistan
           bullets:
             - "Began in 2025 as a Stata regression study of inflation and firm-level profitability; rebuilt in Python in 2026 as a twenty-year panel of 6,683 firm-years for 441 listed non-financial companies, from State Bank of Pakistan data."
@@ -402,7 +402,7 @@ cv:
           org: Khabarovsk (online), participant
           dates: Nov 2025
           link: https://disk.yandex.com/d/Gtywsi9-HLHz1w
-          linkLabel: Programme files
+          linkLabel: Watch the video
           bullets:
             - "Took part online in a programme on AML/CFT standards, FATF compliance and economic risk analysis."
     - title: Other projects
