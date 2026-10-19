@@ -7,7 +7,7 @@ import styles from './page.module.css';
 
 export const metadata: Metadata = {
   title: 'CV',
-  description: `CV of ${profile.person.name}, economist, ${profile.person.location}.`,
+  description: `CV of ${profile.person.name}, economics graduate and MPhil student, ${profile.person.location}.`,
 };
 
 const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
@@ -27,7 +27,7 @@ export default function CvPage() {
         <header className={styles.head}>
           <div>
             <h1>{person.name}</h1>
-            <p className={styles.role}>Economist · {person.location}</p>
+            <p className={styles.role}>{person.label}</p>
           </div>
           <ul className={styles.contact}>
             <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>

@@ -18,13 +18,13 @@ const portrait = img(person.portrait);
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: `${person.name} · Economist, ${person.location}`, template: `%s · ${person.name}` },
+  title: { default: `${person.name} · Economics graduate, ${person.location}`, template: `%s · ${person.name}` },
   description,
   authors: [{ name: person.name, url: site.url }],
   icons: { icon: withBase('/favicon.svg') },
   openGraph: {
     type: 'profile',
-    title: `${person.name} · Economist`,
+    title: `${person.name} · Economics graduate and MPhil student`,
     description,
     url: site.url,
     images: [{ url: portrait.src, width: portrait.width, height: portrait.height, alt: person.name }],
@@ -39,7 +39,6 @@ const personLd = {
   '@type': 'Person',
   name: person.name,
   url: site.url,
-  jobTitle: 'Economist',
   homeLocation: { '@type': 'Place', name: person.location },
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'University of the Punjab' },
   sameAs: [contact.linkedin, contact.github],

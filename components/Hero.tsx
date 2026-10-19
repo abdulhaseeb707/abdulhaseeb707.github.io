@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Photo } from './Photo';
 import { Icon } from './Icon';
 import { Emph } from './Emph';
@@ -10,7 +11,15 @@ export function Hero() {
   return (
     <section className={`wrap ${styles.hero}`} aria-labelledby="hero-title">
       <div className={styles.text}>
-        <p className="label">{person.label}</p>
+        {/* each part stays whole, and a line never starts with the dot */}
+        <p className="label">
+          {person.label.split(' · ').map((part, i, parts) => (
+            <Fragment key={part}>
+              {i > 0 && ' '}
+              <span className={styles.nowrap}>{part}{i < parts.length - 1 && ' ·'}</span>
+            </Fragment>
+          ))}
+        </p>
         <h1 id="hero-title" className={styles.title}><Emph text={person.headline} /></h1>
         {person.intro.map((t) => <p key={t} className={styles.sub}>{t}</p>)}
         <div className={styles.actions}>

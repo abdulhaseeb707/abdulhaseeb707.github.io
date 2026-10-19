@@ -11,6 +11,7 @@
   }
 }
 
+.nowrap { white-space: nowrap; }
 .title {
   margin-top: clamp(12px, 2vh, 20px);
   font-size: calc(var(--fs-hero) * 1.12); /* the name: short, so a little larger than other page titles */
