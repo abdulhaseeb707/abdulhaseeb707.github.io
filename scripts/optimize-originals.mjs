@@ -32,6 +32,7 @@ const files = {
   '3 Certificates/IOFS 2025 - Diploma (II degree).png': 'certificates/iofs-2025-diploma.png',
   '3 Certificates/World Bank Youth Summit 2026 - delegate certificate.png': 'certificates/world-bank-youth-summit-2026.png',
   '3 Certificates/State Bank of Pakistan 2026 - SMEs and access to finance.png': 'certificates/sbp-smes-access-to-finance-2026.png',
+  "3 Certificates/Financial Security Dictation 2026 - Winner's Diploma.jpg": 'certificates/dictation-2026-winners-diploma.jpg',
 };
 
 const kb = (bytes) => `${Math.round(bytes / 1024)} KB`;

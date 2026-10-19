@@ -128,7 +128,7 @@ highlights:
     org: International Festival of Youth 2026
     when: Sep 2026
     place: Ekaterinburg, Russia
-    line: One of 10,000 young people from 191 countries. I presented for Pakistan on financial fraud and how young people can protect themselves.
+    line: One of 10,000 young people from 191 countries. I presented for Pakistan with the International Movement for Financial Security.
     photos:
       - src: photos/ify-2026-znanie-presentation.jpg
         alt: Abdul Haseeb Khan in a suit holding a presentation clicker in front of a screen reading International Festival of Youth 2026 x Znanie.
@@ -161,6 +161,10 @@ highlights:
     when: Sep 2026
     place: International
     line: I scored 100 out of 100. The 2026 theme was financial security in the world of artificial intelligence.
+    photos:   # the diploma from my LinkedIn post
+      - src: certificates/dictation-2026-winners-diploma.jpg
+        alt: Winner's Diploma of the International Financial Security Dictation, certifying that Abdul Haseeb Khan scored 100 out of 100 in September 2026.
+        caption: My Winner's Diploma.
 
   # "MeezanShip Trainee" (internship), as on LinkedIn
   - id: meezan
