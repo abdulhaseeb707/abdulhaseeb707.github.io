@@ -7,6 +7,8 @@ import { Projects } from '@/components/Projects';
 import { Places } from '@/components/Places';
 import { Contact } from '@/components/Contact';
 import { Viewer } from '@/components/Viewer';
+import { JsonLd } from '@/components/JsonLd';
+import { homeGraph } from '@/lib/structured-data';
 
 export const metadata: Metadata = { alternates: { canonical: '/' } };
 
@@ -14,6 +16,7 @@ export const metadata: Metadata = { alternates: { canonical: '/' } };
 export default function Home() {
   return (
     <>
+      <JsonLd graph={homeGraph()} />
       <Hero />
       <WorkGrid />
       <Education />

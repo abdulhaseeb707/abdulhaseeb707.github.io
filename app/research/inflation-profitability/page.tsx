@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { profile, site } from '@/lib/profile';
-import { pageMeta } from '@/lib/meta';
+import { pageMeta, shareImage } from '@/lib/meta';
+import { researchGraph } from '@/lib/structured-data';
+import { JsonLd } from '@/components/JsonLd';
 import { years, profitIndex, sectorSizes, sectorSlopes, kink, inference, totals, shortSector } from '@/lib/research';
 import { ResearchStory } from '@/components/ResearchStory';
 import { DotMoon } from '@/components/DotMoon';
@@ -19,7 +21,12 @@ import styles from './page.module.css';
 
 const r = profile.research;
 
-export const metadata: Metadata = pageMeta({ title: r.title, description: r.tagline, path: site.researchPage });
+export const metadata: Metadata = pageMeta({
+  title: profile.seo.research.title ?? r.title,
+  description: profile.seo.research.description,
+  path: site.researchPage,
+  image: shareImage('research', `${r.title}: a working paper by ${profile.person.name}`),
+});
 
 export default function ResearchPage() {
   const figures = [
@@ -58,6 +65,7 @@ export default function ResearchPage() {
 
   return (
     <article className="chart-paper">
+      <JsonLd graph={researchGraph()} />
       <header className={`wrap ${styles.head}`}>
         <div>
           <Link href="/#papers" className={styles.back}><Icon name="arrow-left" /> Back to my papers</Link>

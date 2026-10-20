@@ -10,6 +10,9 @@ node_modules/
 # generated at build time (npm run assets)
 app/pattern.svg
 public/img/
+public/og/
+public/icons/
+public/favicon.ico
 content/generated/
 
 # full-size originals, the old site and private files (kept locally, never published)

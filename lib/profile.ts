@@ -35,7 +35,22 @@ const cvEntry = z.strictObject({
   bullets: z.array(z.string()).default([]),
 });
 
+// what Google shows for a page: a title that isn't cut off, and a description it won't trim
+const seoPage = z.strictObject({
+  title: z.string().max(60, 'keep the title to 60 characters or Google cuts it off').optional(),
+  description: z
+    .string()
+    .min(70, 'write at least 70 characters, or Google makes up its own')
+    .max(160, 'keep it to 160 characters or Google cuts it off'),
+});
+
 const schema = z.strictObject({
+  seo: z.strictObject({
+    home: seoPage.extend({ title: seoPage.shape.title.unwrap() }),
+    research: seoPage,
+    cv: seoPage,
+    projects: z.record(z.string(), seoPage).default({}),
+  }),
   person: z.strictObject({
     name: z.string(),
     location: z.string(),
@@ -170,6 +185,12 @@ function load() {
   for (const p of data.places) {
     if (p.work && !data.highlights.some((h) => h.id === p.work)) {
       throw new Error(`content/profile.yaml has problems:\n  - places > ${p.name} > work: no highlight has the id "${p.work}"`);
+    }
+  }
+  // every project page needs its own search description
+  for (const p of data.projects) {
+    if (p.slug && !data.seo.projects[p.slug]) {
+      throw new Error(`content/profile.yaml has problems:\n  - seo > projects: add a description for "${p.slug}"`);
     }
   }
   return data;

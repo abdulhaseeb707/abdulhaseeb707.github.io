@@ -1,5 +1,6 @@
 // Runs after every build (npm run build). Enforces AGENTS.md: no wrong, private or "published" claims in what
-// visitors see; no AI attribution; no gradients, shadows, blur or dark theme; no emoji; and a 2-page CV PDF.
+// visitors see; no AI attribution; no gradients, shadows, blur or dark theme; no emoji; search basics on every
+// indexable page (title, description, canonical, share image, structured data, sitemap); and a 2-page CV PDF.
 import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -82,7 +83,54 @@ await scan(['app', 'components', 'lib', 'content'], ['.tsx', '.ts', '.yaml', '.c
   ['banned word', /\b(passionate|leverag(e|ed|ing)|spearhead(ed)?|cutting-edge|synerg(y|ies)|delve|unlock|results-driven|world-class|game-changer|seamless(ly)?)\b/i],
 ]);
 
-// 4. the CV PDF exists and is two pages
+// 4. what search engines and link previews read, on every page that may be indexed
+if (await exists(OUT)) {
+  const SITE = 'https://abdulhaseebkhan.online';
+  const decode = (s) => s.replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+  const meta = (html, attr, name) => html.match(new RegExp(`<meta ${attr}="${name}" content="([^"]*)"`))?.[1];
+  const sitemap = (await exists(path.join(OUT, 'sitemap.xml'))) ? await readFile(path.join(OUT, 'sitemap.xml'), 'utf8') : '';
+  const pngSize = (bytes) => (bytes.toString('latin1', 1, 4) === 'PNG' ? [bytes.readUInt32BE(16), bytes.readUInt32BE(20)] : null);
+
+  let checked = 0;
+  for (const file of (await files(OUT, ['.html'])).filter((f) => path.basename(f) === 'index.html')) {
+    const html = await readFile(file, 'utf8');
+    if (/<meta name="robots" content="noindex/.test(html)) continue; // redirect stubs and the 404 page
+    checked++;
+    const page = path.relative('.', file);
+    const say = (problem) => problems.push(`${page}: ${problem}`);
+
+    const title = decode(html.match(/<title>([^<]*)<\/title>/)?.[1] ?? '');
+    if (!title) say('no <title>');
+    else if (title.length > 70) say(`title is ${title.length} characters, Google cuts it at about 60-70 ("${title}")`);
+
+    const description = decode(meta(html, 'name', 'description') ?? '');
+    if (description.length < 70 || description.length > 160) say(`description is ${description.length} characters, it should be 70 to 160 (seo: in content/profile.yaml)`);
+
+    const canonical = html.match(/<link rel="canonical" href="([^"]*)"/)?.[1];
+    if (!canonical?.startsWith(SITE)) say(`canonical address is ${canonical ?? 'missing'}`);
+    else if (!sitemap.includes(`<loc>${canonical}</loc>`)) say(`${canonical} is not in sitemap.xml`);
+
+    const image = meta(html, 'property', 'og:image');
+    const imageFile = image?.startsWith(SITE) ? path.join(OUT, decodeURI(new URL(image).pathname)) : null;
+    if (!imageFile || !(await exists(imageFile))) say(`share image ${image ?? '(none)'} is missing`);
+    else if (String(pngSize(await readFile(imageFile))) !== '1200,630') say(`share image ${image} should be a 1200x630 PNG`);
+    if (meta(html, 'name', 'twitter:card') !== 'summary_large_image') say('twitter:card should be summary_large_image');
+
+    const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+    if (!blocks.length) say('no structured data (JSON-LD)');
+    for (const b of blocks) {
+      try {
+        if (JSON.parse(b)['@context'] !== 'https://schema.org') say('structured data without the schema.org @context');
+      } catch {
+        say('structured data that is not valid JSON');
+      }
+    }
+  }
+  console.log(`Search basics checked on ${checked} pages.`);
+  if (!checked) problems.push('no indexable pages found in out/');
+}
+
+// 5. the CV PDF exists and is two pages
 const pdf = path.join(OUT, 'Abdul-Haseeb-Khan-CV.pdf');
 if (await exists(pdf)) {
   const bytes = await readFile(pdf);

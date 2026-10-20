@@ -37,6 +37,24 @@ contact:
   linkedin: https://www.linkedin.com/in/abdulhaseebkhan-econ
   github: https://github.com/abdulhaseeb707
 
+# ─── Search engines and link previews ──────────────────────────────────────
+#   title: what Google shows as the link (the name is added after it, except on the home page). Up to 60 characters.
+#   description: the line under it in Google, and in link previews on LinkedIn or WhatsApp. 70 to 160 characters.
+#   The share images (1200x630) are drawn at build time by scripts/make-share-images.mjs from this file.
+seo:
+  home:
+    title: Abdul Haseeb Khan · MPhil Economics student, Lahore
+    description: I'm Abdul Haseeb Khan, a Business Economics graduate and MPhil Economics student in Lahore. My research on inflation and company profits, projects and CV.
+  research:
+    title: Inflation and Corporate Profitability in Pakistan
+    description: An independent working paper on how the profits of 441 listed Pakistani firms moved with inflation from FY2006 to FY2025, told in six charts.
+  cv:
+    title: CV
+    description: CV of Abdul Haseeb Khan, Business Economics graduate and MPhil Economics student in Lahore. Education, research, experience and awards, with a PDF.
+  projects:
+    cost-optimization:
+      description: A linear program in R that picks the cheapest kiln-fuel mix for a listed Pakistani cement producer's four plants, for a modeled 4.0% saving.
+
 # ─── The research paper ─────────────────────────────────────────────────────
 research:
   slug: inflation-profitability

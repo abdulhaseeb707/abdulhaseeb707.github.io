@@ -1,16 +1,20 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { profile, site } from '@/lib/profile';
-import { pageMeta } from '@/lib/meta';
+import { pageMeta, shareImage } from '@/lib/meta';
+import { cvGraph } from '@/lib/structured-data';
+import { JsonLd } from '@/components/JsonLd';
 import { withBase } from '@/lib/base';
 import { Icon } from '@/components/Icon';
 import { PrintButton } from '@/components/PrintButton';
 import styles from './page.module.css';
 
 export const metadata: Metadata = pageMeta({
-  title: 'CV',
-  description: `CV of ${profile.person.name}, Business Economics graduate and MPhil Economics student, ${profile.person.location}.`,
+  title: profile.seo.cv.title ?? 'CV',
+  description: profile.seo.cv.description,
   path: site.cvPage,
+  image: shareImage('cv', `CV of ${profile.person.name}`),
+  type: 'profile',
 });
 
 const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
@@ -19,6 +23,7 @@ export default function CvPage() {
   const { person, contact, cv, skills, languages } = profile;
   return (
     <div className={`wrap ${styles.page}`}>
+      <JsonLd graph={cvGraph()} />
       <nav className={`${styles.toolbar} no-print`} aria-label="CV">
         <Link className="btn" href="/"><Icon name="arrow-left" /> Home</Link>
         <span className={styles.spacer} />

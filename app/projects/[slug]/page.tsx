@@ -3,7 +3,9 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { profile, site } from '@/lib/profile';
-import { pageMeta } from '@/lib/meta';
+import { pageMeta, shareImage } from '@/lib/meta';
+import { projectGraph } from '@/lib/structured-data';
+import { JsonLd } from '@/components/JsonLd';
 import { costOptimization as co } from '@/lib/projects';
 import { PlantCosts } from '@/components/charts/PlantCosts';
 import { ScenarioChanges } from '@/components/charts/ScenarioChanges';
@@ -55,7 +57,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const p = pages.find((x) => x.slug === slug);
-  return p ? pageMeta({ title: p.title, description: p.tagline, path: site.projectPage(slug) }) : {};
+  return p
+    ? pageMeta({
+        title: p.title,
+        description: profile.seo.projects[slug].description,
+        path: site.projectPage(slug),
+        image: shareImage(slug, `${p.title}: a project by ${profile.person.name}`),
+      })
+    : {};
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -69,6 +78,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
   return (
     <article className="chart-paper">
+      <JsonLd graph={projectGraph(slug)} />
       <header className={`wrap ${styles.head}`}>
         <Link href="/#projects" className={styles.back}><Icon name="arrow-left" /> Back to my projects</Link>
         <p className="label">Project · {p.kind}, {p.when}</p>
