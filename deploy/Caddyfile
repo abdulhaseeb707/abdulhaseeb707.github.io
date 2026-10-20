@@ -1,7 +1,7 @@
-# abdulhaseeb.online: the static site that `npm run build` writes to out/, uploaded to /var/www/abdulhaseeb.online.
+# abdulhaseebkhan.online: the static site that `npm run build` writes to out/, uploaded to /var/www/abdulhaseebkhan.online.
 # Caddy gets and renews the HTTPS certificate by itself. See DEPLOY-ORACLE.md in the site's repo.
-abdulhaseeb.online {
-	root * /var/www/abdulhaseeb.online
+abdulhaseebkhan.online {
+	root * /var/www/abdulhaseebkhan.online
 	encode zstd gzip
 	header {
 		Strict-Transport-Security "max-age=31536000"
@@ -22,6 +22,6 @@ abdulhaseeb.online {
 	}
 }
 
-www.abdulhaseeb.online {
-	redir https://abdulhaseeb.online{uri} permanent
+www.abdulhaseebkhan.online {
+	redir https://abdulhaseebkhan.online{uri} permanent
 }

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Upload the built site (out/) to the Oracle Cloud server and switch to it in one step.
 # usage (Git Bash):  npm run build && SSH_KEY=/path/to/key bash scripts/deploy.sh
-# The previous version stays on the server as /var/www/abdulhaseeb.online.old until the next upload.
+# The previous version stays on the server as /var/www/abdulhaseebkhan.online.old until the next upload.
 set -euo pipefail
 
 HOST="${DEPLOY_HOST:-ubuntu@40.233.76.178}"
 KEY="${SSH_KEY:?set SSH_KEY to the server's private key file}"
-WEB=/var/www/abdulhaseeb.online
+WEB=/var/www/abdulhaseebkhan.online
 
 [ -f out/index.html ] || { echo "out/ is missing: run npm run build first" >&2; exit 1; }
 tarball="$(mktemp -t site.XXXXXX).tgz"

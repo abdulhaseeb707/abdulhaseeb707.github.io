@@ -1,10 +1,10 @@
-# abdulhaseeb.online
+# abdulhaseebkhan.online
 
 My personal website: who I am, my research on inflation and company profits in Pakistan (explained in six charts),
 the work I've done, and my CV.
 
 The website and the CV come from the same file, so they never disagree. The CV is a web page at
-[/cv/](https://abdulhaseeb.online/cv/) and a PDF made from the same data. Rules for changing this repo are in
+[/cv/](https://abdulhaseebkhan.online/cv/) and a PDF made from the same data. Rules for changing this repo are in
 [AGENTS.md](AGENTS.md).
 
 ## Changing something
