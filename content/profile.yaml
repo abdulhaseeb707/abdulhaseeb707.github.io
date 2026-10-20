@@ -414,10 +414,12 @@ cv:
             - "Studied credit access for SMEs, financial inclusion and the financing challenges of Pakistan's SME sector."
         # participation only: not an award and not a financial security programme (the owner's corrections)
         - title: BRICS Arts Festival
-          org: Khabarovsk (online), participant
+          org: Khabarovsk, Russia (online)
           dates: Nov 2025
           link: https://disk.yandex.com/d/Gtywsi9-HLHz1w
           linkLabel: Watch the video
+          bullets:
+            - "Took part online as a participant from Pakistan."
     - title: Other projects
       entries:
         - title: Cost Optimization with Linear Programming

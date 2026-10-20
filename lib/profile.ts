@@ -180,7 +180,7 @@ export type Profile = typeof profile;
 export type Highlight = Profile['highlights'][number];
 
 export const site = {
-  url: 'https://abdulhaseeb707.github.io',
+  url: 'https://abdulhaseeb.online',
   cvPage: '/cv/',
   cvFile: withBase('/Abdul-Haseeb-Khan-CV.pdf'), // a plain <a download>, so it needs the folder prefix
   researchPage: `/research/${profile.research.slug}/`,
