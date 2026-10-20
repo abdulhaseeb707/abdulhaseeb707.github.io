@@ -41,7 +41,8 @@ export function siteGraph() {
       award: awards,
       knowsAbout: [...new Set(knowsAbout)],
       knowsLanguage: profile.languages.map((l) => l.name),
-      sameAs: [contact.linkedin, contact.github],
+      // every profile that is the owner's, so Google treats them as one person
+      sameAs: [contact.linkedin, contact.github, contact.scholar, contact.orcid].filter(Boolean),
     },
   ];
 }

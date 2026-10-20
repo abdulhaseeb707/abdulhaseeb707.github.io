@@ -36,6 +36,7 @@ contact:
   phone: "+92 301 9734442"        # printed only in the CV PDF, never on the website
   linkedin: https://www.linkedin.com/in/abdulhaseebkhan-econ
   github: https://github.com/abdulhaseeb707
+  scholar: https://scholar.google.com/citations?user=Em6jpMcAAAAJ   # Google Scholar profile (unverified until a university email is added)
 
 # ─── Search engines and link previews ──────────────────────────────────────
 #   title: what Google shows as the link (the name is added after it, except on the home page). Up to 60 characters.
@@ -456,6 +457,9 @@ cv:
           dates: "2026"
           bullets:
             - "Part of the Movement's work on raising awareness of financial fraud, including its \"Together Against Fraud\" discussion at the International Festival of Youth 2026."
+        # membership certificate: member since 20 October 2026 (worldeconomicsassociation.org)
+        - title: Member, World Economics Association
+          dates: Oct 2026
         - title: "Firm Level Economics: Consumer and Producer Behavior"
           org: University of Illinois Urbana-Champaign, on Coursera (online)
           dates: Jun 2023

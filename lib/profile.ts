@@ -65,6 +65,8 @@ const schema = z.strictObject({
     phone: z.string().optional(),
     linkedin: z.url(),
     github: z.url(),
+    scholar: z.url().optional(), // Google Scholar; in the structured data so Google links it to the owner
+    orcid: z.url().optional(), // ORCID iD page, e.g. https://orcid.org/0000-0000-0000-0000
   }),
   research: z.strictObject({
     slug: z.string(),
