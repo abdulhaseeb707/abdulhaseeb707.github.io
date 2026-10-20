@@ -46,6 +46,7 @@ const seoPage = z.strictObject({
 
 const schema = z.strictObject({
   seo: z.strictObject({
+    person: z.string().max(200, 'one sentence about who I am, up to 200 characters').optional(),
     home: seoPage.extend({ title: seoPage.shape.title.unwrap() }),
     research: seoPage,
     cv: seoPage,

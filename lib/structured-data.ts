@@ -12,7 +12,9 @@ const cvSection = (title: string) => profile.cv.sections.find((s) => s.title ===
 
 /** The site and its owner; on every page. */
 export function siteGraph() {
-  const universities = [...new Set(cvSection('Education').map((e) => e.org?.split(',')[0].trim()).filter(Boolean))];
+  const university = (e: { org?: string }) => e.org?.split(',')[0].trim();
+  const universities = [...new Set(cvSection('Education').map(university).filter(Boolean))];
+  const studyingAt = [...new Set(cvSection('Education').filter((e) => e.dates?.includes('present')).map(university).filter(Boolean))];
   const awards = cvSection('Honours and awards').map((e) => [e.title, e.org].filter(Boolean).join(', ') + (e.dates ? ` (${e.dates})` : ''));
   const memberships = cvSection('Memberships and certifications')
     .filter((e) => e.title.startsWith('Member, '))
@@ -35,7 +37,10 @@ export function siteGraph() {
       url: `${site.url}/`,
       image: abs(img(person.portrait).src),
       description: person.label,
+      // tells search engines and AI answers which Abdul Haseeb Khan this is
+      ...(seo.person ? { disambiguatingDescription: seo.person } : {}),
       homeLocation: { '@type': 'Place', name: person.location },
+      affiliation: studyingAt.map((name) => ({ '@type': 'CollegeOrUniversity', name })),
       alumniOf: universities.map((name) => ({ '@type': 'CollegeOrUniversity', name })),
       memberOf: memberships,
       award: awards,

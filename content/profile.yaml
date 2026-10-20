@@ -44,6 +44,8 @@ contact:
 #   description: the line under it in Google, and in link previews on LinkedIn or WhatsApp. 70 to 160 characters.
 #   The share images (1200x630) are drawn at build time by scripts/make-share-images.mjs from this file.
 seo:
+  # who I am in one sentence, so search engines and AI answers can tell me apart from others with my name
+  person: Business Economics graduate and MPhil Economics student at the University of the Punjab in Lahore, Pakistan, and author of a working paper on inflation and corporate profitability in Pakistan.
   home:
     title: Abdul Haseeb Khan · MPhil Economics student, Lahore
     description: I'm Abdul Haseeb Khan, a Business Economics graduate and MPhil Economics student in Lahore. My research on inflation and company profits, projects and CV.
