@@ -1,4 +1,8 @@
-name: Build the site and CV, then publish
+name: Send the old github.io address to abdulhaseebkhan.online
+
+# The site itself runs on the Oracle server (see DEPLOY-ORACLE.md). GitHub Pages for this repo
+# (abdulhaseeb707.github.io) only publishes deploy/github-pages/: a page that forwards every address
+# to the same page on https://abdulhaseebkhan.online (404.html catches the paths that don't exist here).
 
 on:
   push:
@@ -15,41 +19,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
-    runs-on: ubuntu-24.04
-    env:
-      NEXT_TELEMETRY_DISABLED: 1
-      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 24
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      # assets (doodles, WebP photos) -> next build (static export to out/, CV PDF included) -> rule check
-      - name: Build the website and the CV
-        run: npm run build
-
-      - name: Make sure the CV was generated
-        run: test -s out/Abdul-Haseeb-Khan-CV.pdf
-
-      - uses: actions/configure-pages@v6
-
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: out
-
   deploy:
-    needs: build
     runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v7
+
+      - name: Use the forwarding page for every missing path too
+        run: cp deploy/github-pages/index.html deploy/github-pages/404.html
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: deploy/github-pages
+
       - id: deployment
         uses: actions/deploy-pages@v5

@@ -1,4 +1,4 @@
-// Serves the built static site (out/) exactly as GitHub Pages will, for a local look before publishing.
+// Serves the built static site (out/) the way the server will, for a local look before publishing.
 // usage: npm run build && npm run serve   ->  http://localhost:3000
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';

@@ -1,4 +1,4 @@
-// The CV download. Static export (GitHub Pages): rendered once at build into out/Abdul-Haseeb-Khan-CV.pdf.
+// The CV download. Static export (the live site): rendered once at build into out/Abdul-Haseeb-Khan-CV.pdf.
 // Standalone server (Oracle Cloud): the same handler renders it from content/profile.yaml.
 import { createElement } from 'react';
 import { renderToBuffer, type DocumentProps } from '@react-pdf/renderer';

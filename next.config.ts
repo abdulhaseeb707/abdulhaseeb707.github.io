@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 // NEXT_OUTPUT=standalone builds a Node server (for the Oracle Cloud server).
-// Anything else builds plain static files into out/ (for GitHub Pages).
+// Anything else builds plain static files into out/ (what the Oracle server serves; see DEPLOY-ORACLE.md).
 const standalone = process.env.NEXT_OUTPUT === 'standalone';
 
 const config: NextConfig = {

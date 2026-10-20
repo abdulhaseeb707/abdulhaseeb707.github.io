@@ -53,3 +53,9 @@ ssh -i "$SSH_KEY" ubuntu@40.233.76.178 'sudo cp /tmp/Caddyfile /etc/caddy/Caddyf
 - The site is fully static, so the server needs no Node.js or Docker; this suits a 1 GB machine. The `Dockerfile`
   (`NEXT_OUTPUT=standalone`, a Node server) is still in the repo in case the site ever needs server-side code.
 - Keep the SSH key out of synced folders (OneDrive and the like).
+
+## The old address
+
+`abdulhaseeb707.github.io` (GitHub Pages for this repo) only forwards visitors to the same page on
+https://abdulhaseebkhan.online. `.github/workflows/deploy.yml` publishes [`deploy/github-pages/`](deploy/github-pages/)
+on every push to `main`; nothing else of the site goes to GitHub Pages.
