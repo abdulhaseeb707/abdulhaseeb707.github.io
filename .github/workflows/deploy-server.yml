@@ -1,0 +1,65 @@
+name: Build the site and the CV, then deploy to abdulhaseebkhan.online
+
+# Every push to main builds the static site (CV PDF included, with the rule checks in scripts/check-site.mjs) and
+# publishes it on the Oracle server as a new release (deploy/site-release.sh). Setup: DEPLOY-ORACLE.md.
+# Secrets: DEPLOY_SSH_KEY (private key that may only run site-release as the `deploy` user)
+#          DEPLOY_KNOWN_HOSTS (the server's SSH host key line, so the upload can't be redirected)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: server-deploy
+  cancel-in-progress: false
+
+env:
+  SERVER: deploy@40.233.76.178
+  SITE_URL: https://abdulhaseebkhan.online
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-24.04
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # assets (doodles, WebP photos) -> next build (static export to out/, CV PDF) -> prefetch fix -> rule checks
+      - name: Build the website and the CV
+        run: npm run build
+
+      - name: Make sure the CV was generated
+        run: test -s out/Abdul-Haseeb-Khan-CV.pdf
+
+      - name: Upload to the server and switch to the new release
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          tar -czf - -C out . | ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            "$SERVER" "site-release ${GITHUB_SHA::7}"
+          rm -f ~/.ssh/deploy_key
+
+      - name: Check the live site
+        run: |
+          for path in / /cv/ /research/inflation-profitability/ /Abdul-Haseeb-Khan-CV.pdf; do
+            curl -fsS --retry 3 --retry-delay 5 -o /dev/null -w "%{http_code} $path\n" "$SITE_URL$path"
+          done

@@ -1,26 +1,14 @@
 #!/usr/bin/env bash
-# Upload the built site (out/) to the Oracle Cloud server and switch to it in one step.
+# Deploy the built site (out/) by hand, without GitHub Actions. Normally a push to main does this
+# (.github/workflows/deploy-server.yml).
 # usage (Git Bash):  npm run build && SSH_KEY=/path/to/key bash scripts/deploy.sh
-# The previous version stays on the server as /var/www/abdulhaseebkhan.online.old until the next upload.
+# Uses your own key for the ubuntu user and runs the same release script as GitHub Actions, as the deploy user.
+# To undo the last deploy:  ssh -i "$SSH_KEY" ubuntu@40.233.76.178 "sudo -u deploy site-release --rollback"
 set -euo pipefail
 
 HOST="${DEPLOY_HOST:-ubuntu@40.233.76.178}"
 KEY="${SSH_KEY:?set SSH_KEY to the private key file for the server}"
-WEB=/var/www/abdulhaseebkhan.online
 
 [ -f out/index.html ] || { echo "out/ is missing: run npm run build first" >&2; exit 1; }
-tarball="$(mktemp -t site.XXXXXX).tgz"
-tar -czf "$tarball" -C out .
-scp -q -i "$KEY" -o BatchMode=yes "$tarball" "$HOST:/tmp/site.tgz"
-rm -f "$tarball"
-
-ssh -i "$KEY" -o BatchMode=yes "$HOST" "bash -s" <<EOF
-set -euo pipefail
-sudo rm -rf $WEB.new && sudo mkdir -p $WEB.new
-sudo tar -xzf /tmp/site.tgz -C $WEB.new && rm -f /tmp/site.tgz
-sudo rm -rf $WEB.old
-if [ -d $WEB ]; then sudo mv $WEB $WEB.old; fi
-sudo mv $WEB.new $WEB
-sudo chown -R root:root $WEB && sudo chmod -R a+rX $WEB
-echo "deployed \$(sudo find $WEB -type f | wc -l) files"
-EOF
+id="manual-$(git rev-parse --short HEAD 2>/dev/null || date +%H%M%S)"
+tar -czf - -C out . | ssh -i "$KEY" -o BatchMode=yes "$HOST" "sudo -u deploy site-release $id"
