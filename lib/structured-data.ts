@@ -43,6 +43,9 @@ export function siteGraph() {
       knowsLanguage: profile.languages.map((l) => l.name),
       // every profile that is the owner's, so Google treats them as one person
       sameAs: [contact.linkedin, contact.github, contact.scholar, contact.orcid].filter(Boolean),
+      ...(contact.orcid
+        ? { identifier: { '@type': 'PropertyValue', propertyID: 'ORCID', value: contact.orcid.replace('https://orcid.org/', '') } }
+        : {}),
     },
   ];
 }
