@@ -5,7 +5,7 @@
 set -euo pipefail
 
 HOST="${DEPLOY_HOST:-ubuntu@40.233.76.178}"
-KEY="${SSH_KEY:?set SSH_KEY to the server's private key file}"
+KEY="${SSH_KEY:?set SSH_KEY to the private key file for the server}"
 WEB=/var/www/abdulhaseebkhan.online
 
 [ -f out/index.html ] || { echo "out/ is missing: run npm run build first" >&2; exit 1; }
