@@ -1,8 +1,8 @@
 # AGENTS.md: rules for working on this repo
 
-The personal website of **Abdul Haseeb Khan** (Business Economics graduate and MPhil Economics student, Lahore), built with **Next.js**. It is published as static
-files on GitHub Pages (https://abdulhaseeb707.github.io) and will later run as a Node server on Oracle Cloud
-(see DEPLOY-ORACLE.md). Read this before changing anything.
+The personal website of **Abdul Haseeb Khan** (Business Economics graduate and MPhil Economics student, Lahore), built with **Next.js**. It runs at
+**https://abdulhaseeb.online**: the static build, served by Caddy on the owner's Oracle Cloud server (see
+DEPLOY-ORACLE.md). Read this before changing anything.
 
 ## 1. One file feeds the website and the CV
 
@@ -98,7 +98,7 @@ The owner rejected an old-fashioned serif version and a loud, cartoonish one. Th
 1. **No AI attribution anywhere**: no "Co-Authored-By" trailers, no "Generated with" lines, nothing in commits,
    PR descriptions, the site, the footer or the README.
 2. **Commit as the owner**: `Abdul Haseeb Khan <190069163+abdulhaseeb707@users.noreply.github.com>`.
-3. **Ask the owner before pushing anything** to GitHub.
+3. **Ask the owner before pushing anything** to GitHub, and before deploying to the server.
 4. **Don't change the research repo** (`abdulhaseeb707/inflation-corporate-profitability-pakistan`) without the
    owner's OK, not even its homepage field.
 
@@ -112,6 +112,7 @@ The owner rejected an old-fashioned serif version and a loud, cartoonish one. Th
 | `NEXT_OUTPUT=standalone npm run build` | Node server build for Oracle Cloud (used by the `Dockerfile`) |
 | `NEXT_BASE_PATH=/portfolio-preview npm run build` | Same static export for a sub-folder address (a preview repo). Plain `<a>`/`<img>` paths go through `withBase()` in `lib/base.ts` |
 | `npm run serve` | Serve the built `out/` at http://localhost:3000 |
+| `SSH_KEY=<key file> bash scripts/deploy.sh` | Upload the built `out/` to the server at abdulhaseeb.online (Git Bash; see DEPLOY-ORACLE.md) |
 | `npm run qa` | Screenshots of `out/` at the nine screen sizes plus overflow and CV-button checks |
 | `npm run sync:research` | Refresh `content/research/*.json` from the research repo |
 | `npm run sync:projects` | Refresh `content/projects/<slug>/*.json` from each project repo (list in `scripts/sync-projects.mjs`) |

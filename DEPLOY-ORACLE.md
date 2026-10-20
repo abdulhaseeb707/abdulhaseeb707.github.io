@@ -1,57 +1,55 @@
-# Moving the site to an Oracle Cloud server
+# The site on the Oracle Cloud server
 
-The site runs on GitHub Pages today as static files. The same code also builds as a small Node server
-(`NEXT_OUTPUT=standalone`), packaged by the `Dockerfile`. These are the steps for when the server is ready.
+The site lives at **https://abdulhaseeb.online**. It is the static build (`npm run build` writes it to `out/`), served
+by [Caddy](https://caddyserver.com) on an Oracle Cloud machine. Caddy gets and renews the HTTPS certificate by itself.
 
-## 1. The machine
+## The machine
 
-1. In Oracle Cloud, create a compute instance (the Always Free Ampere A1 or AMD shape is enough) with Ubuntu 24.04.
-2. In the instance's subnet **security list**, allow inbound TCP **80** and **443** from `0.0.0.0/0`.
-3. Ubuntu images on Oracle also block ports in iptables. Open them on the machine:
+- **haseeb-server**, Oracle Cloud, Canada Southeast (Toronto), Always Free `VM.Standard.E2.1.Micro` (1 GB memory),
+  Ubuntu 24.04, public IP **40.233.76.178**, user `ubuntu`.
+- Oracle's security list for the network `haseeb` already lets all traffic in; the machine's own firewall (iptables)
+  decides. Ports 22 (SSH), 80 and 443 (web) and the VPN's IPsec ports are open. The rules are saved in both
+  `/etc/iptables/rules.v4` and `/etc/iptables.rules` (the VPN setup loads the second), so they survive a reboot.
+- The site's files: `/var/www/abdulhaseeb.online`. Caddy's config: `/etc/caddy/Caddyfile`, a copy of
+  [`deploy/Caddyfile`](deploy/Caddyfile).
 
-   ```bash
-   sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 80 -j ACCEPT
-   sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
-   sudo netfilter-persistent save
-   ```
+## The domain
 
-## 2. Docker and the site
+`abdulhaseeb.online` is registered with Hostinger. In Hostinger's DNS zone for it:
+
+| Type | Name | Points to |
+|---|---|---|
+| A | `@` | `40.233.76.178` |
+| CNAME | `www` | `abdulhaseeb.online` |
+
+No other `A` or `AAAA` record for `@` or `www` (Hostinger's parking records would send visitors elsewhere).
+`www.abdulhaseeb.online` forwards to `https://abdulhaseeb.online`.
+
+## Updating the site
+
+From the repo, in Git Bash:
 
 ```bash
-curl -fsSL https://get.docker.com | sudo sh
-git clone https://github.com/abdulhaseeb707/abdulhaseeb707.github.io.git portfolio
-cd portfolio
-sudo docker build -t portfolio .
-sudo docker run -d --name portfolio --restart unless-stopped -p 127.0.0.1:3000:3000 portfolio
+npm run build && npm run qa
+SSH_KEY="/path/to/ssh-key.key" bash scripts/deploy.sh
 ```
 
-The site is now on `http://127.0.0.1:3000` on the machine. The CV is at `/Abdul-Haseeb-Khan-CV.pdf`.
-
-## 3. HTTPS with a domain (Caddy)
-
-Point the domain's `A` record at the instance's public IP, then:
+`scripts/deploy.sh` uploads `out/` and switches to it in one step; the previous version stays on the server as
+`/var/www/abdulhaseeb.online.old` until the next upload. To go back to it:
 
 ```bash
-sudo apt install -y caddy
-echo 'yourdomain.com {
-  reverse_proxy 127.0.0.1:3000
-}' | sudo tee /etc/caddy/Caddyfile
-sudo systemctl reload caddy
+ssh -i "$SSH_KEY" ubuntu@40.233.76.178 'sudo mv /var/www/abdulhaseeb.online /var/www/abdulhaseeb.online.bad && sudo mv /var/www/abdulhaseeb.online.old /var/www/abdulhaseeb.online'
 ```
 
-Caddy gets and renews the certificate by itself.
-
-## 4. Updating
+If `deploy/Caddyfile` changes, copy it to the server and reload Caddy:
 
 ```bash
-cd portfolio && git pull
-sudo docker build -t portfolio . && sudo docker rm -f portfolio
-sudo docker run -d --name portfolio --restart unless-stopped -p 127.0.0.1:3000:3000 portfolio
+scp -i "$SSH_KEY" deploy/Caddyfile ubuntu@40.233.76.178:/tmp/Caddyfile
+ssh -i "$SSH_KEY" ubuntu@40.233.76.178 'sudo cp /tmp/Caddyfile /etc/caddy/Caddyfile && sudo systemctl reload caddy'
 ```
 
 ## Notes
 
-- The CV PDF is rendered at build time from `content/profile.yaml`, in both modes. To render it on every request
-  instead, change `dynamic = 'force-static'` to `'force-dynamic'` in `app/Abdul-Haseeb-Khan-CV.pdf/route.ts`
-  (server mode only; GitHub Pages needs it static).
-- When the site moves to its own domain, update `site.url` in `lib/profile.ts`.
+- The site is fully static, so the server needs no Node.js or Docker; this suits a 1 GB machine. The `Dockerfile`
+  (`NEXT_OUTPUT=standalone`, a Node server) is still in the repo in case the site ever needs server-side code.
+- Keep the SSH key out of synced folders (OneDrive and the like).
