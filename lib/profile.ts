@@ -25,7 +25,7 @@ const proof = z
   })
   .refine((p) => [p.image, p.file, p.url].filter(Boolean).length === 1, 'give exactly one of image, file or url');
 
-const cvEntry = z.strictObject({
+export const cvEntry = z.strictObject({
   title: z.string(),
   org: z.string().optional(),
   dates: text.optional(),

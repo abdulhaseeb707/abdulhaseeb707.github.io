@@ -20,6 +20,9 @@ DEPLOY-ORACLE.md). **Every push to `main` goes live** through GitHub Actions. Re
   or CV-screening software reads "P R O F I L E". No 50% scholarship anywhere (CV or website; the owner's choice).
 - In `cv:` entries, `pdf: false` keeps an entry on the website but out of the PDF, and `linkLabel` is what the PDF
   prints for a link.
+- A CV or resume **tailored to one job** uses the same PDF design (`npm run cv:tailored`, format in
+  `lib/cv/tailored.ts`). Its YAML and PDF stay in the owner's folder (`4 CV\Applications\<company - role>`), never in
+  this repo or online. Tailoring picks, orders and words facts for the job; it never adds new ones.
 - Change facts in `profile.yaml`, not in components. `lib/profile.ts` validates the file and fails the build with a
   readable message if something is wrong.
 
@@ -115,6 +118,7 @@ The owner rejected an old-fashioned serif version and a loud, cartoonish one. Th
 | `npm run serve` | Serve the built `out/` at http://localhost:3000 |
 | `SSH_KEY=<key file> bash scripts/deploy.sh` | Deploy the built `out/` by hand, without GitHub (Git Bash). A push to `main` normally does this; rollback and server setup are in DEPLOY-ORACLE.md |
 | `npm run qa` | Screenshots of `out/` at the nine screen sizes plus overflow and CV-button checks |
+| `npm run cv:tailored -- "../4 CV/Applications/<company - role>"` | Each YAML file there becomes a tailored CV or resume PDF next to it; fails on the section 3 wording rules or a wrong page count |
 | `npm run sync:research` | Refresh `content/research/*.json` from the research repo |
 | `npm run sync:projects` | Refresh `content/projects/<slug>/*.json` from each project repo (list in `scripts/sync-projects.mjs`) |
 | `npm run photos` | Resize the owner's full-size originals (see section 7) into `assets/`; the map is in `scripts/optimize-originals.mjs` |
@@ -133,7 +137,7 @@ parent folder, outside git, in numbered folders (a `READ ME.txt` there explains 
 | `1 Add new files here` | The owner's drop box for new material. Start here when asked to update the site |
 | `2 Photos` | Full-size originals by event (`IOFS 2025 - Krasnoyarsk`, `Festival of Youth 2026 - Ekaterinburg`, `Portrait`) |
 | `3 Certificates` | Diplomas, certificates, award graphics |
-| `4 CV` | Dated copies of the generated CV PDF, for emailing |
+| `4 CV` | Dated copies of the generated CV PDF, for emailing. `Applications\<company - role>`: the job ad, tailored CV and resume (YAML and PDF) |
 | `5 Research` | Charts from the paper and links to the paper, summary, slides and code |
 | `6 Website design` | The approved "Cycles" direction board |
 | `7 Old website` | The previous site and the old CV (wrong facts, reference only) |

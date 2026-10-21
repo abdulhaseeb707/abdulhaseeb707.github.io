@@ -63,7 +63,34 @@ const ORDER: [string, string][] = [
   ['Memberships and certifications', 'Memberships and certifications'],
 ];
 
-type Entry = (typeof profile.cv.sections)[number]['entries'][number];
+export type Entry = (typeof profile.cv.sections)[number]['entries'][number];
+
+// What the PDF prints. The website CV comes from profile.yaml (siteCv); a CV or resume tailored to one job comes
+// from lib/cv/tailored.ts. The name, contact line and languages always come from profile.yaml.
+export type CvContent = {
+  kind: 'CV' | 'Resume';
+  label: string;
+  summary: string;
+  sections: { heading: string; entries: Entry[] }[]; // in print order
+  skills: { group: string; items: string[] }[];
+  skillsFirst: boolean; // skills right after the profile (tailored) or at the end (website CV)
+};
+
+export function siteCv(): CvContent {
+  const { person, cv, skills } = profile;
+  const known = new Set(ORDER.map(([key]) => key));
+  const sections = [
+    ...ORDER.flatMap(([key, heading]) => {
+      const found = cv.sections.find((x) => x.title === key);
+      return found ? [{ ...found, heading }] : [];
+    }),
+    ...cv.sections.filter((x) => !known.has(x.title)).map((x) => ({ ...x, heading: x.title })),
+  ]
+    .map((x) => ({ heading: x.heading, entries: x.entries.filter((e) => e.pdf) }))
+    .filter((x) => x.entries.length);
+  return { kind: 'CV', label: person.label, summary: cv.summary, sections, skills, skillsFirst: false };
+}
+
 const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 // a file on this site (/files/...) becomes its full website address, so the link works from a downloaded PDF
 const absolute = (url: string) => (url.startsWith('/') ? new URL(url, site.url).href : url);
@@ -95,18 +122,27 @@ function EntryView({ e, first }: { e: Entry; first?: boolean }) {
   );
 }
 
-export function CvDocument() {
-  const { person, contact, cv, skills, languages } = profile;
-  const known = new Set(ORDER.map(([key]) => key));
-  const sections = [
-    ...ORDER.flatMap(([key, heading]) => {
-      const found = cv.sections.find((x) => x.title === key);
-      return found ? [{ ...found, heading }] : [];
-    }),
-    ...cv.sections.filter((x) => !known.has(x.title)).map((x) => ({ ...x, heading: x.title })),
-  ]
-    .map((x) => ({ ...x, entries: x.entries.filter((e) => e.pdf) }))
-    .filter((x) => x.entries.length);
+function Skills({ skills }: { skills: CvContent['skills'] }) {
+  return (
+    <View style={s.section} wrap={false}>
+      <Heading>Skills and languages</Heading>
+      {skills.map((g) => (
+        <View key={g.group} style={s.pair}>
+          <Text style={s.key}>{g.group}</Text>
+          <Text style={s.value}>{g.items.join(', ')}</Text>
+        </View>
+      ))}
+      <View style={s.pair}>
+        <Text style={s.key}>Languages</Text>
+        <Text style={s.value}>{profile.languages.map((l) => `${l.name} (${l.level})`).join('; ')}</Text>
+      </View>
+    </View>
+  );
+}
+
+export function CvDocument({ content = siteCv() }: { content?: CvContent }) {
+  const { person, contact, cv } = profile;
+  const { sections, skills } = content;
 
   const contacts = [
     cv.showPhone && contact.phone ? <Text key="phone">{contact.phone}</Text> : null,
@@ -116,11 +152,17 @@ export function CvDocument() {
   ].filter(Boolean);
 
   return (
-    <Document title={`${person.name}, CV`} author={person.name} subject="Curriculum vitae" creator={person.name} producer={person.name}>
+    <Document
+      title={`${person.name}, ${content.kind}`}
+      author={person.name}
+      subject={content.kind === 'CV' ? 'Curriculum vitae' : 'Resume'}
+      creator={person.name}
+      producer={person.name}
+    >
       <Page size="A4" style={s.page}>
         <View style={s.head}>
           <Text style={s.name}>{person.name}</Text>
-          <Text style={s.tag}>{person.label}</Text>
+          <Text style={s.tag}>{content.label}</Text>
           <Text style={s.contact}>
             {contacts.map((c, i) => (
               <Text key={i}>
@@ -133,13 +175,15 @@ export function CvDocument() {
 
         <View style={s.section}>
           <Heading>Profile</Heading>
-          <Text style={s.summary}>{cv.summary}</Text>
+          <Text style={s.summary}>{content.summary}</Text>
         </View>
+
+        {content.skillsFirst ? <Skills skills={skills} /> : null}
 
         {sections.map((section) => {
           const [first, ...rest] = section.entries;
           return (
-            <View key={section.title} style={s.section}>
+            <View key={section.heading} style={s.section}>
               {/* the heading always moves to the next page together with its first entry */}
               <View wrap={false}>
                 <Heading>{section.heading}</Heading>
@@ -150,19 +194,7 @@ export function CvDocument() {
           );
         })}
 
-        <View style={s.section} wrap={false}>
-          <Heading>Skills and languages</Heading>
-          {skills.map((g) => (
-            <View key={g.group} style={s.pair}>
-              <Text style={s.key}>{g.group}</Text>
-              <Text style={s.value}>{g.items.join(', ')}</Text>
-            </View>
-          ))}
-          <View style={s.pair}>
-            <Text style={s.key}>Languages</Text>
-            <Text style={s.value}>{languages.map((l) => `${l.name} (${l.level})`).join('; ')}</Text>
-          </View>
-        </View>
+        {content.skillsFirst ? null : <Skills skills={skills} />}
       </Page>
     </Document>
   );

@@ -18,7 +18,8 @@
     "sync:research": "node scripts/sync-research.mjs",
     "sync:projects": "node scripts/sync-projects.mjs",
     "photos": "node scripts/optimize-originals.mjs",
-    "qa": "node scripts/qa-shots.mjs"
+    "qa": "node scripts/qa-shots.mjs",
+    "cv:tailored": "node scripts/make-tailored-cv.mjs"
   },
   "dependencies": {
     "@fontsource/source-serif-4": "5.3.0",
